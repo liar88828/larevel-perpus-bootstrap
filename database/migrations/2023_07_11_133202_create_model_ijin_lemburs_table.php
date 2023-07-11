@@ -30,17 +30,13 @@ return new class extends Migration
 
             $table->string('nama_penyetujui');   // IT nama orang sesuai devisi
             $table->string('jabatan_penyetujui');   // jabatan sesuai bidang
-            
-            
-            
-            
-            $table->timestamps();
 
+            $table->timestamps();
         });
     }
 
 
-   // Pemohon	Nama	Jabatan	Mengetahui	Nama	Jabatan	Menyetujui	Nama	Jabatan
+    // Pemohon	Nama	Jabatan	Mengetahui	Nama	Jabatan	Menyetujui	Nama	Jabatan
 
 
 

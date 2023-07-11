@@ -3,25 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\ModelIjinLembur;
+
 use App\Http\Requests\StoreModelIjinLemburRequest;
 use App\Http\Requests\UpdateModelIjinLemburRequest;
+use Illuminate\View\View;
 
 class ModelIjinLemburController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index():View
     {
-        //
+        $surats=ModelIjinLembur::all();
+        return view('surat.index', compact('surats'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create():View
     {
-        //
+        return view('surat.create');
     }
 
     /**

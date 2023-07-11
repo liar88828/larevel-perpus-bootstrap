@@ -26,5 +26,5 @@ class ModelIjinLembur extends Model
 
 
 
-    ]
+    ];
 }

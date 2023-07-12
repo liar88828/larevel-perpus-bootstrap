@@ -18,19 +18,15 @@ return new class extends Migration
             $table->string('nama');     // Bayu
             $table->string('jabatan');  // mahasiswa 'manajer IT'
             $table->string('divisi');   // IT 'merupakan bidang '
-
             $table->string('no');   // urutan apsen
             $table->string('hari_tanggal');   // hari kegiatn
             $table->string('jam_kerja_normal');   // jam mulai kerja
             $table->string('jam_kerja_lembur');   //  jam terakhir
             $table->string('guna');   // keterangan
-
             $table->string('nama_divisi');   // IT nama orang sesuai devisi
             $table->string('jabatan_divisi');   // jabatan sesuai bidang
-
             $table->string('nama_penyetujui');   // IT nama orang sesuai devisi
             $table->string('jabatan_penyetujui');   // jabatan sesuai bidang
-
             $table->timestamps();
         });
     }

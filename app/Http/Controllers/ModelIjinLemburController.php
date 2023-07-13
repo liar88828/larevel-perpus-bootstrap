@@ -33,6 +33,7 @@ class ModelIjinLemburController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(StoreModelIjinLemburRequest $request): RedirectResponse
     {
         //validate form
@@ -77,16 +78,23 @@ class ModelIjinLemburController extends Controller
 
         //redirect to index
         return redirect()
-        ->route('surat.index')
-        ->with(['success' => 'Data Berhasil Disimpan!']);
+            ->route('surat.index')
+            ->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ModelIjinLembur $modelIjinLembur)
+    public function show(string $id): View// harus di ganti id
     {
-        //
+
+        // dd($id);
+        $surat = ModelIjinLembur::query()->findOrFail($id);
+        // dd($surat);
+        return view(
+            'surat.show',
+            compact('surat')
+        );
     }
 
     /**

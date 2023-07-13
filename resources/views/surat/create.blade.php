@@ -5,8 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Data Post </title>
+    <title>Tambah Data Post </title>`
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    {{-- // iki penting --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body style="background: lightgray">
@@ -85,7 +89,7 @@
                                     </div>
                                 @enderror
                             </div>
-
+                            {{-- no --}}
                             <div class="form-group">
                                 <label class="font-weight-bold">No</label>
                                 <input type="text" class="form-control @error('no') is-invalid @enderror"
@@ -113,13 +117,21 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label class="font-weight-bold">Jam Kerja Normal</label>
-                                <input type="time"
-                                    class="form-control @error('jam_kerja_normal') is-invalid @enderror"
-                                    name="jam_kerja_normal" value="{{ old('jam_kerja_normal') }}"
-                                    placeholder="Masukkan Jam Kerja Normal Post">
 
+                            {{-- <div class=""> --}}
+                            <div class="input-group form-group date" id="timePicker"
+                                style="display: flex; flex-direction: column;">
+                                <label class="font-weight-bold">Jam Kerja Normal</label>
+                                <div class="d-flex flex-row">
+
+                                    <input type="text" style="width: 90%"
+                                        class="form-control timePicker form-control @error('jam_kerja_normal') is-invalid @enderror"
+                                        name="jam_kerja_normal" value="{{ old('jam_kerja_normal') }}"
+                                        placeholder="Masukkan Jam Kerja Normal Post">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                    
                                 <!-- error message untuk jam_kerja_normal -->
                                 @error('jam_kerja_normal')
                                     <div class="alert alert-danger mt-2">
@@ -128,12 +140,28 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label class="font-weight-bold">Jam Kerja lembur</label>
-                                <input type="time"
+
+                     
+                            
+
+                            <div class="input-group form-group date" id="timePicker2"
+                                style="display: flex; flex-direction: column;">
+                                <label class="font-weight-bold">Jam Kerja Lembur</label>
+                                <div class="d-flex flex-row">
+
+                                    <input type="text" style="width: 90%"
+                                        class="form-control timePicker2 form-control @error('jam_kerja_lembur') is-invalid @enderror"
+                                        name="jam_kerja_lembur" value="{{ old('jam_kerja_lembur') }}"
+                                        placeholder="Masukkan Jam Kerja Lembur Post">
+                                    <span class="input-group-addon"><i class="fa fa-clock-o" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                {{-- </div> --}}
+                                {{-- 
+                                <input type="text"
                                     class="form-control @error('jam_kerja_lembur') is-invalid @enderror"
                                     name="jam_kerja_lembur" value="{{ old('jam_kerja_lembur') }}"
-                                    placeholder="Masukkan Jam Kerja Lembur Post">
+                                    placeholder="Masukkan Jam Kerja Normal Post"> --}}
 
                                 <!-- error message untuk jam_kerja_lembur -->
                                 @error('jam_kerja_lembur')
@@ -229,12 +257,60 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
+    </script>
     <script>
         CKEDITOR.replace('content');
     </script>
+
+    <script>
+        var firstOpen = true;
+        var time;
+
+        $('#timePicker').datetimepicker({
+            useCurrent: false,
+            format: "hh:mm A"
+        }).on('dp.show', function() {
+            if (firstOpen) {
+                time = moment().startOf('day');
+                firstOpen = false;
+            } else {
+                time = "01:00 PM"
+            }
+            $(this).data('DateTimePicker').date(time);
+        });
+
+
+        
+    </script>
+
+<script>
+    var firstOpen = true;
+    var time;
+
+    $('#timePicker2').datetimepicker({
+        useCurrent: false,
+        format: "hh:mm A"
+    }).on('dp.show', function() {
+        if (firstOpen) {
+            time = moment().startOf('day');
+            firstOpen = false;
+        } else {
+            time = "01:00 PM"
+        }
+        $(this).data('DateTimePicker').date(time);
+    });
+
+
+    
+</script>
+
 </body>
 
 </html>

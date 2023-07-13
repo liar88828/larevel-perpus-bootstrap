@@ -13,7 +13,7 @@
 <body style="background: lightgray">
 <div class="d-flex justify-content-center ">
 
-    <div style="">
+    <div style="overflow-x:scroll ">
         <div class="row">
             <div class="">
                 <div>
@@ -21,7 +21,7 @@
                     <hr>
                 </div>
                 
-                <div class="card border-0 shadow-sm rounded">
+                <div class="card border-0 shadow-sm rounded" >
                     <div class="card-body">
                         <a href="{{ route('surat.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
                         <table class="table table-bordered">
@@ -46,32 +46,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($surats as $key=>$post)
+                                @forelse ($surats as $key=>$surat)
                                     <tr>
-                                        <td>{{ $loop->index }}</td>
-                                        <td>{{ $post->kepada }}</td>
-                                        <td>{{ $post->hal }}</td>
-                                        <td>{{ $post->nama }}</td>
-                                        <td>{{ $post->jabatan }}</td>
-                                        <td>{{ $post->divisi }}</td>
-                                        <td>{{ $post->no }}</td>
-                                        <td>{{ $post->hari_tanggal }}</td>
-                                        <td>{{ $post->jam_kerja_normal }}</td>
-                                        <td>{{ $post->jam_kerja_lembur }}</td>
-                                        <td>{{ $post->guna }}</td>
-                                        <td>{{ $post->nama_divisi }}</td>
-                                        <td>{{ $post->jabatan_divisi }}</td>
-                                        <td>{{ $post->nama_penyetujui }}</td>
-                                        <td>{{ $post->jabatan_penyetujui }}</td>
+                                        {{-- <td>{{ $loop->index }}</td> --}}
+                                        <td>{{ $surat->id }}</td>
+                                        <td>{{ $surat->kepada }}</td>
+                                        <td>{{ $surat->hal }}</td>
+                                        <td>{{ $surat->nama }}</td>
+                                        <td>{{ $surat->jabatan }}</td>
+                                        <td>{{ $surat->divisi }}</td>
+                                        <td>{{ $surat->no }}</td>
+                                        <td>{{ $surat->hari_tanggal }}</td>
+                                        <td>{{ $surat->jam_kerja_normal }}</td>
+                                        <td>{{ $surat->jam_kerja_lembur }}</td>
+                                        <td>{{ $surat->guna }}</td>
+                                        <td>{{ $surat->nama_divisi }}</td>
+                                        <td>{{ $surat->jabatan_divisi }}</td>
+                                        <td>{{ $surat->nama_penyetujui }}</td>
+                                        <td>{{ $surat->jabatan_penyetujui }}</td>
 
                                         <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                action="{{ route('surat.destroy', $post->id) }}" method="POST">
+                                                action="{{ route('surat.destroy', $surat->id) }}" method="POST">
 
-                                                <a href="{{ route('surat.show', $post->id) }}"
+                                                <a href="{{ route('surat.show', $surat->id) }}"
                                                     class="btn btn-sm btn-dark">SHOW</a>
 
-                                                <a href="{{ route('surat.edit', $post->id) }}"
+                                                <a href="{{ route('surat.edit', $surat->id) }}"
                                                     class="btn btn-sm btn-primary">EDIT</a>
                                                 @csrf
                                                 @method('DELETE')

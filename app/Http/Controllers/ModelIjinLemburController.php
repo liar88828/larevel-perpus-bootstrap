@@ -36,24 +36,6 @@ class ModelIjinLemburController extends Controller
 
     public function store(StoreModelIjinLemburRequest $request): RedirectResponse
     {
-        //validate form
-        $this->validate($request, [
-
-            'kepada' => 'required|min:5',
-            'hal' => 'required|min:5',
-            'nama' => 'required|min:5',
-            'jabatan' => 'required|min:2',
-            'divisi' => 'required|min:5',
-            'no' => 'required|min:1',
-            'hari_tanggal' => 'required|min:2',
-            'jam_kerja_normal' => 'required|min:2',
-            'jam_kerja_lembur' => 'required|min:2',
-            'guna' => 'required|min:10',
-            'nama_divisi' => 'required|min:5',
-            'jabatan_divisi' => 'required|min:2',
-            'nama_penyetujui' => 'required|min:5',
-            'jabatan_penyetujui' => 'required|min:5',
-        ]);
 
 
 
@@ -85,7 +67,7 @@ class ModelIjinLemburController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View// harus di ganti id
+    public function show(string $id): View // harus di ganti id
     {
 
         // dd($id);
@@ -100,17 +82,63 @@ class ModelIjinLemburController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ModelIjinLembur $modelIjinLembur)
+    public function edit(string $id)
     {
-        //
+        $surat = ModelIjinLembur::query()->findOrFail($id);
+        return view('surat.edit', compact('surat'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateModelIjinLemburRequest $request, ModelIjinLembur $modelIjinLembur)
+    public function update(UpdateModelIjinLemburRequest $request, string $id): RedirectResponse
     {
-        //
+        //validate form
+        $this->validate($request, [
+
+            'kepada' => 'required|min:5',
+            'hal' => 'required|min:5',
+            'nama' => 'required|min:5',
+            'jabatan' => 'required|min:2',
+            'divisi' => 'required|min:5',
+            'no' => 'required|min:1',
+            'hari_tanggal' => 'required|min:2',
+            'jam_kerja_normal' => 'required|min:2',
+            'jam_kerja_lembur' => 'required|min:2',
+            'guna' => 'required|min:10',
+            'nama_divisi' => 'required|min:5',
+            'jabatan_divisi' => 'required|min:2',
+            'nama_penyetujui' => 'required|min:5',
+            'jabatan_penyetujui' => 'required|min:5',
+        ]);
+
+        $surat = ModelIjinLembur::query()->findOrFail($id);
+
+
+        $surat->update(
+            [
+                'kepada' => $request->kepada,
+                'hal' => $request->hal,
+                'nama' => $request->nama,
+                'jabatan' => $request->jabatan,
+                'divisi' => $request->divisi,
+                'no' => $request->no,
+                'hari_tanggal' => $request->hari_tanggal,
+                'jam_kerja_normal' => $request->jam_kerja_normal,
+                'jam_kerja_lembur' => $request->jam_kerja_lembur,
+                'guna' => $request->guna,
+                'nama_divisi' => $request->nama_divisi,
+                'jabatan_divisi' => $request->jabatan_divisi,
+                'nama_penyetujui' => $request->nama_penyetujui,
+                'jabatan_penyetujui' => $request->jabatan_penyetujui,
+            ]
+        );
+
+
+        return redirect()
+            ->route('surat.index')
+            ->with(['success' => 'Data Berhasil Diubah!']);
+
     }
 
     /**

@@ -144,8 +144,13 @@ class ModelIjinLemburController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ModelIjinLembur $modelIjinLembur)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+
+        $surat = ModelIjinLembur::query()->findOrFail($id);
+        $surat->delete();
+        return redirect()->route('surat.index')->with(['success' => 'Berhasil Di Hapus']);
+
+
     }
 }

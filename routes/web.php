@@ -19,12 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/surat',ModelIjinLemburController::class);
+Route::resource('/surat', ModelIjinLemburController::class);
 
 
 
-Route::group(['middleware' => 'guest'], function(){
-    Route::get('/login', function () {
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', action: function () {
         return view('auth.login');
     })->name('login');
 
@@ -34,8 +34,6 @@ Route::group(['middleware' => 'guest'], function(){
 
     Route::get('/register', [AuthController::class, 'register'])->name('register');
 
-    Route::post('/register', function () {
-        return view('auth.register');
-    })->name('register');
+    Route::post('/register', [AuthController::class, 'registerPost']);
 });
 Route::get('/login', [AuthController::class, 'login'])->name('login');

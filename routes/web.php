@@ -24,16 +24,12 @@ Route::resource('/surat', ModelIjinLemburController::class);
 
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/login', action: function () {
-        return view('auth.login');
-    })->name('login');
 
-    Route::post('/login', function () {
-        return view('auth.login');
-    })->name('login');
+    //login
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login',[AuthController::class, 'loginPost'])->name('login');
 
+    //register
     Route::get('/register', [AuthController::class, 'register'])->name('register');
-
-    Route::post('/register', [AuthController::class, 'registerPost']);
+    Route::post('/register', [AuthController::class, 'registerPost'])->name('register');;
 });
-Route::get('/login', [AuthController::class, 'login'])->name('login');

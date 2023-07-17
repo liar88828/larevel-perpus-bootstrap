@@ -17,9 +17,24 @@
                     <h1 class="card-tittle">Register</h1>
                 </div>
 
-          
 
-                <div class="card-body mb-3"">
+
+                <div class="card-body mb-3">
+
+
+                    @if (session('success'))
+                        <div class="card-body"></div>
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @elseif (session('error'))
+                        <div class="card-body"></div>
+                        <div class="alert alert-warning" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+
                     <form action="{{ route('register') }}" method="POST">
                         @csrf
 
@@ -45,8 +60,8 @@
 
 
                         <div class="form-group mb-3">
-                            <label class="font-weight-bold mb-3" >Email</label>
-                            <input type="email" class="form-control @error('nama') is-invalid @enderror"
+                            <label class="font-weight-bold mb-3">Email</label>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror"
                                 name="email" placeholder="Masukkan Email" />
 
                             <!-- error message untuk nama -->
@@ -68,17 +83,17 @@
 
 
                         <div class="form-group mb-3">
-                          <label class="font-weight-bold mb-3">Password</label>
-                          <input type="password" class="form-control @error('password') is-invalid @enderror"
-                              name="password" placeholder="Masukkan Password" />
+                            <label class="font-weight-bold mb-3">Password</label>
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                name="password" placeholder="Masukkan Password" />
 
-                          <!-- error message untuk nama -->
-                          @error('password')
-                              <div class="alert alert-danger mt-2">
-                                  {{ $message }}
-                              </div>
-                          @enderror
-                      </div>
+                            <!-- error message untuk nama -->
+                            @error('password')
+                                <div class="alert alert-danger mt-2">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
 
 
                         {{-- <div class="mb-3">
@@ -94,6 +109,16 @@
                             </div>
                         </div>
                     </form>
+
+
+                    <form action="{{ route('login') }}" method="GET">
+                        <div class="mb-3">
+                            <div class="d-grid">
+                                <button class="btn btn-success">Login</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

@@ -8,98 +8,128 @@
     <title>Data Posts - SantriKoding.com</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <style>.membesar{
-        width: 120px;
-        /* background: red; */
-    }</style>
+    <style>
+        .membesar {
+            width: 120px;
+            /* background: red; */
+        }
+    </style>
 </head>
 
 <body style="background: lightgray">
-<div class="d-flex justify-content-center ">
+    <div class="d-flex justify-content-center ">
 
-    <div style="overflow-x:scroll ">
-        <div class="row">
-            <div class="">
-                <div>
-                    <h3 class="text-center my-4">Table Ijin Lembur</h3>
-                    <hr>
-                </div>
-                
-                <div class="card border-0 shadow-sm rounded" >
-                    <div class="card-body">
-                        <a href="{{ route('surat.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th scope="col"> No.</th>
-                                    <th scope="col"> kepada</th>
-                                    <th scope="col"> Hal</th>
-                                    <th scope="col"> nama</th>
-                                    <th scope="col"> jabatan</th>
-                                    <th scope="col"> divisi</th>
-                                    <th scope="col"> no</th>
-                                    <th scope="col"> hari tanggal</th>
-                                    <th scope="col"> jam kerja normal</th>
-                                    <th scope="col"> jam kerja lembur</th>
-                                    <th scope="col"> guna</th>
-                                    <th scope="col"> nama divisi</th>
-                                    <th scope="col"> jabatan divisi</th>
-                                    <th scope="col"> nama penyetujui</th>
-                                    <th scope="col"> jabatan penyetujui</th>
-                                    <th scope="col"> Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($surats as $key=>$surat)
+
+
+
+
+        <div style="overflow-x:scroll ">
+            <div class="row">
+                <div class="">
+                    <div>
+                        <h3 class="text-center my-4">Table Ijin Lembur</h3>
+                        <hr>
+                    </div>
+
+                    <div class="mx-4">
+
+                        @if (session('login'))
+                            <div class="card-body"></div>
+                            <div class="alert alert-success px-5" role="alert">
+                                {{ session('login') }}
+                            </div>
+                        @elseif (session('error'))
+                            <div class="card-body"></div>
+                            <div class="alert alert-warning " role="alert">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+
+
+                    </div>
+
+                    <div class="card border-0 shadow-sm rounded mx-4">
+                        <div class="card-body">
+                            <a href="{{ route('surat.create') }}" class="btn btn-md btn-success mb-3">TAMBAH POST</a>
+                            <table class="table table-bordered">
+                                <thead>
                                     <tr>
-                                        {{-- <td>{{ $loop->index }}</td> --}}
-                                        <td>{{ $surat->id }}</td>
-                                        <td>{{ $surat->kepada }}</td>
-                                        <td>{{ $surat->hal }}</td>
-                                        <td>{{ $surat->nama }}</td>
-                                        <td>{{ $surat->jabatan }}</td>
-                                        <td>{{ $surat->divisi }}</td>
-                                        <td>{{ $surat->no }}</td>
-                                        <td>{{ $surat->hari_tanggal }}</td>
-                                        <td>{{ $surat->jam_kerja_normal }}</td>
-                                        <td>{{ $surat->jam_kerja_lembur }}</td>
-                                        <td class='membesar'>{{ $surat->guna }}</td>
-                                        <td>{{ $surat->nama_divisi }}</td>
-                                        <td>{{ $surat->jabatan_divisi }}</td>
-                                        <td>{{ $surat->nama_penyetujui }}</td>
-                                        <td>{{ $surat->jabatan_penyetujui }}</td>
-
-                                        <td class="text-center">
-                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                action="{{ route('surat.destroy', $surat->id) }}" method="POST">
-
-                                                <a href="{{ route('surat.show', $surat->id) }}"
-                                                    class="btn btn-sm btn-dark">SHOW</a>
-
-                                                <a href="{{ route('surat.edit', $surat->id) }}"
-                                                    class="btn btn-sm btn-primary">EDIT</a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
-                                            </form>
-                                        </td>
+                                        <th scope="col"> No.</th>
+                                        <th scope="col"> kepada</th>
+                                        <th scope="col"> Hal</th>
+                                        <th scope="col"> nama</th>
+                                        <th scope="col"> jabatan</th>
+                                        <th scope="col"> divisi</th>
+                                        <th scope="col"> no</th>
+                                        <th scope="col"> hari tanggal</th>
+                                        <th scope="col"> jam kerja normal</th>
+                                        <th scope="col"> jam kerja lembur</th>
+                                        <th scope="col"> guna</th>
+                                        <th scope="col"> nama divisi</th>
+                                        <th scope="col"> jabatan divisi</th>
+                                        <th scope="col"> nama penyetujui</th>
+                                        <th scope="col"> jabatan penyetujui</th>
+                                        <th scope="col"> Action</th>
                                     </tr>
-                                @empty
-                                    <div class="alert alert-danger">
-                                        Data Post belum Tersedia.
-                                    </div>
-                                @endforelse
-                            </tbody>
-                        </table>
-                        {{-- {{ $surat->links() }} --}}
+                                </thead>
+                                <tbody>
+                                    @forelse ($surats as $key=>$surat)
+                                        <tr>
+                                            {{-- <td>{{ $loop->index }}</td> --}}
+                                            <td>{{ $surat->id }}</td>
+                                            <td>{{ $surat->kepada }}</td>
+                                            <td>{{ $surat->hal }}</td>
+                                            <td>{{ $surat->nama }}</td>
+                                            <td>{{ $surat->jabatan }}</td>
+                                            <td>{{ $surat->divisi }}</td>
+                                            <td>{{ $surat->no }}</td>
+                                            <td>{{ $surat->hari_tanggal }}</td>
+                                            <td>{{ $surat->jam_kerja_normal }}</td>
+                                            <td>{{ $surat->jam_kerja_lembur }}</td>
+                                            <td class=''
+                                             style=" white-space: nowrap;
+                                            overflow: hidden;
+                                            text-overflow: ellipsis;
+                                            max-width:20rem;">
+
+                                                        {{ $surat->guna }}
+                                            </td>
+                                            <td>{{ $surat->nama_divisi }}</td>
+                                            <td>{{ $surat->jabatan_divisi }}</td>
+                                            <td>{{ $surat->nama_penyetujui }}</td>
+                                            <td>{{ $surat->jabatan_penyetujui }}</td>
+
+                                            <td class="text-center">
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                    action="{{ route('surat.destroy', $surat->id) }}" method="POST">
+
+                                                    <a href="{{ route('surat.show', $surat->id) }}"
+                                                        class="btn btn-sm btn-dark">SHOW</a>
+
+                                                    <a href="{{ route('surat.edit', $surat->id) }}"
+                                                        class="btn btn-sm btn-primary">EDIT</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <div class="alert alert-danger">
+                                            Data Post belum Tersedia.
+                                        </div>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                            {{-- {{ $surat->links() }} --}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-{{-- <p>{{$success}}</p> --}}
+    {{-- <p>{{$success}}</p> --}}
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

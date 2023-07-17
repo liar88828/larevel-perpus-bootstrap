@@ -8,6 +8,10 @@
     <title>Data Posts - SantriKoding.com</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <style>.membesar{
+        width: 120px;
+        /* background: red; */
+    }</style>
 </head>
 
 <body style="background: lightgray">
@@ -29,19 +33,19 @@
                                 <tr>
                                     <th scope="col"> No.</th>
                                     <th scope="col"> kepada</th>
-                                    <th scope="col"> hal</th>
+                                    <th scope="col"> Hal</th>
                                     <th scope="col"> nama</th>
                                     <th scope="col"> jabatan</th>
                                     <th scope="col"> divisi</th>
                                     <th scope="col"> no</th>
-                                    <th scope="col"> hari_tanggal</th>
-                                    <th scope="col"> jam_kerja_normal</th>
-                                    <th scope="col"> jam_kerja_lembur</th>
+                                    <th scope="col"> hari tanggal</th>
+                                    <th scope="col"> jam kerja normal</th>
+                                    <th scope="col"> jam kerja lembur</th>
                                     <th scope="col"> guna</th>
-                                    <th scope="col"> nama_divisi</th>
-                                    <th scope="col"> jabatan_divisi</th>
-                                    <th scope="col"> nama_penyetujui</th>
-                                    <th scope="col"> jabatan_penyetujui</th>
+                                    <th scope="col"> nama divisi</th>
+                                    <th scope="col"> jabatan divisi</th>
+                                    <th scope="col"> nama penyetujui</th>
+                                    <th scope="col"> jabatan penyetujui</th>
                                     <th scope="col"> Action</th>
                                 </tr>
                             </thead>
@@ -59,7 +63,7 @@
                                         <td>{{ $surat->hari_tanggal }}</td>
                                         <td>{{ $surat->jam_kerja_normal }}</td>
                                         <td>{{ $surat->jam_kerja_lembur }}</td>
-                                        <td>{{ $surat->guna }}</td>
+                                        <td class='membesar'>{{ $surat->guna }}</td>
                                         <td>{{ $surat->nama_divisi }}</td>
                                         <td>{{ $surat->jabatan_divisi }}</td>
                                         <td>{{ $surat->nama_penyetujui }}</td>

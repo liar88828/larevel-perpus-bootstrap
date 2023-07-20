@@ -25,6 +25,10 @@ Route::resource('/surat', ModelIjinLemburController::class);
 
 Route::group(['middleware' => 'guest'], function () {
 
+    //lupa
+    Route::get('/lupa', [AuthController::class, 'lupa'])->name('lupa');
+    Route::post('/lupa', [AuthController::class, 'lupaPost'])->name('lupa');
+    
     //login
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login',[AuthController::class, 'loginPost'])->name('login');

@@ -8,6 +8,22 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+
+
+    function lupa()
+    {
+        return view('auth.lupa');
+    }
+
+
+
+    function lupaPost()
+    {
+        return view('auth.lupa');
+    }
+
+
+
     function register()
     {
         session()->regenerate();
@@ -17,10 +33,6 @@ class AuthController extends Controller
 
         // get session / mendapatkan session
         // $value = session('success');
-
-
-
-
         return view('auth.register');
     }
 
@@ -30,10 +42,27 @@ class AuthController extends Controller
         $this->validate($request, [
 
             'nama' => 'required|min:7',
+            'jenisKelamin' => 'required|min:10',
             'email' => 'required|min:10',
+            'tanggalLahir' => 'required',
+            'noHp' => 'required|min:8',
+            'jabatan' => 'required|min:10',
+            'divisi' => 'required|min:10',
             'password' => 'required|min:8',
+            'confpass' => 'required|min:8',
         ]);
 
+        $password = $request->password;
+        $confPass = $request->password;
+
+
+        if($password!==$confPass){
+            return redirect()->back()
+            ->with('error', 'Konfirmasi password tidak sama');
+        }
+
+
+        
         session(['success' => "$request->nama Success Register"]);
 
         return redirect()->route(

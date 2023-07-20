@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\authtenticate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+
+use function PHPUnit\Framework\isEmpty;
+use function PHPUnit\Framework\isNull;
 
 class AuthController extends Controller
 {
@@ -52,17 +56,37 @@ class AuthController extends Controller
             'confpass' => 'required|min:8',
         ]);
 
+        $email = $request->email;
         $password = $request->password;
         $confPass = $request->password;
 
 
-        if($password!==$confPass){
+        if ($password !== $confPass) {
             return redirect()->back()
-            ->with('error', 'Konfirmasi password tidak sama');
+                ->with('error', 'Konfirmasi password tidak sama');
         }
 
+        $email = authtenticate::query()->findOrFail($email);
 
-        
+        if ($email) {
+            return redirect()->back()
+                ->with('error', 'Email sudah terdaftar');
+        }
+
+        $createUser = [
+            'nama' => $request->nama,
+            'jenisKelamin' => $request->jenisKelamin,
+            'email' => $request->email,
+            'tanggalLahir' => $request->tanggalLahir,
+            'noHp' => $request->noHp,
+            'jabatan' => $request->jabatan,
+            'divisi' => $request->divisi,
+            'password' => $request->password,
+        ];
+
+        authtenticate::create($createUser);
+
+
         session(['success' => "$request->nama Success Register"]);
 
         return redirect()->route(
@@ -80,6 +104,10 @@ class AuthController extends Controller
 
         session()->forget('success');
 
+
+
+
+
         // if ($request->email) {
 
         //     session(['error' => "$request->nama Success Register"]);
@@ -91,6 +119,48 @@ class AuthController extends Controller
             'password' => 'required|min:8',
         ]);
 
+        $email = $request->email;
+        $password = $request->password;
+
+        if ($email . isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'Email tidak boleh kosong');
+        }
+
+        if ($password . isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'Password tidak  boleh kosong');
+        }
+
+        $user = authtenticate::query()->findOrFail($email);
+
+        if ($user . isNull()) {
+            return redirect()->back()
+                ->with('error', 'Email tidak terdaftar');
+        }
+
+        if ($user->password !== $password) {
+            return redirect()->back()
+                ->with('error', 'Password salah');
+        }
+
+        $createUser = [
+            'nama' => $request->nama,
+            'jenisKelamin' => $request->jenisKelamin,
+            'email' => $request->email,
+            'tanggalLahir' => $request->tanggalLahir,
+            'noHp' => $request->noHp,
+            'jabatan' => $request->jabatan,
+            'divisi' => $request->divisi,
+            'password' => $request->password,
+        ];
+
+        
+
+        authtenticate::create($createUser);
+
+
+        session(['success' => "$request->nama Success Register"]);
 
 
         session(['login' => "$request->email Success Login"]);

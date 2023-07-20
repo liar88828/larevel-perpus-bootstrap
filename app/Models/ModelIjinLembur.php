@@ -23,8 +23,5 @@ class ModelIjinLembur extends Model
         'jabatan_divisi',
         'nama_penyetujui',
         'jabatan_penyetujui',
-
-
-
     ];
 }

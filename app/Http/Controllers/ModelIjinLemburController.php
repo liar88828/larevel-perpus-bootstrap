@@ -12,6 +12,13 @@ use Illuminate\View\View;
 
 class ModelIjinLemburController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -37,6 +44,10 @@ class ModelIjinLemburController extends Controller
     public function store(StoreModelIjinLemburRequest $request): RedirectResponse
     {
 
+
+
+
+        
         $createModelLembur = [
             'kepada' => $request->kepada,
             'hal' => $request->hal,

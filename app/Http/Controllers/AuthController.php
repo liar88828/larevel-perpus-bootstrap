@@ -14,6 +14,9 @@ class AuthController extends Controller
 {
 
 
+
+
+
     function lupa()
     {
         return view('auth.lupa');
@@ -155,7 +158,7 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
-        
+
 
         authtenticate::create($createUser);
 

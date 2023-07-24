@@ -49,7 +49,7 @@ class AuthController extends Controller
         $this->validate($request, [
 
             'nama' => 'required|min:7',
-            'jenisKelamin' => 'required|min:10',
+            'jenisKelamin' => 'required',
             'email' => 'required|min:10',
             'tanggalLahir' => 'required',
             'noHp' => 'required|min:8',

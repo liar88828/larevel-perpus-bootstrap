@@ -19,26 +19,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::resource('/surat', ModelIjinLemburController::class);
 
+Route::get('/profile', function () {
+    return view('profile.index');
+});
 
 
+Route::group(['middleware' => 'guest'], function () {
 
-// Route::group(['middleware' => 'guest'], function () {
+    //lupa
+    Route::get('/lupa', [AuthController::class, 'lupa'])->name('lupa');
+    Route::post('/lupa', [AuthController::class, 'lupaPost'])->name('lupa');
 
-//     //lupa
-//     Route::get('/lupa', [AuthController::class, 'lupa'])->name('lupa');
-//     Route::post('/lupa', [AuthController::class, 'lupaPost'])->name('lupa');
+    //login
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
 
-//     //login
-//     Route::get('/login', [AuthController::class, 'login'])->name('login');
-//     Route::post('/login', [AuthController::class, 'loginPost'])->name('login');
-
-//     //register
-//     Route::get('/register', [AuthController::class, 'register'])->name('register');
-//     Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
-//     ;
-// });
+    //register
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'registerPost'])->name('register');
+    ;
+});
 
 // Route::controller(AuthController::class)->group(function () {
 //     Route::post('login', 'login');

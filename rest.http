@@ -1,11 +1,26 @@
+### LOGIN
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{
+    "email": "bayu1234@gmail.com",
+    "password": "bayu1234",
+}
+
+
 ### register 
 POST http://127.0.0.1:8000/api/register
 Content-Type: application/json
 
 {
-    "name": "bayu1234",
-    "email": "bayu1234@gmail.com",
+    "name": "bayu1234baru",
+    "email": "bayu1234baru@gmail.com",
     "password": "bayu1234",
     "password_confirmation":"bayu1234"
 
 }
+####
+### USER
+GET http://127.0.0.1:8000/api/user
+Content-Type: application/json
+

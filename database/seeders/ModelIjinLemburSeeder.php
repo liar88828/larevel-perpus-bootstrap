@@ -31,8 +31,6 @@ class ModelIjinLemburSeeder extends Seeder
             'jabatan_divisi' => Str::random(10),
             'nama_penyetujui' => Str::random(10),
             'jabatan_penyetujui' => Str::random(10),
-
-
         ]);
     }
 }

@@ -13,15 +13,6 @@ use Illuminate\View\View;
 class ModelIjinLemburController extends Controller
 {
 
-
-    public function __construct()
-    {
-        // $this->middleware('auth:web');
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
     public function index(): View
     {
         $surats = ModelIjinLembur::all();
@@ -43,9 +34,6 @@ class ModelIjinLemburController extends Controller
 
     public function store(StoreModelIjinLemburRequest $request): RedirectResponse
     {
-
-
-
 
         
         $createModelLembur = [

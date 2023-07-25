@@ -20,7 +20,7 @@
             </div>
 
 
-            
+
             <div class="card">
                 <div class="card-header">
                     <h1 class="card-tittle">Register</h1>
@@ -46,9 +46,8 @@
 
                         <div class="form-group mb-3">
                             <label class="font-weight-bold mb-3">Nama</label>
-                            <input class="form-control @error('nama') is-invalid @enderror" 
-                            name="nama"
-                                type="text" placeholder="Masukkan Nama" />
+                            <input class="form-control @error('nama') is-invalid @enderror" name="nama"
+                                type="text" placeholder="Masukkan Nama"  value="{{old('nama')}}"  />
 
                             <!-- error message untuk nama -->
                             @error('nama')
@@ -63,7 +62,7 @@
                             <p>Masukan Jenis Kelamin</p>
                             <div class="form-check">
                                 <input class="form-check-input"
-                                    class="form-control @error('confpass') is-invalid @enderror" type="radio"
+                                    class="form-control @error('jenisKelamin') is-invalid @enderror" type="radio"
                                     name="jenisKelamin" id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Laki Laki
@@ -71,7 +70,7 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input"
-                                    class="form-control @error('confpass') is-invalid @enderror" type="radio"
+                                    class="form-control @error('jenisKelamin') is-invalid @enderror" type="radio"
                                     name="jenisKelamin" id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Perempuan
@@ -102,7 +101,9 @@
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Email</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                        placeholder="Masukkan Email" />
+                        placeholder="Masukkan Email"
+                        value="{{old('email')}}" 
+                        />
 
                     <!-- error message untuk nama -->
                     @error('email')
@@ -117,7 +118,9 @@
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Tanggal Lahir</label>
                     <input type="date" class="form-control @error('tanggalLahir') is-invalid @enderror"
-                        name="tanggalLahir" />
+                        name="tanggalLahir"
+                        value="{{old('tanggalLahir')}}" 
+                        />
 
                     <!-- error message untuk nama -->
                     @error('tanggalLahir')
@@ -130,8 +133,7 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">No.Hp</label>
-                    <input type="number" class="form-control @error('noHp') is-invalid @enderror" 
-                    name="noHp"
+                    <input type="number" class="form-control @error('noHp') is-invalid @enderror" name="noHp" value="{{old('noHp')}}" 
                         placeholder="Masukkan No.Hp" />
 
                     <!-- error message untuk nama -->
@@ -144,8 +146,7 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Pilih Jabatan</label>
-                    <select class="form-control @error('jabatan') is-invalid @enderror" 
-                    name="jabatan"
+                    <select class="form-control @error('jabatan') is-invalid @enderror" name="jabatan"  value="{{old('jabatan')}}" 
                         placeholder="Masukkan Jabatan">
                         <option value="Manager Produksi">Manager Produksi</option>
                         <option value="Manager IT">Manager IT</option>
@@ -165,14 +166,12 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Pilih Divisi</label>
-                    <select class="form-control @error('divisi') is-invalid @enderror"
-                     name="divisi"
+                    <select class="form-control @error('divisi') is-invalid @enderror" name="divisi"    value="{{old('divisi')}}" 
                         placeholder="Masukkan Divisi">
                         <option value="Divisi Produksi">Divisi Produksi</option>
                         <option value="Divisi IT">Divisi IT</option>
                         <option value="Divisi Marketing">Divisi Marketing</option>
                         <option value="Divisi Teknik">Divisi Teknik</option>
-                        <option value="Divisi Kepala News">Divisi Kepala News</option>
                         <option value="Divisi Keuangan & HRD">Divisi Keuangan & HRD</option>
                     </select>
 
@@ -193,9 +192,10 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Password</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                    name="password"
-                        placeholder="Masukkan Password" />
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                        placeholder="Masukkan Password" 
+                        value="{{old('password')}}" 
+                        />
 
                     <!-- error message untuk nama -->
                     @error('password')
@@ -207,11 +207,12 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">ConfPass</label>
-                    <input type="confpass" class="form-control @error('confpass') is-invalid @enderror"
-                        name="confpass" placeholder="Masukkan Confpass" />
+                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                        name="password_confirmation" placeholder="Masukkan Ulang Password"
+                        value="{{ old('password_confirmation') }}" /> 
 
                     <!-- error message untuk nama -->
-                    @error('confpass')
+                    @error('password_confirmation')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
                         </div>

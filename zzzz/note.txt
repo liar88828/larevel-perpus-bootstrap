@@ -6,3 +6,11 @@ php artisan make:model ModelIjinLembur -a
 
 kirim ke database
 --php artisan migrate
+
+
+
+// table staff untuk pengajuan Lembur
+
+// table kepala untuk pengajuan lembur
+
+

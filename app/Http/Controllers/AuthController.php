@@ -17,7 +17,7 @@ class AuthController extends Controller
 
 
     // Logout User
-    public function logoutUser(Request $request) 
+    public function logoutUser(Request $request)
     {
         auth()->logout();
         $request->session()->invalidate();
@@ -57,7 +57,7 @@ class AuthController extends Controller
         // buat auth baru dengan user yang sudah dibuat
         auth()->login($user);
         // set sesson berdasarkan user
-        session(['success' => "nama Success Register"]);
+        session(['success' => $formField['nama'] . " Success Register"]);
         // akan di redirec/ di pindah halaman ke login
         return redirect()->route('login', )->with('message', 'User created and logged in');
     }
@@ -114,6 +114,12 @@ class AuthController extends Controller
     function lupaPost()
     {
         return view('auth.lupa');
+    }
+
+    // kirim kan email kepada admin
+    function profile()
+    {
+        return view('profile.index');
     }
 
 

@@ -46,8 +46,8 @@
 
                     <div class="card border-0 shadow-sm rounded mx-4">
                         <div class="card-body">
-                            <a href="{{ route('surat-users.create') }}" class="btn btn-md btn-success mb-3">TAMBAH
-                                POST</a>
+                            {{-- <a href="{{ route('surat-user.create') }}" class="btn btn-md btn-success mb-3">TAMBAH
+                                POST</a> --}}
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -65,32 +65,39 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($suratUsers as $key=>$suratUser)
+                                    @forelse ($surat_ijin as $key=>$s)
                                         <tr>
                                             {{-- <td>{{ $loop->index }}</td> --}}
-                                            <td>{{ $suratUser->id }}</td>
-                                            <td>{{ $suratUser->jenis }}</td>
-                                            <td>{{ $suratUser->keterangan }}</td>
-                                            <td>{{ $suratUser->jam_kerja }}</td>
-                                            <td>{{ $suratUser->jam_lebur }}</td>
-                                            <td>{{ $suratUser->lama }}</td>
-                                            <td> Safira Nuraiha M.kom </td>
-                                            <td> Heri Pamungkas S.S.M.I.KOM </td>
-                                            {{-- <td>{{ $suratUser->acc_divisi}}</td> --}}
-                                            {{-- <td>{{ $suratUser->acc_direktur}}</td> --}}
-                                            <td>{{ $suratUser->lampiran }}</td>
-                                            <td> Di Terima </td>
-                                            {{-- <td>{{ $suratUser->status }}</td> --}}
+                                            <td>{{ $s->id }}</td>
+                                            <td>{{ $s->jenis }}</td>
+                                            <td>{{ $s->keterangan }}</td>
+                                            <td>{{ $s->jam_kerja }}</td>
+                                            <td>{{ $s->jam_lembur }}</td>
+                                            <td>{{ $s->lama }}</td>
+                                            <td> Safira Nuraiha M.kom
+
+                                                <span class="btn btn-warning">Di Proses</span>
+
+                                            </td>
+                                            <td> Heri Pamungkas S.S.M.I.KOM
+                                                <span class="btn btn-primary">Di Terima</span>
+
+                                            </td>
+                                            {{-- <td>{{ $s->acc_divisi}}</td> --}}
+                                            {{-- <td>{{ $s->acc_direktur}}</td> --}}
+                                            <td>{{ $s->lampiran }}</td>
+                                            <td> <span class="btn btn-success">Belum Mencukupi</span> </td>
+                                            {{-- <td>{{ $s->status }}</td> --}}
                                             <td class="text-center">
+                                                {{-- --------------------SHOW------------------------------------------------- --}}
+                                                <a href="{{ route('surat-ijin.show', $s->id) }}"
+                                                    class="btn btn-sm btn-dark">SHOW</a>
+                                                {{-- --------------------EDIT------------------------------------------------- --}}
+                                                <a href="{{ route('surat-ijin.edit', $s->id) }}"
+                                                    class="btn btn-sm btn-primary">EDIT</a>
+                                                {{-- --------------------DELETE------------------------------------------------- --}}
                                                 <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                    action="{{ route('surat.destroy', $suratUser->id) }}"
-                                                    method="POST">
-
-                                                    <a href="{{ route('surat.show', $suratUser->id) }}"
-                                                        class="btn btn-sm btn-dark">SHOW</a>
-
-                                                    <a href="{{ route('surat.edit', $suratUser->id) }}"
-                                                        class="btn btn-sm btn-primary">EDIT</a>
+                                                    action="{{ route('surat-ijin.destroy', $s->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>

@@ -25,22 +25,27 @@
                         <div class="profile-img ">
                             <div class=" d-flex  justify-content-center my-3">
 
-                                <img style="width: 60%; height:auto;"
+                                <img style="width: 50%; height:auto;"
                                     src="https://upload.wikimedia.org/wikipedia/id/thumb/9/91/TVKU-BChannel.png/800px-TVKU-BChannel.png"
                                     alt="" class="rounded" />
                             </div>
-                            <div class=" d-flex  justify-content-center m-2">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                                    alt="" class="rounded" />
+
+                            <div class=" d-flex  justify-content-center m-2 ">
+                                <img src= '{{asset('/profile.png')}}'
+                                    alt="" class="rounded" 
+                                    style="width: 60%; height: auto"
+                                    />
                             </div>
-                            <div>
-                                <p> </p>
-                                <input class='file btn   btn-primary w-5' type="file" name="file" />
-                            </div>
-                            <div class="col-md-2 mt-3">
-                                <a class="btn btn-success text-nowrap p-2 " href="{{ route('surat.create') }}"> Buat
-                                    Ijin Lembur </a>
-                            </div>
+                            {{--  upload file --}}
+                            {{-- <div> --}}
+                        {{-- Href Create --}}
+                        <div class="col-md-2 mt-3">
+                            <a class="btn btn-success text-nowrap p-2 " 
+                            href="{{Route('surat-ijin.create')}}">
+                            Buat Ijin Lembur </a>
+                        </div>
+                        {{-- Href Create --}}
+
                             <div class="col-md-2 mt-3">
                                 <a class="btn btn-primary text-nowrap p-2  "> Edit Surat </a>
                             </div>
@@ -70,7 +75,7 @@
                                         <label>User Id</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Kshiti123</p>
+                                        <p>{{auth()->user()->id }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -79,7 +84,7 @@
                                         <label>Nama</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Kshiti Ghelani</p>
+                                        <p>{{auth()->user()->nama }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -88,7 +93,7 @@
                                         <label>Jenis Kelamin</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Laki Laki</p>
+                                        <p>{{auth()->user()->jenisKelamin}}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -97,7 +102,7 @@
                                         <label>Email</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>kshitighelani@gmail.com</p>
+                                        <p>{{auth()->user()->email }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -106,7 +111,7 @@
                                         <label>Tanggal Lahir</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>12/12/1999</p>
+                                        <p>{{auth()->user()->tanggalLahir }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -115,7 +120,7 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>123 456 7890</p>
+                                        <p>{{auth()->user()->noHp }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -124,7 +129,7 @@
                                         <label>Jabatan</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Orak Sekolah</p>
+                                        <p>{{auth()->user()->jabatan }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -133,7 +138,8 @@
                                         <label>Divisi</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>Anak Punk</p>
+                                        <p>{{auth()->user()->divisi }}</p>
+
                                     </div>
                                 </div>
                             </div>

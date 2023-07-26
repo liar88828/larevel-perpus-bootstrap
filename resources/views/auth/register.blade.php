@@ -62,7 +62,10 @@
                             <p>Masukan Jenis Kelamin</p>
                             <div class="form-check">
                                 <input class="form-check-input"
-                                    class="form-control @error('jenisKelamin') is-invalid @enderror" type="radio"
+                                    class="form-control @error('jenisKelamin') is-invalid @enderror" 
+                                    type="radio"
+                                    value="Laki-laki"
+
                                     name="jenisKelamin" id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Laki Laki
@@ -70,8 +73,12 @@
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input"
-                                    class="form-control @error('jenisKelamin') is-invalid @enderror" type="radio"
-                                    name="jenisKelamin" id="flexRadioDefault1">
+                                    class="form-control @error('jenisKelamin') is-invalid @enderror" 
+                                    type="radio"
+                                    name="jenisKelamin" 
+                                    id="flexRadioDefault1"
+                                    value="Perempuan"
+                                    >
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Perempuan
                                 </label>

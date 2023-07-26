@@ -20,17 +20,22 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form action="{{ route('surat-user.store') }}" method="POST" enctype="multipart/form-data">
+                        <h1 class="h1 text-center my-5">Buat Pengajuan Surat</h1>
+                        <form action="{{ route('surat-ijin.store') }}" method="POST">
                             @csrf()
 
+
+                            {{-- hidden --}}
+                            <input type="text" name="acc_divisi" value="{{ old('acc_divisi') }}">
+                            <input type="text" name="acc_direktur" value="{{ old('acc_direktur') }}">
+                            <input type="text" name="status" value="{{ old('status') }}">
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Jenis</label>
                                 <input type="text"
                                     class="form-control @error('jenis') 
                                 is-invalid @enderror"
-                                    name="jenis" value="{{ old('jenis') }}" placeholder="Masukan Jenis"
-                                    value=''>
+                                    name="jenis" value="{{ old('jenis') }}" placeholder="Masukan Jenis">
 
                                 <!-- error message untuk hal -->
                                 @error('jenis')
@@ -46,8 +51,7 @@
                                 <input type="text"
                                     class="form-control @error('keterangan') 
                                 is-invalid @enderror"
-                                    name="keterangan" value="{{ old('keterangan') }}" placeholder="Masukan Keterangan "
-                                    value=''>
+                                    name="keterangan" value="{{ old('keterangan') }}" placeholder="Masukan Keterangan ">
 
                                 <!-- error message untuk hal -->
                                 @error('keterangan')
@@ -57,7 +61,7 @@
                                 @enderror
                             </div>
 
-                         
+
                             <div class="input-group form-group date" id="timePicker1"
                                 style="display: flex; flex-direction: column;">
                                 <label class="font-weight-bold">Jam Kerja</label>
@@ -81,7 +85,7 @@
                             </div>
 
 
-                             
+
                             <div class="input-group form-group date" id="timePicker2"
                                 style="display: flex; flex-direction: column;">
                                 <label class="font-weight-bold">Jam lembur</label>
@@ -95,7 +99,7 @@
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
                                     </span>
                                 </div>
- 
+
                                 @error('jam_lembur')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
@@ -104,15 +108,14 @@
                             </div>
 
 
-                       
+
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Lama</label>
                                 <input type="text"
                                     class="form-control @error('lama') 
                                 is-invalid @enderror"
-                                    name="lama"  placeholder="Masukan Lama "
-                                    value="{{ old('lama') }}">
+                                    name="lama" placeholder="Masukan Lama " value="{{ old('lama') }}">
 
                                 <!-- error message untuk hal -->
                                 @error('lama')
@@ -127,8 +130,7 @@
                                 <input type="text"
                                     class="form-control @error('lampiran') 
                                 is-invalid @enderror"
-                                    name="lampiran" placeholder="Masukan Lampiran "
-                                    value="{{ old('lampiran') }}">
+                                    name="lampiran" placeholder="Masukan Lampiran " value="{{ old('lampiran') }}">
 
                                 <!-- error message untuk hal -->
                                 @error('lampiran')
@@ -139,6 +141,9 @@
                             </div>
 
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
+                            {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
+                            {{-- <button onclick="history.back()" class="btn btn-md btn-primary">KEMBALI</button> --}}
+                            <a href="{{ url()->previous() }}" class="btn btn-success">KEMBALI</a>
                             {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
 
                         </form>

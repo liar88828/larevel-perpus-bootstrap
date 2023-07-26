@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModelIjinLemburController;
-use App\Http\Controllers\SuratUserController;
+use App\Http\Controllers\SuratController;
+use App\Models\surat;
+// use App\Http\Controllers\SuratUserController;
+// use App\Models\suratUser;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,45 +24,45 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/surat', ModelIjinLemburController::class);
-
-Route::prefix('/surat-users')->group(function () {
-    Route::controller(SuratUserController::class)->group(function () {
-        Route::get('/', 'index')->name('surat-user.index');
-        Route::get('/create', 'create')->name('surat-user.create');
-        // Route::get(  '/{id}','show');
-        Route::get('/edit/{id}', 'edit');
-        Route::post('/create', 'store')->name('surat-user.store');
-        Route::put('/edit/{id}', 'update');
-        Route::delete('/delete/{id}', 'destroy');
-    });
-});
-
-
-Route::get('/profile', function () {
-    return view('profile.index');
-});
+Route::resource('/surat', ModelIjinLemburController::class);//->middleware('auth');
+Route::resource('/surat-ijin', SuratController::class);//->middleware('auth');
 
 
 
-    //register
-    Route::get('/register', [AuthController::class, 'createRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'storeRegister'])->name('register');
 
-    // //logout
-    // Route::post('/logout', //dd('test')
-    // [AuthController::class, 'logoutUser'])->name('logout');//->middleware('auth');
 
-    // Log User Out
-    Route::post('/logout', [AuthController::class, 'logoutUser'])->middleware('auth');
 
-    //loginView
-    Route::get('/login', [AuthController::class, 'loginView'])->name('login');
-    Route::post('/login', [AuthController::class, 'loginAuth'])->name('login');
 
-    //lupa
-    Route::get('/lupa', [AuthController::class, 'lupa'])->name('lupa')->middleware('guest');
-    Route::post('/lupa', [AuthController::class, 'lupaPost'])->name('lupa');
+// Route::prefix('/surat-users')->group(function () {
+//     Route::controller(SuratUserController::class)->group(function () {
+//         Route::get('/', 'index');
+//         Route::get('/create', 'create')->name('surat-user.create');
+//         // Route::get(  '/{id}','show');
+//         // Route::get('/edit/{id}', 'edit');
+//         // Route::put('/edit/{id}', 'update');
+//         // Route::delete('/delete/{id}', 'destroy');
+//     });
+// });
+
+// Route::post('/surat-users/store', [SuratUserController::class, 'storeSurat'])->name('surat-user.store');
+
+
+
+//register
+Route::get('/register', [AuthController::class, 'createRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'storeRegister'])->name('register');
+
+// //logout
+Route::post('/logout', [AuthController::class, 'logoutUser'])->middleware('auth');
+
+//loginView
+Route::get('/login', [AuthController::class, 'loginView'])->name('login');
+Route::post('/login', [AuthController::class, 'loginAuth'])->name('login');
+
+//lupa
+Route::get('/lupa', [AuthController::class, 'lupa'])->name('lupa')->middleware('guest');
+Route::post('/lupa', [AuthController::class, 'lupaPost'])->name('lupa');
+Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
 
 
 

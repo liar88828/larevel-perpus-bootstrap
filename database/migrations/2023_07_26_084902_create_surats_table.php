@@ -14,14 +14,20 @@ return new class extends Migration
         Schema::create('surats', function (Blueprint $table) {
             $table->id();
             // $table->string(column: 'user_id');
-            $table->string('jenis');
+            // $table->string('jenis');
+            $table->string('hari_tanggal');
             $table->string('keterangan');
-            $table->string('jam_kerja');
-            $table->string('jam_lembur');
-            $table->string('lama');
+
+            $table->string('hari_kerja');
+            $table->string('mulai_pagi') ;
+            $table->string('akhir_pagi') ;
+            $table->string('mulai_malam') ;
+            $table->string('akhir_malam') ;
+
+            // $table->string('lama');
             $table->string('acc_divisi');
             $table->string('acc_direktur');
-            $table->string('lampiran');
+            // $table->string('lampiran');
             $table->string('status');
             $table->timestamps();
         });

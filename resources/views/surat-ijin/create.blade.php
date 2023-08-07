@@ -26,19 +26,20 @@
 
 
                             {{-- hidden --}}
-                            <input type="text" name="acc_divisi" value="{{ old('acc_divisi') }}">
-                            <input type="text" name="acc_direktur" value="{{ old('acc_direktur') }}">
-                            <input type="text" name="status" value="{{ old('status') }}">
+                            <input type="hidden" name="acc_divisi" value="{{ old('acc_divisi') }}">
+                            <input type="hidden" name="acc_direktur" value="{{ old('acc_direktur') }}">
+                            <input type="hidden" name="status" value="{{ old('status') }}">
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Jenis</label>
-                                <input type="text"
-                                    class="form-control @error('jenis') 
+                                <label class="font-weight-bold">Hari/Tanggal</label>
+                                <input type="date"
+                                    class="form-control @error('hari_tanggal') 
                                 is-invalid @enderror"
-                                    name="jenis" value="{{ old('jenis') }}" placeholder="Masukan Jenis">
+                                    name="hari_tanggal" value="{{ old('hari_tanggal') }}"
+                                    placeholder="Masukan Hari dan Tanggal">
 
                                 <!-- error message untuk hal -->
-                                @error('jenis')
+                                @error('hari_tanggal')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -62,22 +63,16 @@
                             </div>
 
 
-                            <div class="input-group form-group date" id="timePicker1"
-                                style="display: flex; flex-direction: column;">
-                                <label class="font-weight-bold">Jam Kerja</label>
-                                <div class="d-flex flex-row">
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold mb-3">Hari Kerja</label>
+                                <select class="form-control @error('hari_kerja') is-invalid @enderror" name="hari_kerja"
+                                    value="{{ old('hari_kerja') }}" placeholder="Masukkan Hari Kerja">
+                                    <option value="Hari Normal">Hari Normal</option>
+                                    <option value="Hari Libur">Hari Libur</option>
+                                </select>
 
-                                    <input type="text" style="width: 90%"
-                                        class="form-control timePicker1 form-control
-                                         @error('jam_kerja') is-invalid @enderror"
-                                        name="jam_kerja" value="{{ old('jam_kerja') }}">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-
-                                <!-- error message untuk jam_kerja_normal -->
-                                @error('jam_kerja')
+                                <!-- error message untuk nama -->
+                                @error('hari_kerja')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -85,32 +80,108 @@
                             </div>
 
 
+                            <h3>Jam Pagi</h3>
+                            <div class="d-flex flex-col">
+                                <div class="input-group form-group date" id="mulai_pagi"
+                                    style="display: flex; flex-direction: column;">
+                                    <label class="font-weight-bold">Mulai</label>
+                                    <div class="d-flex flex-row">
 
-                            <div class="input-group form-group date" id="timePicker2"
-                                style="display: flex; flex-direction: column;">
-                                <label class="font-weight-bold">Jam lembur</label>
-                                <div class="d-flex flex-row">
+                                        <input type="text" style="width: 90%"
+                                            class="form-control mulai_pagi form-control
+                                         @error('mulai_pagi') is-invalid @enderror"
+                                            name="mulai_pagi" value="{{ old('mulai_pagi') ?? 'kosong' }}">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
 
-                                    <input type="text" style="width: 90%"
-                                        class="form-control timePicker2 form-control
-                                         @error('jam_lembur') is-invalid @enderror"
-                                        name="jam_lembur" value="{{ old('jam_lembur') }}">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                    </span>
+                                    <!-- error message untuk mulai_pagi_normal -->
+                                    @error('mulai_pagi')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
 
-                                @error('jam_lembur')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
+
+                                <div class="input-group form-group date" id="akhir_pagi"
+                                    style="display: flex; flex-direction: column;">
+                                    <label class="font-weight-bold">Akhir</label>
+                                    <div class="d-flex flex-row">
+
+                                        <input type="text" style="width: 90%"
+                                            class="form-control akhir_pagi form-control
+                                     @error('akhir_pagi') is-invalid @enderror"
+                                            name="akhir_pagi" value="{{ old('akhir_pagi') ?? 'kosong'}}">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        </span>
                                     </div>
-                                @enderror
+
+                                    <!-- error message untuk akhir_pagi_normal -->
+                                    @error('akhir_pagi')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <h3>Jam Malam</h3>
+                            <div class="d-flex flex-col">
+
+                                <div class="input-group form-group date" id="mulai_malam"
+                                    style="display: flex; flex-direction: column;">
+                                    <label class="font-weight-bold">Mulai</label>
+                                    <div class="d-flex flex-row">
+
+                                        <input type="text" style="width: 90%"
+                                            class="form-control mulai_malam form-control
+                                         @error('mulai_malam') is-invalid @enderror"
+                                            name="mulai_malam" value="{{ old('mulai_malam') ?? 'kosong'}}">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <!-- error message untuk mulai_malam_normal -->
+                                    @error('mulai_malam')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+
+                                <div class="input-group form-group date" id="akhir_malam"
+                                    style="display: flex; flex-direction: column;">
+                                    <label class="font-weight-bold">Akhir</label>
+                                    <div class="d-flex flex-row">
+
+                                        <input type="text" style="width: 90%"
+                                            class="form-control akhir_malam form-control
+                                     @error('akhir_malam') is-invalid @enderror"
+                                            name="akhir_malam" value="{{ old('akhir_malam') ?? 'kosong'}}">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+
+                                    <!-- error message untuk akhir_malam_normal -->
+                                    @error('akhir_malam')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
 
 
 
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="font-weight-bold">Lama</label>
                                 <input type="text"
                                     class="form-control @error('lama') 
@@ -123,9 +194,9 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label class="font-weight-bold">Lampiran</label>
                                 <input type="text"
                                     class="form-control @error('lampiran') 
@@ -138,7 +209,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
@@ -169,7 +240,7 @@
         var firstOpen = true;
         var time;
 
-        $('#timePicker1').datetimepicker({
+        $('#mulai_pagi').datetimepicker({
             useCurrent: false,
             format: "hh:mm A"
         }).on('dp.show', function() {
@@ -187,7 +258,41 @@
         var firstOpen = true;
         var time;
 
-        $('#timePicker2').datetimepicker({
+        $('#akhir_pagi').datetimepicker({
+            useCurrent: false,
+            format: "hh:mm A"
+        }).on('dp.show', function() {
+            if (firstOpen) {
+                time = moment().startOf('day');
+                firstOpen = false;
+            } else {
+                time = "01:00 PM"
+            }
+            $(this).data('DateTimePicker').date(time);
+        });
+    </script>
+    <script>
+        var firstOpen = true;
+        var time;
+
+        $('#mulai_malam').datetimepicker({
+            useCurrent: false,
+            format: "hh:mm A"
+        }).on('dp.show', function() {
+            if (firstOpen) {
+                time = moment().startOf('day');
+                firstOpen = false;
+            } else {
+                time = "01:00 PM"
+            }
+            $(this).data('DateTimePicker').date(time);
+        });
+    </script>
+    <script>
+        var firstOpen = true;
+        var time;
+
+        $('#akhir_malam').datetimepicker({
             useCurrent: false,
             format: "hh:mm A"
         }).on('dp.show', function() {

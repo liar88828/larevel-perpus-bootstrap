@@ -52,14 +52,18 @@
                                 <thead>
                                     <tr>
                                         <th scope="col"> No.</th>
-                                        <th scope="col"> Jenis</th>
+                                        {{-- <th scope="col"> Jenis</th> --}}
+                                        <th scope="col"> Hari/Tanggal</th>
                                         <th scope="col"> Keterangan</th>
-                                        <th scope="col"> Jam Kerja</th>
-                                        <th scope="col"> Jam Lembur</th>
-                                        <th scope="col"> lama</th>
+                                        <th scope="col"> Hari Kerja</th>
+                                        <th scope="col"> Mulai Pagi</th>
+                                        <th scope="col"> Akhir Pagi</th>
+                                        <th scope="col"> Mulai Malam</th>
+                                        <th scope="col"> Akhir Malam</th>
+                                        {{-- <th scope="col"> lama</th> --}}
                                         <th scope="col"> Acc Divisi</th>
                                         <th scope="col"> Acc Direktur</th>
-                                        <th scope="col"> Lampiran</th>
+                                        {{-- <th scope="col"> Lampiran</th> --}}
                                         <th scope="col"> Status</th>
                                         <th scope="col"> Aksi</th>
                                     </tr>
@@ -69,11 +73,16 @@
                                         <tr>
                                             {{-- <td>{{ $loop->index }}</td> --}}
                                             <td>{{ $s->id }}</td>
-                                            <td>{{ $s->jenis }}</td>
+                                            {{-- <td>{{ $s->jenis }}</td> --}}
+                                            <td>{{ $s->hari_tanggal }}</td>
                                             <td>{{ $s->keterangan }}</td>
-                                            <td>{{ $s->jam_kerja }}</td>
-                                            <td>{{ $s->jam_lembur }}</td>
-                                            <td>{{ $s->lama }}</td>
+
+                                            <td>{{ $s->hari_kerja }}</td>
+                                            <td>{{ $s->mulai_pagi }}</td>
+                                            <td>{{ $s->akhir_pagi }}</td>
+                                            <td>{{ $s->mulai_malam }}</td>
+                                            <td>{{ $s->akhir_malam }}</td>
+                                            {{-- <td>{{ $s->lama }}</td> --}}
                                             <td> Safira Nuraiha M.kom
 
                                                 <span class="btn btn-warning">Di Proses</span>
@@ -85,7 +94,9 @@
                                             </td>
                                             {{-- <td>{{ $s->acc_divisi}}</td> --}}
                                             {{-- <td>{{ $s->acc_direktur}}</td> --}}
-                                            <td>{{ $s->lampiran }}</td>
+
+                                            {{-- <td>{{ $s->lampiran }}</td> --}}
+                                            
                                             <td> <span class="btn btn-success">Belum Mencukupi</span> </td>
                                             {{-- <td>{{ $s->status }}</td> --}}
                                             <td class="text-center">

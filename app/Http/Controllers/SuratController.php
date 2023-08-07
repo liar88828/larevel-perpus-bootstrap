@@ -30,7 +30,12 @@ class SuratController extends Controller
      */
     public function create()
     {
-        return view('surat-ijin.create');
+        return view('surat-ijin.create')
+            ->with('mulai_pagi', 'kosong')
+            ->with('akhir_pagi', 'kosong')
+            ->with('mulai_malam', 'kosong')
+            ->with('akhir_malam', 'kosong')
+        ;
     }
 
     /**
@@ -42,14 +47,20 @@ class SuratController extends Controller
 
 
         $createSurat = [
-            'jenis' => $request->jenis,
+            'hari_tanggal' => $request->hari_tanggal,
             'keterangan' => $request->keterangan,
-            'jam_kerja' => $request->jam_kerja,
-            'jam_lembur' => $request->jam_lembur,
-            'lama' => $request->lama,
+
+            'hari_kerja' => $request->hari_kerja,
+            'mulai_pagi' => $request->mulai_pagi??'-',
+            'akhir_pagi' => $request->akhir_pagi??'-',
+
+            'mulai_malam' => $request->mulai_malam??'-',
+            'akhir_malam' => $request->akhir_malam??'-',
+
+            // 'lama' => $request->lama,
             'acc_divisi' => 'Safira Nuraiha M.kom',
             'acc_direktur' => 'Heri Pamungkas S.S.M.I.KOM',
-            'lampiran' => $request->lampiran,
+            // 'lampiran' => $request->lampiran,
             'status' => 'Di Proses',
             // 'acc_divisi' => $request->acc_divisi,
             // 'acc_direktur' => $request->acc_direktur,

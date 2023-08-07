@@ -25,7 +25,7 @@
 
         // dd('asdasda');
         // return redirect('/surat-users')->with(['success' => 'Data Berhasil Disimpan!']);
-    }
+    <!-- } -->
     // edit surat
     public function edit(string $id)
     {
@@ -76,6 +76,6 @@
         $suratUser->delete();
         return redirect()->route('surat-user.index')->with(['success' => 'Berhasil Di Hapus']);
     }
-}
+<!-- } -->
 
 

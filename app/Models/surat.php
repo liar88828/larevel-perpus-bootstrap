@@ -9,14 +9,19 @@ class surat extends Model
 {
     use HasFactory;
     protected $fillable=[
-        'jenis',
+        'hari_tanggal',
         'keterangan',
-        'jam_kerja',
-        'jam_lembur',
-        'lama',
+
+        'hari_kerja',
+        'mulai_pagi',
+        'akhir_pagi',
+        'mulai_malam',
+        'akhir_malam',
+
+        // 'lama',
         'acc_divisi',
         'acc_direktur',
-        'lampiran',
+        // 'lampiran',
         'status'
     ];
 }

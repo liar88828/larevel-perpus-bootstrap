@@ -22,14 +22,19 @@ class StoresuratRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'jenis' => 'required|min:5',
+            'hari_tanggal' => 'required|min:5',
             'keterangan' => 'required|min:5',
-            'jam_kerja' => 'required|min:5',
-            'jam_lembur' => 'required|min:2',
-            'lama' => 'required|min:5',
+
+            'hari_kerja' => 'required|min:5',
+            'mulai_pagi' => 'nullable',
+            'akhir_pagi' => 'nullable',
+            'mulai_malam' => 'nullable',
+            'akhir_malam' => 'nullable',
+
+            // 'lama' => 'required|min:5',
             'acc_divisi' => 'required|min:1',
             'acc_direktur' => 'required|min:2',
-            'lampiran' => 'required|min:2',
+            // 'lampiran' => 'required|min:2',
             'status' => 'required|min:2',
         ];
     }

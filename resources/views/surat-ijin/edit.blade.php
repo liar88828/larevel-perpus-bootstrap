@@ -39,7 +39,7 @@
                                 <label class="font-weight-bold">Hal</label>
                                 <input type="text" class="form-control @error('hal') is-invalid @enderror"
                                     name="hal"  value="{{ old('hal',$surat->hal) }}"  placeholder="Keterangan apa"
-                                    value='Permohonan Lembur Karyawan'>
+                               >
 
                                 <!-- error message untuk hal -->
                                 @error('hal')

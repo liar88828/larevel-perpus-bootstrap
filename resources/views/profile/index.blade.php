@@ -44,8 +44,8 @@
                             {{-- Href Create --}}
 
                             <div class="col-md-2 mt-3">
-                                <a class="btn btn-primary text-nowrap p-2  ">
-                                    Edit Surat
+                                <a class="btn btn-primary text-nowrap p-2  "href="{{ Route('surat-ijin.index') }}">
+                                    Show Surat
                                 </a>
                             </div>
 

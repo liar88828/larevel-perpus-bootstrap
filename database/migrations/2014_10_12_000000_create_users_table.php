@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('jenisKelamin');
             $table->string('tanggalLahir');
             $table->string('noHp');
+            $table->string('anggota');
             $table->string('jabatan');
             $table->string('divisi');
             //

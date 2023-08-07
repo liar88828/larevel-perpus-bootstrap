@@ -151,6 +151,24 @@
                     @enderror
                 </div>
 
+
+
+                <div class="form-group mb-3">
+                    <label class="font-weight-bold mb-3">Jabatan</label>
+                    <select class="form-control @error('anggota') is-invalid @enderror" name="anggota"  value="{{old('anggota')}}" 
+                        placeholder="Masukkan Anggota">
+                        <option value="Staff">Staff</option>
+                        <option value="Kepala">Kepala</option>
+                    </select>
+
+                    <!-- error message untuk nama -->
+                    @error('anggota')
+                        <div class="alert alert-danger mt-2">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Pilih Jabatan</label>
                     <select class="form-control @error('jabatan') is-invalid @enderror" name="jabatan"  value="{{old('jabatan')}}" 

@@ -24,6 +24,7 @@ class User extends Authenticatable implements JWTSubject
         'jenisKelamin',
         'tanggalLahir',
         'noHp',
+        'anggota',
         'jabatan',
         'divisi',
         'password',

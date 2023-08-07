@@ -31,27 +31,35 @@
                             </div>
 
                             <div class=" d-flex  justify-content-center m-2 ">
-                                <img src= '{{asset('/profile.png')}}'
-                                    alt="" class="rounded" 
-                                    style="width: 60%; height: auto"
-                                    />
+                                <img src='{{ asset('/profile.png') }}' alt="" class="rounded"
+                                    style="width: 60%; height: auto" />
                             </div>
                             {{--  upload file --}}
                             {{-- <div> --}}
-                        {{-- Href Create --}}
-                        <div class="col-md-2 mt-3">
-                            <a class="btn btn-success text-nowrap p-2 " 
-                            href="{{Route('surat-ijin.create')}}">
-                            Buat Ijin Lembur </a>
-                        </div>
-                        {{-- Href Create --}}
 
                             <div class="col-md-2 mt-3">
-                                <a class="btn btn-primary text-nowrap p-2  "> Edit Surat </a>
+                                <a class="btn btn-success text-nowrap p-2 " href="{{ Route('surat-ijin.create') }}">
+                                    Buat Ijin Lembur </a>
                             </div>
+                            {{-- Href Create --}}
+
                             <div class="col-md-2 mt-3">
-                                <a class="btn btn-warning text-nowrap p-2  "> Print Surat </a>
+                                <a class="btn btn-primary text-nowrap p-2  ">
+                                    Edit Surat
+                                </a>
                             </div>
+
+                            <div class="col-md-2 mt-3">
+                                <a class="btn btn-warning text-nowrap p-2  ">
+                                    Print Surat
+                                </a>
+                            </div>
+                            <br>
+                            <form class="col-md-2 mt-3" method="POST" action="logout"> @csrf
+                                <button type="submit" class="btn btn-danger text-nowrap p-2  ">
+                                    Logout
+                                </button>
+                            </form>
                         </div>
                     </div>
 
@@ -75,7 +83,7 @@
                                         <label>User Id</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->id }}</p>
+                                        <p>{{ auth()->user()->id }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -84,7 +92,7 @@
                                         <label>Nama</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->nama }}</p>
+                                        <p>{{ auth()->user()->nama }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -93,7 +101,7 @@
                                         <label>Jenis Kelamin</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->jenisKelamin}}</p>
+                                        <p>{{ auth()->user()->jenisKelamin }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -102,7 +110,7 @@
                                         <label>Email</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->email }}</p>
+                                        <p>{{ auth()->user()->email }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -111,7 +119,7 @@
                                         <label>Tanggal Lahir</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->tanggalLahir }}</p>
+                                        <p>{{ auth()->user()->tanggalLahir }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -120,7 +128,7 @@
                                         <label>Phone</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->noHp }}</p>
+                                        <p>{{ auth()->user()->noHp }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -129,7 +137,16 @@
                                         <label>Jabatan</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->jabatan }}</p>
+                                        <p>{{ auth()->user()->jabatan }}</p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Anggota</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{ auth()->user()->anggota }}</p>
                                     </div>
                                 </div>
                                 <hr>
@@ -138,7 +155,7 @@
                                         <label>Divisi</label>
                                     </div>
                                     <div class="col-md-6">
-                                        <p>{{auth()->user()->divisi }}</p>
+                                        <p>{{ auth()->user()->divisi }}</p>
 
                                     </div>
                                 </div>

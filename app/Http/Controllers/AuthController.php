@@ -45,6 +45,7 @@ class AuthController extends Controller
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'tanggalLahir' => 'required',
             'noHp' => 'required|min:8',
+            'anggota' => 'required',
             'jabatan' => 'required',
             'divisi' => 'required',
             'password' => 'required|confirmed|min:6'

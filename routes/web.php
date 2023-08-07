@@ -53,6 +53,7 @@ Route::get('/register', [AuthController::class, 'createRegister'])->name('regist
 Route::post('/register', [AuthController::class, 'storeRegister'])->name('register');
 
 // //logout
+Route::post('/profile', [AuthController::class, 'logoutUser'])->middleware('auth');
 Route::post('/logout', [AuthController::class, 'logoutUser'])->middleware('auth');
 
 //loginView

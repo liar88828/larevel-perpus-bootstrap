@@ -17,6 +17,7 @@ return new class extends Migration
             // $table->string('jenis');
             $table->string('hari_tanggal');
             $table->string('keterangan');
+            $table->string('nama');
 
             $table->string('hari_kerja');
             $table->string('mulai_pagi') ;

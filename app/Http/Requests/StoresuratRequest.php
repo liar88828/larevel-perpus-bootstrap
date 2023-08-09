@@ -23,6 +23,7 @@ class StoresuratRequest extends FormRequest
     {
         return [
             'user_id'=>'required|min:5',
+            'nama' => 'required|min:5',
             'hari_tanggal' => 'required|min:5',
             'keterangan' => 'required|min:5',
 

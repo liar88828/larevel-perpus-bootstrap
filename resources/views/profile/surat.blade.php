@@ -59,6 +59,7 @@
                             <tr>
                                 <th>No. </th>
                                 {{-- <th>Id </th> --}}
+                                <th>Nama </th>
                                 <th>Hari/Tanggal </th>
                                 <th>Hari Kerja Normal </th>
                                 <th>Mulai Pagi </th>
@@ -75,6 +76,7 @@
                             <tr>
                                 <td>{{$key+1}}</td>
                                 {{-- <td>{{$s->id}}</td> --}}
+                                <td>{{$s->nama}}</td>
                                 <td>{{$s->hari_tanggal}}</td>
                                 <td>{{$s->hari_kerja}}</td>
                                 <td>{{$s->mulai_pagi}}</td>

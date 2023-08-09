@@ -17,12 +17,23 @@ class SuratController extends Controller
     //
     public function index()
     {
-        $surats = surat::all();
-        // dd($surats);
-        return view(
-            'surat-ijin.index',
-            ['surat_ijin' => $surats]
-        );
+
+        
+
+        if(auth()->user()->anggota==='Manager'){
+            $surats = surat::all();
+            return view(
+                'surat-ijin.index',
+                ['surat_ijin' => $surats]
+            );
+        }else{
+            $surats = auth()->user()->userSurat()->get();
+            // dd($surats);
+            return view(
+                'surat-ijin.index',
+                ['surat_ijin' => $surats]
+            );
+        }
     }
 
     /**
@@ -30,12 +41,7 @@ class SuratController extends Controller
      */
     public function create()
     {
-        return view('surat-ijin.create')
-            ->with('mulai_pagi', 'kosong')
-            ->with('akhir_pagi', 'kosong')
-            ->with('mulai_malam', 'kosong')
-            ->with('akhir_malam', 'kosong')
-        ;
+        return view('surat-ijin.create')        ;
     }
 
     /**
@@ -48,10 +54,11 @@ class SuratController extends Controller
 
         $createSurat = [
             'user_id' => $request->user_id,
-            'hari_tanggal' => $request->hari_tanggal,
-            'keterangan' => $request->keterangan,
+            'nama' => $request->nama,
+            'hari_tanggal' => $request->hari_tanggal?? '-',
+            'keterangan' => $request->keterangan?? '-',
 
-            'hari_kerja' => $request->hari_kerja,
+            'hari_kerja' => $request->hari_kerja?? '-',
             'mulai_pagi' => $request->mulai_pagi ?? '-',
             'akhir_pagi' => $request->akhir_pagi ?? '-',
 
@@ -76,10 +83,7 @@ class SuratController extends Controller
             ->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
-
-    /**
-     * Display the specified resource.
-     */
+ // hnya melihat satian data
     public function show(string $id)
     {
         // $surat = surat::query()->findOrFail((int) $id);

@@ -11,6 +11,7 @@ class surat extends Model
     protected $fillable=[
         'hari_tanggal',
         'keterangan',
+        'nama',
 
         'hari_kerja',
         'mulai_pagi',

@@ -30,6 +30,7 @@
                             <input type="hidden" name="acc_direktur" value="{{ old('acc_direktur') }}">
                             <input type="hidden" name="status" value="{{ old('status') }}">
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            <input type="hidden" name="nama" value="{{ auth()->user()->nama }}">
                             <div class="form-group">
                                 <label class="font-weight-bold">Hari/Tanggal</label>
                                 <input type="date"

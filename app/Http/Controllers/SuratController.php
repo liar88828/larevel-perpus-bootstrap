@@ -47,15 +47,16 @@ class SuratController extends Controller
 
 
         $createSurat = [
+            'user_id' => $request->user_id,
             'hari_tanggal' => $request->hari_tanggal,
             'keterangan' => $request->keterangan,
 
             'hari_kerja' => $request->hari_kerja,
-            'mulai_pagi' => $request->mulai_pagi??'-',
-            'akhir_pagi' => $request->akhir_pagi??'-',
+            'mulai_pagi' => $request->mulai_pagi ?? '-',
+            'akhir_pagi' => $request->akhir_pagi ?? '-',
 
-            'mulai_malam' => $request->mulai_malam??'-',
-            'akhir_malam' => $request->akhir_malam??'-',
+            'mulai_malam' => $request->mulai_malam ?? '-',
+            'akhir_malam' => $request->akhir_malam ?? '-',
 
             // 'lama' => $request->lama,
             'acc_divisi' => 'Safira Nuraiha M.kom',
@@ -81,11 +82,31 @@ class SuratController extends Controller
      */
     public function show(string $id)
     {
-        $surat = surat::query()->findOrFail((int) $id);
+        // $surat = surat::query()->findOrFail((int) $id);
+        // $surat = surat::query()->findOrFail((int) $id);
+        // $surat->user()->where('id', '1') 
+
+        // $surat = surat::query()->whereBelongsTo('user', $id);
+        // $surat = surat::with('user')->whereBelongsTo('')
+        // ->where('user_id','==',1)->get()
+        //   ->whereIn('user_id',1)//->get()
+        // $surat=surat::with('user')->where('user_id','=', 1)->get();
+// $data=$surat->user->email;
+
+        $surat = surat::latest()->get();
+        // dd($surat);
+        // dd($surat);
         return view(
             'surat-ijin.show',
             compact('surat')
         );
+
+
+        // $data = Item::select('*')
+
+        //     ->whereMonth('created_at', Carbon::now()->month)
+
+        //     ->get();
     }
 
     /**
@@ -115,4 +136,13 @@ class SuratController extends Controller
         return redirect()->route('surat-ijin.index')->with(['success' => 'Berhasil Di Hapus']);
 
     }
+
+    // public function surat(string $id)
+
+    
+    // {
+    //     return redirect()->route('surat-ijin.surat' );
+
+    // }
+
 }

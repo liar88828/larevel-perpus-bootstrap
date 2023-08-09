@@ -45,6 +45,11 @@
 
                             <div class="col-md-2 mt-3">
                                 <a class="btn btn-primary text-nowrap p-2  "href="{{ Route('surat-ijin.index') }}">
+                                    Status Surat
+                                </a>
+                            </div>
+                            <div class="col-md-2 mt-3">
+                                <a class="btn btn-info text-nowrap p-2  "href="{{ Route('profile.surat') }}">
                                     Show Surat
                                 </a>
                             </div>

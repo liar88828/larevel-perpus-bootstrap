@@ -44,11 +44,11 @@
                      <br>
                      {{-- {{ $surat->nama }} --}}
                     {{-- {{ $surat->jabatan }} --}}
-                    Divisi : Divisi Ti<br>
+                    Staff : {{auth()->user()->jabatan}}<br>
                     {{-- {{ $surat->divisi }} --}}
                 </p>
             </div>
-
+{{-- {{dd($surat)}} --}}
             <div class="">
                 <p class="tulis"> Memohon untuk bekerja ekstra pada,</p>
 
@@ -58,7 +58,7 @@
                         <thead>
                             <tr>
                                 <th>No. </th>
-                                {{-- <th>Nama </th> --}}
+                                {{-- <th>Id </th> --}}
                                 <th>Hari/Tanggal </th>
                                 <th>Hari Kerja Normal </th>
                                 <th>Mulai Pagi </th>
@@ -69,20 +69,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ([20] as $item)
+                            @unless($surat->isEmpty())
+                            @foreach($surat as $key=>$s)
                                 
-                            @endforeach --}}
                             <tr>
-                                <td>1</td>
-                                <td>Senin,12/12/2012</td>
-                                <td>Kerja Normal</td>
-                                <td>12:12</td>
-                                <td>20:12</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>Tidak sakit</td>
+                                <td>{{$key+1}}</td>
+                                {{-- <td>{{$s->id}}</td> --}}
+                                <td>{{$s->hari_tanggal}}</td>
+                                <td>{{$s->hari_kerja}}</td>
+                                <td>{{$s->mulai_pagi}}</td>
+                                <td>{{$s->akhir_pagi}}</td>
+                                <td>{{$s->mulai_malam}}</td>
+                                <td>{{$s->akhir_malam}}</td>
+                                <td>{{$s->keterangan}}</td>
                             </tr>
-               
+                            
+                            @endforeach
+                            @else
+                            <tr>
+                                <td>0</td>
+                                <td>Data kosong</td>
+                            </tr>
+                            @endunless
 
                         </tbody>
                     </table>
@@ -108,7 +116,7 @@
                     <p class='tulis'>Nama : Bayu 1223
                         {{-- {{ $surat->nama }} --}}
                     </p>
-                    <p class='tulis'>Jabatan : Stafd TI
+                    <p class='tulis'>{{ auth()->user()->jabatan }}
                         {{-- {{ $surat->jabatan }} --}}
                     </p>
                 </div>

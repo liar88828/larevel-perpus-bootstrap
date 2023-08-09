@@ -48,6 +48,10 @@ Route::resource('/surat-ijin', SuratController::class);//->middleware('auth');
 
 
 
+//profile
+Route::get('/profile/surat/', [AuthController::class, 'surat'])->name('profile.surat')->middleware('auth');
+
+
 //register
 Route::get('/register', [AuthController::class, 'createRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'storeRegister'])->name('register');

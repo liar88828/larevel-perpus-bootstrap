@@ -22,6 +22,7 @@ class StoresuratRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id'=>'required|min:5',
             'hari_tanggal' => 'required|min:5',
             'keterangan' => 'required|min:5',
 

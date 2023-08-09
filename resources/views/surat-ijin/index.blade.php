@@ -53,6 +53,7 @@
                                     <tr>
                                         <th scope="col"> No.</th>
                                         {{-- <th scope="col"> Jenis</th> --}}
+                                        <th scope="col"> Nama</th>
                                         <th scope="col"> Hari/Tanggal</th>
                                         <th scope="col"> Keterangan</th>
                                         <th scope="col"> Hari Kerja</th>
@@ -73,6 +74,7 @@
                                         <tr>
                                             {{-- <td>{{ $loop->index }}</td> --}}
                                             <td>{{ $s->id }}</td>
+                                            <td>User</td>
                                             {{-- <td>{{ $s->jenis }}</td> --}}
                                             <td>{{ $s->hari_tanggal }}</td>
                                             <td>{{ $s->keterangan }}</td>

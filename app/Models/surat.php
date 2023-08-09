@@ -22,6 +22,16 @@ class surat extends Model
         'acc_divisi',
         'acc_direktur',
         // 'lampiran',
-        'status'
+        'status',
+        'user_id'
     ];
+
+
+    public function user() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -29,7 +29,7 @@
                             <input type="hidden" name="acc_divisi" value="{{ old('acc_divisi') }}">
                             <input type="hidden" name="acc_direktur" value="{{ old('acc_direktur') }}">
                             <input type="hidden" name="status" value="{{ old('status') }}">
-
+                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             <div class="form-group">
                                 <label class="font-weight-bold">Hari/Tanggal</label>
                                 <input type="date"
@@ -80,7 +80,7 @@
                             </div>
 
 
-                            <h3>Jam Pagi</h3>
+                            <h6>Jam Pagi</h6>
                             <div class="d-flex flex-col">
                                 <div class="input-group form-group date" id="mulai_pagi"
                                     style="display: flex; flex-direction: column;">
@@ -129,7 +129,7 @@
                             </div>
 
 
-                            <h3>Jam Malam</h3>
+                            <h6>Jam Malam</h6>
                             <div class="d-flex flex-col">
 
                                 <div class="input-group form-group date" id="mulai_malam"

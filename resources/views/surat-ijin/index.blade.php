@@ -69,12 +69,13 @@
                                         <th scope="col"> Aksi</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     @forelse ($surat_ijin as $key=>$s)
                                         <tr>
                                             {{-- <td>{{ $loop->index }}</td> --}}
                                             <td>{{ $s->id }}</td>
-                                            <td>User</td>
+                                            <td>{{$s->nama}}</td>
                                             {{-- <td>{{ $s->jenis }}</td> --}}
                                             <td>{{ $s->hari_tanggal }}</td>
                                             <td>{{ $s->keterangan }}</td>
@@ -103,8 +104,10 @@
                                             {{-- <td>{{ $s->status }}</td> --}}
                                             <td class="text-center">
                                                 {{-- --------------------SHOW------------------------------------------------- --}}
-                                                <a href="{{ route('surat-ijin.show', $s->id) }}"
-                                                    class="btn btn-sm btn-dark">SHOW</a>
+                                                {{-- <a href="{{ route('surat-ijin.show', $s->id) }}"
+                                                    class="btn btn-sm btn-dark">
+                                                    SHOW
+                                                </a> --}}
                                                 {{-- --------------------EDIT------------------------------------------------- --}}
                                                 <a href="{{ route('surat-ijin.edit', $s->id) }}"
                                                     class="btn btn-sm btn-primary">EDIT</a>

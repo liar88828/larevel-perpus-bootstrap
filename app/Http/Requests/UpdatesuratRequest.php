@@ -11,18 +11,25 @@ class UpdatesuratRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
+
     public function rules(): array
     {
         return [
-            //
+            'user_id' => 'required|min:1',
+            'nama' => 'required|min:1',
+            'hari_tanggal' => 'required|min:1',
+            'keterangan' => 'required|min:1',
+            'hari_kerja' => 'required|min:1',
+            // 'mulai_pagi' => 'required|min:1',
+            // 'akhir_pagi' => 'required|min:1',
+            // 'mulai_malam' => 'required|min:1',
+            // 'akhir_malam' => 'required|min:1',
+            'acc_divisi' => 'required|min:1',
+            'acc_direktur' => 'required|min:2',
+            'status' => 'required|min:2',
         ];
     }
 }

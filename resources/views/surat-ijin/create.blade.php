@@ -31,6 +31,8 @@
                             <input type="hidden" name="status" value="{{ old('status') }}">
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             <input type="hidden" name="nama" value="{{ auth()->user()->nama }}">
+
+
                             <div class="form-group">
                                 <label class="font-weight-bold">Hari/Tanggal</label>
                                 <input type="date"
@@ -91,7 +93,7 @@
                                         <input type="text" style="width: 90%"
                                             class="form-control mulai_pagi form-control
                                          @error('mulai_pagi') is-invalid @enderror"
-                                            name="mulai_pagi" value="{{ old('mulai_pagi') ?? 'kosong' }}">
+                                            name="mulai_pagi" value="{{ old('mulai_pagi') ?? '-' }}">
                                         <span class="input-group-addon">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </span>
@@ -114,7 +116,7 @@
                                         <input type="text" style="width: 90%"
                                             class="form-control akhir_pagi form-control
                                      @error('akhir_pagi') is-invalid @enderror"
-                                            name="akhir_pagi" value="{{ old('akhir_pagi') ?? 'kosong'}}">
+                                            name="akhir_pagi" value="{{ old('akhir_pagi') ?? '-'}}">
                                         <span class="input-group-addon">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </span>
@@ -141,7 +143,7 @@
                                         <input type="text" style="width: 90%"
                                             class="form-control mulai_malam form-control
                                          @error('mulai_malam') is-invalid @enderror"
-                                            name="mulai_malam" value="{{ old('mulai_malam') ?? 'kosong'}}">
+                                            name="mulai_malam" value="{{ old('mulai_malam') ?? '-'}}">
                                         <span class="input-group-addon">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </span>
@@ -164,7 +166,7 @@
                                         <input type="text" style="width: 90%"
                                             class="form-control akhir_malam form-control
                                      @error('akhir_malam') is-invalid @enderror"
-                                            name="akhir_malam" value="{{ old('akhir_malam') ?? 'kosong'}}">
+                                            name="akhir_malam" value="{{ old('akhir_malam') ?? '-'}}">
                                         <span class="input-group-addon">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </span>
@@ -272,6 +274,7 @@
             $(this).data('DateTimePicker').date(time);
         });
     </script>
+
     <script>
         var firstOpen = true;
         var time;
@@ -289,6 +292,7 @@
             $(this).data('DateTimePicker').date(time);
         });
     </script>
+
     <script>
         var firstOpen = true;
         var time;

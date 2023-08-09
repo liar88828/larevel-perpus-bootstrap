@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\surat;
 use App\Http\Requests\StoresuratRequest;
 use App\Http\Requests\UpdatesuratRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SuratController extends Controller
@@ -18,15 +19,13 @@ class SuratController extends Controller
     public function index()
     {
 
-        
-
-        if(auth()->user()->anggota==='Manager'){
+        if (auth()->user()->anggota === 'Manager') {
             $surats = surat::all();
             return view(
                 'surat-ijin.index',
                 ['surat_ijin' => $surats]
             );
-        }else{
+        } else {
             $surats = auth()->user()->userSurat()->get();
             // dd($surats);
             return view(
@@ -41,7 +40,7 @@ class SuratController extends Controller
      */
     public function create()
     {
-        return view('surat-ijin.create')        ;
+        return view('surat-ijin.create');
     }
 
     /**
@@ -55,10 +54,10 @@ class SuratController extends Controller
         $createSurat = [
             'user_id' => $request->user_id,
             'nama' => $request->nama,
-            'hari_tanggal' => $request->hari_tanggal?? '-',
-            'keterangan' => $request->keterangan?? '-',
+            'hari_tanggal' => $request->hari_tanggal ,
+            'keterangan' => $request->keterangan ?? '-',
 
-            'hari_kerja' => $request->hari_kerja?? '-',
+            'hari_kerja' => $request->hari_kerja ?? '-',
             'mulai_pagi' => $request->mulai_pagi ?? '-',
             'akhir_pagi' => $request->akhir_pagi ?? '-',
 
@@ -83,7 +82,7 @@ class SuratController extends Controller
             ->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
- // hnya melihat satian data
+    // hnya melihat satian data
     public function show(string $id)
     {
         // $surat = surat::query()->findOrFail((int) $id);
@@ -119,15 +118,50 @@ class SuratController extends Controller
     public function edit(string $id)
     {
         $surat = surat::query()->findOrFail($id);
-        return view('surat.edit', compact('surat'));
+        return view('surat-ijin.edit', compact('surat'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatesuratRequest $request, surat $surat)
+    public function update(UpdatesuratRequest $request, string $id)
     {
-        //
+        // dd($request);
+        // dd($id);
+
+        $createSurat = [
+            'user_id' => $request->user_id,
+            'nama' => $request->nama,
+            'hari_tanggal' => $request->hari_tanggal ,
+            'keterangan' => $request->keterangan ?? '-',
+
+            'hari_kerja' => $request->hari_kerja ?? '-',
+            'mulai_pagi' => $request->mulai_pagi ?? '-',
+            'akhir_pagi' => $request->akhir_pagi ?? '-',
+
+            'mulai_malam' => $request->mulai_malam ?? '-',
+            'akhir_malam' => $request->akhir_malam ?? '-',
+
+            // 'lama' => $request->lama,
+            'acc_divisi' => 'Safira Nuraiha M.kom',
+            'acc_direktur' => 'Heri Pamungkas S.S.M.I.KOM',
+            // 'lampiran' => $request->lampiran,
+            'status' => 'Di Proses',
+            // 'acc_divisi' => $request->acc_divisi,
+            // 'acc_direktur' => $request->acc_direktur,
+        ];
+
+
+        $surat = surat::query()->findOrFail($id);
+
+        $surat->update($createSurat);
+
+        // dd($request);
+        //redirect to index
+        return redirect()
+            ->route('surat-ijin.index')
+            ->with(['success' => 'Data Berhasil Di Ubah!']);
+
     }
 
     /**
@@ -143,10 +177,59 @@ class SuratController extends Controller
 
     // public function surat(string $id)
 
-    
+
     // {
     //     return redirect()->route('surat-ijin.surat' );
 
     // }
+
+    public function editData(Request $request, string $id)
+    {
+
+        $this->validate(
+            $request,
+            [
+                'user_id' => 'required|min:1',
+                'nama' => 'required|min:1',
+                'hari_tanggal' => 'required|min:1',
+                'keterangan' => 'required|min:1',
+                'hari_kerja' => 'required|min:1',
+                // 'mulai_pagi' => 'required|min:1',
+                // 'akhir_pagi' => 'required|min:1',
+                // 'mulai_malam' => 'required|min:1',
+                // 'akhir_malam' => 'required|min:1',
+                'acc_divisi' => 'required|min:1',
+                'acc_direktur' => 'required|min:2',
+                'status' => 'required|min:2',
+            ]
+        );
+        // dd($request);
+
+        $surat = surat::query()->findOrFail($id);
+        // dd($surat);
+
+        $surat->update(
+            [
+                'user_id' => $request->user_id,
+                'nama' => $request->nama,
+                'hari_tanggal' => $request->hari_tanggal ?? '-',
+                'keterangan' => $request->keterangan ?? '-',
+                'hari_kerja' => $request->hari_kerja ?? '-',
+                'mulai_pagi' => $request->mulai_pagi ?? '-',
+                'akhir_pagi' => $request->akhir_pagi ?? '-',
+                'mulai_malam' => $request->mulai_malam ?? '-',
+                'akhir_malam' => $request->akhir_malam ?? '-',
+                'acc_divisi' => 'Safira Nuraiha M.kom',
+                'acc_direktur' => 'Heri Pamungkas S.S.M.I.KOM',
+                'status' => 'Di Proses'
+            ]
+        );
+
+        return redirect()
+            ->route('surat-ijin.index')
+            ->with(['success' => 'Data Berhasil Di Ubah!']);
+
+
+    }
 
 }

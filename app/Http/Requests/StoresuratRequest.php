@@ -28,10 +28,10 @@ class StoresuratRequest extends FormRequest
             'keterangan' => 'required|min:5',
 
             'hari_kerja' => 'required|min:5',
-            'mulai_pagi' => 'nullable',
-            'akhir_pagi' => 'nullable',
-            'mulai_malam' => 'nullable',
-            'akhir_malam' => 'nullable',
+            // 'mulai_pagi' => 'nullable',
+            // 'akhir_pagi' => 'nullable',
+            // 'mulai_malam' => 'nullable',
+            // 'akhir_malam' => 'nullable',
 
             // 'lama' => 'required|min:5',
             'acc_divisi' => 'required|min:1',

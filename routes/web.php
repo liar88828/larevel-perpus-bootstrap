@@ -24,8 +24,10 @@ Route::get('/', function () {
 });
 
 
-Route::resource('/surat', ModelIjinLemburController::class);//->middleware('auth');
+// Route::resource('/surat', ModelIjinLemburController::class)->middleware('auth');
 Route::resource('/surat-ijin', SuratController::class);//->middleware('auth');
+Route::put('/surat-ijin/update/{id}', [SuratController::class, 'update'])->middleware('auth');
+Route::put('/surat-ijin/editData/{surat_ijin}', [SuratController::class, 'editData']);//->middleware('auth');
 
 
 
@@ -67,7 +69,8 @@ Route::post('/login', [AuthController::class, 'loginAuth'])->name('login');
 //lupa
 Route::get('/lupa', [AuthController::class, 'lupa'])->name('lupa')->middleware('guest');
 Route::post('/lupa', [AuthController::class, 'lupaPost'])->name('lupa');
-Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+Route::get('/profile', [AuthController::class, 'profile'])->name('profile')->middleware('auth');
+;
 
 
 

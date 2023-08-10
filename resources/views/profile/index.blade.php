@@ -30,37 +30,38 @@
                                     alt="" class="rounded" />
                             </div>
 
-                            <div class=" d-flex  justify-content-center m-2 ">
+                            <div class="d-flex  justify-content-center m-2 ">
                                 <img src='{{ asset('/profile.png') }}' alt="" class="rounded"
                                     style="width: 60%; height: auto" />
                             </div>
-                            {{--  upload file --}}
-                            {{-- <div> --}}
 
                             <div class="col-md-2 mt-3">
-                                <a class="btn btn-success text-nowrap p-2 " href="{{ Route('surat-ijin.create') }}">
+                                <a class="btn btn-success text-nowrap p-2 " 
+                                href="{{ Route('surat-ijin.create') }}">
                                     Buat Ijin Lembur </a>
                             </div>
                             {{-- Href Create --}}
 
                             <div class="col-md-2 mt-3">
-                                <a class="btn btn-primary text-nowrap p-2  "href="{{ Route('surat-ijin.index') }}">
+                                <a class="btn btn-primary text-nowrap p-2  "
+                                href="{{ Route('surat-ijin.index') }}">
                                     Status Surat
                                 </a>
                             </div>
                             <div class="col-md-2 mt-3">
-                                <a class="btn btn-info text-nowrap p-2  "href="{{ Route('profile.surat') }}">
-                                    Show Surat
-                                </a>
-                            </div>
-
-                            <div class="col-md-2 mt-3">
-                                <a class="btn btn-warning text-nowrap p-2  ">
+                                <a class="btn btn-warning text-nowrap p-2  "
+                                href="{{ Route('profile.surat') }}">
                                     Print Surat
                                 </a>
                             </div>
+
+                            {{-- <div class="col-md-2 mt-3">
+                                <a class="btn btn-warning text-nowrap p-2  ">
+                                </a>
+                            </div> --}}
                             <br>
-                            <form class="col-md-2 mt-3" method="POST" action="logout"> @csrf
+                            <form class="col-md-2 mt-3" method="POST" action="logout">
+                                @csrf
                                 <button type="submit" class="btn btn-danger text-nowrap p-2  ">
                                     Logout
                                 </button>

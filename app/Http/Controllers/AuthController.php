@@ -40,7 +40,7 @@ class AuthController extends Controller
         // dd($request->all());
         $formField = $request->validate([
 
-            'nama' => 'required|min:7',
+            'nama' => 'required|min:5',
             'jenisKelamin' => 'required',
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'tanggalLahir' => 'required',

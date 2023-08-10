@@ -11,14 +11,12 @@
     <style>
         .membesar {
             width: 120px;
-            /* background: red; */
         }
     </style>
 </head>
 
 <body style="background: lightgray">
     <div class="d-flex justify-content-center ">
-
         <div style="overflow-x:scroll ">
             <div class="row">
                 <div class="">
@@ -26,9 +24,7 @@
                         <h3 class="text-center my-4">Table Ijin Lembur</h3>
                         <hr>
                     </div>
-
                     <div class="mx-4">
-
                         @if (session('login'))
                             <div class="card-body"></div>
                             <div class="alert alert-success px-5" role="alert">
@@ -40,25 +36,15 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-
-
                     </div>
 
                     <div class="card border-0 shadow-sm rounded mx-4">
                         <div class="card-body">
-
-                            <a class="btn btn-success" href="{{ Route('surat-ijin.create') }}">
-                                BUAT IJIN</a>
-
                             <a href="{{ url()->previous() }}" class="btn btn-secondary">KEMBALI</a>
-
-                            {{-- <a href="{{ route('surat-user.create') }}" class="btn btn-md btn-success mb-3">TAMBAH
-                                POST</a> --}}
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col"> No.</th>
-                                        {{-- <th scope="col"> Jenis</th> --}}
                                         <th scope="col"> Nama</th>
                                         <th scope="col"> Hari/Tanggal</th>
                                         <th scope="col"> Keterangan</th>
@@ -67,75 +53,69 @@
                                         <th scope="col"> Akhir Pagi</th>
                                         <th scope="col"> Mulai Malam</th>
                                         <th scope="col"> Akhir Malam</th>
-                                        {{-- <th scope="col"> lama</th> --}}
                                         <th scope="col"> Acc Divisi</th>
                                         <th scope="col"> Acc Direktur</th>
-                                        {{-- <th scope="col"> Lampiran</th> --}}
                                         <th scope="col"> Status</th>
                                         <th scope="col"> Aksi</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @forelse ($surat_ijin as $key=>$s)
+
+                                    @forelse ($surat as $key=>$s)
                                         <tr>
-                                            {{-- <td>{{ $loop->index }}</td> --}}
                                             <td>{{ $s->id }}</td>
                                             <td>{{ $s->nama }}</td>
-                                            {{-- <td>{{ $s->jenis }}</td> --}}
                                             <td>{{ $s->hari_tanggal }}</td>
                                             <td>{{ $s->keterangan }}</td>
-
                                             <td>{{ $s->hari_kerja }}</td>
                                             <td>{{ $s->mulai_pagi }}</td>
                                             <td>{{ $s->akhir_pagi }}</td>
                                             <td>{{ $s->mulai_malam }}</td>
                                             <td>{{ $s->akhir_malam }}</td>
-                                            {{-- <td>{{ $s->lama }}</td> --}}
+
                                             <td>
-                                                {{-- Safira Nuraiha M.kom --}}
+                                                <form class=''
+                                                    action="{{ url("admin/surat/edit/{$s->id}/divisi/{$s->acc_divisi}") }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-{{ $s->acc_divisi === 'Belum Di Terima' ? 'warning' : 'info' }}">
+                                                        {{ $s->acc_divisi }}
+                                                    </button>
+                                                </form>
+                                            </td>
 
-                                                <span
-                                                    class="btn btn-{{ $s->acc_divisi === 'Belum Di Terima' ? 'warning' : 'info' }}">{{ $s->acc_divisi }}</span>
-
+                                            <td>
+                                                <form class=''
+                                                    action="{{ url("admin/surat/edit/{$s->id}/direktur/{$s->acc_direktur}") }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit"
+                                                        class="btn btn-sm btn-{{ $s->acc_direktur === 'Belum Di Terima' ? 'warning' : 'info' }}">
+                                                        {{ $s->acc_direktur }}
+                                                    </button>
+                                                </form>
                                             </td>
                                             <td>
-                                                {{-- Heri Pamungkas S.S.M.I.KOM --}}
                                                 <span
-                                                    class="btn btn-{{ $s->acc_direktur === 'Belum Di Terima' ? 'warning' : 'info' }}">{{ $s->acc_direktur }}</span>
+                                                    class="btn btn-sm btn-{{ $s->acc_divisi=== 'Di Terima'  && $s->acc_direktur === 'Di Terima' ? 'info' : 'warning' }}">
+                                                    {{ $s->acc_divisi=== 'Di Terima'  && $s->acc_direktur === 'Di Terima' ? 'Mencukupi' : 'Belum Mencukupi' }}
 
+                                                </span>
                                             </td>
-                                            {{-- <td>{{ $s->acc_divisi}}</td> --}}
-                                            {{-- <td>{{ $s->acc_direktur}}</td> --}}
-                                            {{-- <td>{{ $s->lampiran }}</td> --}}
 
-                                            <td
-                                                class="btn btn-sm btn-{{ $s->acc_divisi === 'Di Terima' && $s->acc_direktur === 'Di Terima' ? 'info' : 'warning' }}">
-                                                {{ $s->acc_divisi === 'Di Terima' && $s->acc_direktur === 'Di Terima' 
-                                                ? 'Mencukupi' : 'Belum Mencukupi' }}
-                                            </td>
-                                            {{-- <td>{{ $s->status }}</td> --}}
                                             <td class="text-center">
-                                                {{-- --------------------SHOW------------------------------------------------- --}}
-                                                {{-- <a href="{{ route('surat-ijin.show', $s->id) }}"
-                                                    class="btn btn-sm btn-dark">
-                                                    SHOW
-                                                </a> --}}
-
                                                 {{-- --------------------DELETE------------------------------------------------- --}}
                                                 <form class='' onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                     action="{{ route('surat-ijin.destroy', $s->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     {{-- --------------------EDIT------------------------------------------------- --}}
-
-
-                                                    
                                                     <a href="{{ route('surat-ijin.edit', $s->id) }}"
-                                                        class="btn btn-sm btn-primary btn-lg btn-block mb-1">
-                                                        EDIT
-                                                    </a>
-
+                                                        class="btn btn-sm btn-primary btn-lg btn-block mb-1">EDIT</a>
                                                     <button type="submit" class="btn btn-sm btn-danger ">HAPUS</button>
                                                 </form>
                                             </td>

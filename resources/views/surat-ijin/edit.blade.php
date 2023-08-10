@@ -20,11 +20,8 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <form 
-                        {{-- action="{{ url('/surat-ijin/editData', $surat->id) }}"  --}}
-                            action="{{ route('surat-ijin.update',$surat->id) }}" 
-                            {{-- action=" /surat-ijin/update/{{$surat->id}} "  --}} 
-                            method="POST" enctype="multipart/form-data">
+                        <form {{-- action="{{ url('/surat-ijin/editData', $surat->id) }}"  --}} action="{{ route('surat-ijin.update', $surat->id) }}"
+                            {{-- action=" /surat-ijin/update/{{$surat->id}} "  --}} method="POST" enctype="multipart/form-data">
                             @csrf()
                             @method('PUT')
 
@@ -194,9 +191,9 @@
                             </div>
 
 
-                            <button class="btn btn-md btn-primary">UPDATE</button>
+                            <button class="btn btn-md btn-success">UPDATE</button>
                             {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
-
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary">KEMBALI</a>
                         </form>
                     </div>
                 </div>
@@ -216,12 +213,10 @@
         CKEDITOR.replace('content');
     </script>
 
-    <script>
-    
-    </script>
+    <script></script>
 
     <script>
-        const  firstOpen = true;
+        const firstOpen = true;
         let time;
 
         $('#akhir_pagi').datetimepicker({
@@ -250,7 +245,7 @@
             }
             $(this).data('DateTimePicker').date(time);
         });
-     
+
 
         $('#mulai_malam').datetimepicker({
             useCurrent: false,
@@ -265,7 +260,7 @@
             $(this).data('DateTimePicker').date(time);
         });
 
-   
+
 
         $('#akhir_malam').datetimepicker({
             useCurrent: false,

@@ -83,6 +83,11 @@
                             </div>
 
 
+
+
+
+                            
+
                             <h6>Jam Pagi</h6>
                             <div class="d-flex flex-col">
                                 <div class="input-group form-group date" id="mulai_pagi"
@@ -116,7 +121,7 @@
                                         <input type="text" style="width: 90%"
                                             class="form-control akhir_pagi form-control
                                      @error('akhir_pagi') is-invalid @enderror"
-                                            name="akhir_pagi" value="{{ old('akhir_pagi') ?? '-'}}">
+                                            name="akhir_pagi" value="{{ old('akhir_pagi') ?? '-' }}">
                                         <span class="input-group-addon">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </span>
@@ -143,7 +148,7 @@
                                         <input type="text" style="width: 90%"
                                             class="form-control mulai_malam form-control
                                          @error('mulai_malam') is-invalid @enderror"
-                                            name="mulai_malam" value="{{ old('mulai_malam') ?? '-'}}">
+                                            name="mulai_malam" value="{{ old('mulai_malam') ?? '-' }}">
                                         <span class="input-group-addon">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </span>
@@ -166,7 +171,7 @@
                                         <input type="text" style="width: 90%"
                                             class="form-control akhir_malam form-control
                                      @error('akhir_malam') is-invalid @enderror"
-                                            name="akhir_malam" value="{{ old('akhir_malam') ?? '-'}}">
+                                            name="akhir_malam" value="{{ old('akhir_malam') ?? '-' }}">
                                         <span class="input-group-addon">
                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
                                         </span>
@@ -214,10 +219,10 @@
                                 @enderror
                             </div> --}}
 
-                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
+                            <button type="submit" class="btn btn-md btn-success">SIMPAN</button>
                             {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
                             {{-- <button onclick="history.back()" class="btn btn-md btn-primary">KEMBALI</button> --}}
-                            <a href="{{ url()->previous() }}" class="btn btn-success">KEMBALI</a>
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary">KEMBALI</a>
                             {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
 
                         </form>
@@ -244,17 +249,9 @@
         var time;
 
         $('#mulai_pagi').datetimepicker({
-            useCurrent: false,
-            format: "hh:mm A"
-        }).on('dp.show', function() {
-            if (firstOpen) {
-                time = moment().startOf('day');
-                firstOpen = false;
-            } else {
-                time = "01:00 PM"
-            }
-            $(this).data('DateTimePicker').date(time);
-        });
+            useCurrent: true,
+            format: 'HH:mm'
+        }) 
     </script>
 
     <script>
@@ -262,8 +259,8 @@
         var time;
 
         $('#akhir_pagi').datetimepicker({
-            useCurrent: false,
-            format: "hh:mm A"
+            useCurrent: true,
+            format: 'HH:mm'
         }).on('dp.show', function() {
             if (firstOpen) {
                 time = moment().startOf('day');
@@ -280,8 +277,8 @@
         var time;
 
         $('#mulai_malam').datetimepicker({
-            useCurrent: false,
-            format: "hh:mm A"
+            useCurrent: true,
+            format: 'HH:mm'
         }).on('dp.show', function() {
             if (firstOpen) {
                 time = moment().startOf('day');
@@ -298,8 +295,8 @@
         var time;
 
         $('#akhir_malam').datetimepicker({
-            useCurrent: false,
-            format: "hh:mm A"
+            useCurrent: true,
+            format: 'HH:mm'
         }).on('dp.show', function() {
             if (firstOpen) {
                 time = moment().startOf('day');

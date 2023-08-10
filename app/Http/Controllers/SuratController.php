@@ -48,13 +48,10 @@ class SuratController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
-
         $createSurat = [
             'user_id' => $request->user_id,
             'nama' => $request->nama,
-            'hari_tanggal' => $request->hari_tanggal ,
+            'hari_tanggal' => $request->hari_tanggal,
             'keterangan' => $request->keterangan ?? '-',
 
             'hari_kerja' => $request->hari_kerja ?? '-',
@@ -63,10 +60,12 @@ class SuratController extends Controller
 
             'mulai_malam' => $request->mulai_malam ?? '-',
             'akhir_malam' => $request->akhir_malam ?? '-',
+            // Safira Nuraiha M.kom'
+// 'Heri Pamungkas S.S.M.I.KOM',
 
             // 'lama' => $request->lama,
-            'acc_divisi' => 'Safira Nuraiha M.kom',
-            'acc_direktur' => 'Heri Pamungkas S.S.M.I.KOM',
+            'acc_divisi' => 'Belum Di Terima',
+            'acc_direktur' => 'Belum Di Terima',
             // 'lampiran' => $request->lampiran,
             'status' => 'Di Proses',
             // 'acc_divisi' => $request->acc_divisi,
@@ -132,7 +131,7 @@ class SuratController extends Controller
         $createSurat = [
             'user_id' => $request->user_id,
             'nama' => $request->nama,
-            'hari_tanggal' => $request->hari_tanggal ,
+            'hari_tanggal' => $request->hari_tanggal,
             'keterangan' => $request->keterangan ?? '-',
 
             'hari_kerja' => $request->hari_kerja ?? '-',
@@ -143,8 +142,10 @@ class SuratController extends Controller
             'akhir_malam' => $request->akhir_malam ?? '-',
 
             // 'lama' => $request->lama,
-            'acc_divisi' => 'Safira Nuraiha M.kom',
-            'acc_direktur' => 'Heri Pamungkas S.S.M.I.KOM',
+
+
+            'acc_divisi' => $request->acc_divisi ?? 'Belum Di Terima',
+            'acc_direktur' => $request->acc_direktur ?? 'Belum Di Terima',
             // 'lampiran' => $request->lampiran,
             'status' => 'Di Proses',
             // 'acc_divisi' => $request->acc_divisi,

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ModelIjinLemburController;
 use App\Http\Controllers\SuratController;
@@ -25,16 +26,20 @@ Route::get('/', function () {
 
 
 // Route::resource('/surat', ModelIjinLemburController::class)->middleware('auth');
-Route::resource('/surat-ijin', SuratController::class);//->middleware('auth');
+Route::resource('/surat-ijin', SuratController::class); //->middleware('auth');
 Route::put('/surat-ijin/update/{id}', [SuratController::class, 'update'])->middleware('auth');
-Route::put('/surat-ijin/editData/{surat_ijin}', [SuratController::class, 'editData']);//->middleware('auth');
+Route::put('/surat-ijin/editData/{surat_ijin}', [SuratController::class, 'editData']); //->middleware('auth');
 
+Route::controller(AdminController::class)->group(function () {
+    Route::prefix('/admin/surat')->group(function () {
+        Route::get('/', 'suratShow')->name('admin.surat.show');
+        Route::put('/edit/{id}/{option}/{value}', 'suratEdit') ;
+    });
 
-
-
-
-
-
+    Route::prefix('/admin/user')->group(function () {
+        Route::get('/', 'userShow')->name('admin.user.show');
+    });
+});
 // Route::prefix('/surat-users')->group(function () {
 //     Route::controller(SuratUserController::class)->group(function () {
 //         Route::get('/', 'index');

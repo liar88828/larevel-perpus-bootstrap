@@ -198,7 +198,7 @@
                         <option value="Divisi IT">Divisi IT</option>
                         <option value="Divisi Marketing">Divisi Marketing</option>
                         <option value="Divisi Teknik">Divisi Teknik</option>
-                        <option value="Divisi Keuangan & HRD">Divisi Keuangan & HRD</option>
+                        <option value="Divisi News">Divisi News</option>
                     </select>
 
                     <!-- error message untuk nama -->

@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\surat;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function userShow()
+    public function userShow($slug)
     {
         $user = user::all();
         // dd($user);
@@ -18,14 +19,44 @@ class AdminController extends Controller
         );
     }
 
-    public function suratShow()
+    public function suratShow(string $slug)
     {
-        $surat = surat::all();
+
+        if ($slug === 'all') {
+
+            $surat = surat::all();
+            return view(
+                'admin.surat',
+                ['surat' => $surat]
+            );
+        }
+        else{
+            $surat = DB::table('users')
+            ->join('surats', 'surats.user_id', '=', 'users.id')
+            ->where('users.divisi', '=', $slug)
+            ->select('users.*', 'surats.*')
+            ->get();
+            return view(
+                'admin.surat',
+                ['surat' => $surat]
+            ); 
+        }
+    }
+
+    public function index()
+    {
+        $surat = surat::count();
+        $user = user::count();
         return view(
-            'admin.surat',
-            ['surat' => $surat]
+            'admin.index',
+            [
+                'surat' => $surat,
+                'user' => $user
+            ]
         );
     }
+
+
     public function suratEdit(
         $id,
         $option,
@@ -40,7 +71,7 @@ class AdminController extends Controller
         $sudah = 'Di Terima';
         $divisi = 'divisi';
         $direktur = 'direktur';
-        
+
         if ($option === $divisi) {
             if ($value === $sudah) {
                 surat::where('id', $id)->update(array('acc_divisi' => $belum));
@@ -59,10 +90,12 @@ class AdminController extends Controller
             }
         }
 
-
         return redirect()
             ->route('admin.surat.show')
             ->with(['success' => 'Data' . $value . ' Berhasil Di Ubah']);
     }
+
+
+
 
 }

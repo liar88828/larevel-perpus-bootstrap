@@ -73,5 +73,6 @@ class User extends Authenticatable implements JWTSubject
     public function userSurat() {
         return $this->hasMany(surat::class, 'user_id');
     }
+    
 
 }

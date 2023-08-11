@@ -126,11 +126,7 @@ class AuthController extends Controller
 
     function surat()
     {
-
-
         // $surat = User::latest()->get();
-
-
         $surat = auth()->user()->userSurat()->get();
 
         // dd($surat);

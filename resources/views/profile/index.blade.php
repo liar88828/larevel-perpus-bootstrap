@@ -78,12 +78,8 @@
                                 aria-selected="true">
                                 Profile
                             </a>
-
-
                             <div class="tab-pane fade show active" id="home" role="tabpanel"
                                 aria-labelledby="home-tab">
-
-
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>User Id</label>

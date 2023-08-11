@@ -102,12 +102,8 @@ class SuratController extends Controller
             'surat-ijin.show',
             compact('surat')
         );
-
-
         // $data = Item::select('*')
-
         //     ->whereMonth('created_at', Carbon::now()->month)
-
         //     ->get();
     }
 

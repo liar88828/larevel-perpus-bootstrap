@@ -11,12 +11,25 @@ class AdminController extends Controller
 {
     public function userShow($slug)
     {
-        $user = user::all();
-        // dd($user);
-        return view(
-            'admin.user',
-            ['user' => $user]
-        );
+    
+        if ($slug === 'all') {
+
+            $user = User::all();
+            return view(
+                'admin.user',
+                ['user' => $user]
+            );
+        }
+        else{
+            $user = DB::table('users')
+            ->where('users.divisi', '=', $slug)
+            ->select('users.*',  )
+            ->get();
+            return view(
+                'admin.user',
+                ['user' => $user]
+            ); 
+        }
     }
 
     public function suratShow(string $slug)
@@ -62,11 +75,6 @@ class AdminController extends Controller
         $option,
         $value
     ) {
-        // dd($id, $option, $value);
-        // $surat = surat::query()->findOrFail($id);
-        // $acc = $surat->update($option);
-
-
         $belum = 'Belum Di Terima';
         $sudah = 'Di Terima';
         $divisi = 'divisi';
@@ -94,8 +102,4 @@ class AdminController extends Controller
             ->route('admin.surat.show')
             ->with(['success' => 'Data' . $value . ' Berhasil Di Ubah']);
     }
-
-
-
-
 }

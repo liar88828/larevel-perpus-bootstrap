@@ -45,29 +45,30 @@
                                 </div>
 
                                 <div style='display:flex; gap: 2rem'>
-                                    <a href="{{  url("admin/surat/all")  }}"
-                                    class="px-3 btn  " style="background: lightsalmon">Semua
-                                </a>
+                                   
+                                    <a href="{{ url('admin/surat/all') }}" class="px-3 btn  "
+                                        style="background: lightsalmon">Semua
+                                    </a>
 
-                                    <a href="{{  url("admin/surat/Divisi Produksi")  }}"
+                                    <a href="{{ url('admin/surat/Divisi Produksi') }}"
                                         class="px-3 btn btn-primary">Divisi Produksi
                                     </a>
 
-                                    <a href="{{  url("admin/surat/Divisi IT") }}"
-                                        class="px-3 btn btn-success">Divisi IT
+                                    <a href="{{ url('admin/surat/Divisi IT') }}" class="px-3 btn btn-success">Divisi IT
                                     </a>
 
-                                    <a href="{{  url("admin/surat/Divisi Marketing") }}"
-                                         class="px-3 btn btn-info">Divisi Marketing
+                                    <a href="{{ url('admin/surat/Divisi Marketing') }}" class="px-3 btn btn-info">Divisi
+                                        Marketing
                                     </a>
 
-                                    <a href="{{  url("admin/surat/Divisi Teknik") }}"
-                                        class="px-3 btn btn-warning">Divisi Teknik
+                                    <a href="{{ url('admin/surat/Divisi Teknik') }}" class="px-3 btn btn-warning">Divisi
+                                        Teknik
                                     </a>
 
-                                    <a href="{{  url("admin/surat/Divisi News") }}" 
-                                        class="px-3 btn btn-danger">Divisi News
+                                    <a href="{{ url('admin/surat/Divisi News') }}" class="px-3 btn btn-danger">Divisi
+                                        News
                                     </a>
+                                    
                                 </div>
                             </div>
                             {{-- ---------------------- iki table ---------------------- --}}

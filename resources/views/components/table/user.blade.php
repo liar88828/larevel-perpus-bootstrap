@@ -21,7 +21,7 @@
     <tbody>
         @forelse ($user as $key=>$u)
             <tr>
-                <td>{{ $u->key }}</td>
+                <td>{{  $key+1 }}</td>
                 <td>{{ $u->id }}</td>
                 <td>{{ $u->nama }}</td>
                 <td>{{ $u->email }}</td>

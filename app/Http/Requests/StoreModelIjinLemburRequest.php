@@ -25,7 +25,6 @@ class StoreModelIjinLemburRequest extends FormRequest
             'kepada' => 'required|min:5',
             'hal' => 'required|min:5',
             'nama' => 'required|min:5',
-            'jabatan' => 'required|min:2',
             'divisi' => 'required|min:5',
             'no' => 'required|min:1',
             'hari_tanggal' => 'required|min:2',
@@ -33,9 +32,7 @@ class StoreModelIjinLemburRequest extends FormRequest
             'jam_kerja_lembur' => 'required|min:2',
             'guna' => 'required|min:10',
             'nama_divisi' => 'required|min:5',
-            'jabatan_divisi' => 'required|min:2',
             'nama_penyetujui' => 'required|min:5',
-            'jabatan_penyetujui' => 'required|min:5',
         ];
     }
 }

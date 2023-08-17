@@ -48,12 +48,14 @@
                                     Status Surat
                                 </a>
                             </div>
+                         @if($surat!==0)
                             <div class="col-md-2 mt-3">
                                 <a class="btn btn-warning text-nowrap p-2  "
                                 href="{{ Route('profile.surat') }}">
-                                    Print Surat
-                                </a>
+                                Print Surat
+                            </a>
                             </div>
+                            @endif
 
                             {{-- <div class="col-md-2 mt-3">
                                 <a class="btn btn-warning text-nowrap p-2  ">
@@ -133,15 +135,7 @@
                                         <p>{{ auth()->user()->noHp }}</p>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Jabatan</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>{{ auth()->user()->jabatan }}</p>
-                                    </div>
-                                </div>
+                               
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-6">

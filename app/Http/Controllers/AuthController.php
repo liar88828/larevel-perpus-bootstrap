@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\Rule;
 use function PHPUnit\Framework\isEmpty;
@@ -40,13 +41,12 @@ class AuthController extends Controller
         // dd($request->all());
         $formField = $request->validate([
 
-            'nama' => 'required|min:5',
+            'nama' =>[ 'required','min:3' ,Rule::unique('users', 'nama')],
             'jenisKelamin' => 'required',
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'tanggalLahir' => 'required',
-            'noHp' => 'required|min:8',
+            'noHp' => ['required','min:8',Rule::unique('users', 'noHp')],
             'anggota' => 'required',
-            'jabatan' => 'required',
             'divisi' => 'required',
             'password' => 'required|confirmed|min:6'
         ]);
@@ -120,17 +120,32 @@ class AuthController extends Controller
     // kirim kan email kepada admin
     function profile()
     {
-        return view('profile.index');
+
+        $surat = DB::table('users')
+            ->join('surats', 'surats.user_id', '=', 'users.id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('acc_divisi', '=', 'Di Terima')
+            ->select('users.*', 'surats.*')
+            ->get();
+        // dd(count($surat));
+        return view('profile.index', ['surat' => count($surat)]);
     }
 
 
     function surat()
     {
-        // $surat = User::latest()->get();
-        $surat = auth()->user()->userSurat()->get();
-
+        $surat = DB::table('users')
+            ->join('surats', 'surats.user_id', '=', 'users.id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('acc_divisi', '=', 'Di Terima')
+            ->select('users.*', 'surats.*')
+            ->get();
+// dd ('test');
+        if (count($surat) <= 0) {
+            return redirect('/profile');
+        }
         // dd($surat);
-        return view('profile.surat',['surat' => $surat]);
+        return view('profile.surat', ['surat' => $surat]);
     }
 
 }

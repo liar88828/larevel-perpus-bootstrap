@@ -12,7 +12,6 @@ class ModelIjinLembur extends Model
         'kepada',
         'hal',
         'nama',
-        'jabatan',
         'divisi',
         'no',
         'hari_tanggal',
@@ -20,8 +19,6 @@ class ModelIjinLembur extends Model
         'jam_kerja_lembur',
         'guna',
         'nama_divisi',
-        'jabatan_divisi',
         'nama_penyetujui',
-        'jabatan_penyetujui',
     ];
 }

@@ -1,4 +1,3 @@
-
 @props(['surat'])
 
 <table class="table table-bordered">
@@ -14,17 +13,17 @@
             <th scope="col"> Mulai Malam</th>
             <th scope="col"> Akhir Malam</th>
             <th scope="col"> Acc Divisi</th>
-            <th scope="col"> Acc Direktur</th>
             <th scope="col"> Status</th>
             <th scope="col"> Aksi</th>
         </tr>
     </thead>
 
     <tbody>
+  {{-- {{      dd($surat)}} --}}
         @forelse ($surat as $key=>$s)
             <tr>
                 {{-- <td>{{ $s->id }}</td> --}}
-                <td>{{$key+1 }}</td>
+                <td>{{ $key + 1 }}</td>
                 <td>{{ $s->nama }}</td>
                 <td>{{ $s->hari_tanggal }}</td>
                 <td>{{ $s->keterangan }}</td>
@@ -36,8 +35,13 @@
 
                 <td>
                     <form class=''
-                        action="{{ url("admin/surat/edit/{$s->id}/divisi/{$s->acc_divisi}") }}"
-                        method="POST">
+                        action="{{ route('admin.surat.edit', [
+                            'id' => $s->id,
+                            'option' => 'divisi',
+                            'value' => $s->acc_divisi,
+                            'divisi' => $s->divisi,
+                        ]) }}"
+                        {{-- action="{{ url("admin/surat/edit/{$s->id}/divisi/{$s->acc_divisi}/$s->divisi") }}" --}} method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit"
@@ -47,22 +51,11 @@
                     </form>
                 </td>
 
-                <td>
-                    <form class=''
-                        action="{{ url("admin/surat/edit/{$s->id}/direktur/{$s->acc_direktur}") }}"
-                        method="POST">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit"
-                            class="btn btn-sm btn-{{ $s->acc_direktur === 'Belum Di Terima' ? 'warning' : 'info' }}">
-                            {{ $s->acc_direktur }}
-                        </button>
-                    </form>
-                </td>
+             
                 <td>
                     <span
-                        class="btn btn-sm btn-{{ $s->acc_divisi=== 'Di Terima'  && $s->acc_direktur === 'Di Terima' ? 'info' : 'warning' }}">
-                        {{ $s->acc_divisi=== 'Di Terima'  && $s->acc_direktur === 'Di Terima' ? 'Mencukupi' : 'Belum Mencukupi' }}
+                        class="btn btn-sm btn-{{ $s->acc_divisi === 'Di Terima' ? 'info' : 'warning' }}">
+                        {{ $s->acc_divisi === 'Di Terima'   ? 'Mencukupi' : 'Belum Mencukupi' }}
 
                     </span>
                 </td>
@@ -70,13 +63,16 @@
                 <td class="text-center">
                     {{-- --------------------DELETE------------------------------------------------- --}}
                     <form class='' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                        action="{{ route('surat-ijin.destroy', $s->id) }}" method="POST">
+                        action="{{ route('admin.surat.delete', $s->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger ">HAPUS</button>
                         {{-- --------------------EDIT------------------------------------------------- --}}
                         <a href="{{ route('surat-ijin.edit', $s->id) }}"
                             class="btn btn-sm btn-primary btn-lg btn-block mb-1">EDIT</a>
-                        <button type="submit" class="btn btn-sm btn-danger ">HAPUS</button>
+                        {{-- PRINT SURAT --}}
+                        <a href="{{ route('admin.surat.print', $s->user_id) }}"
+                            class="btn btn-sm btn-success btn-lg btn-block mb-1">PRINT</a>
                     </form>
                 </td>
             </tr>

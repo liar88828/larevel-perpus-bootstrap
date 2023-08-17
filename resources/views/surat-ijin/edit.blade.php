@@ -28,8 +28,6 @@
 
                             {{-- hidden --}}
                             <input type="hidden" name="acc_divisi" value="{{ old('acc_divisi', $surat->acc_divisi) }}">
-                            <input type="hidden" name="acc_direktur"
-                                value="{{ old('acc_direktur', $surat->acc_direktur) }}">
                             <input type="hidden" name="status" value="{{ old('status', $surat->status) }}">
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             <input type="hidden" name="nama" value="{{ auth()->user()->nama }}">
@@ -38,7 +36,7 @@
                                 <label class="font-weight-bold">Hari/Tanggal</label>
                                 <input type="date"
                                     class="form-control @error('hari_tanggal') 
-            is-invalid @enderror"
+                                      is-invalid @enderror"
                                     name="hari_tanggal" value="{{ old('hari_tanggal', $surat->hari_tanggal) }}"
                                     placeholder="Masukan Hari dan Tanggal">
 
@@ -93,7 +91,7 @@
                             <div class="d-flex flex-col">
                                 <div class="input-group form-group date" id="mulai_pagi"
                                     style="display: flex; flex-direction: column;">
-                                    <label class="font-weight-bold">Mulai</label>
+                                    <label class="font-weight-bold">Masuk kerja</label>
                                     <div class="d-flex flex-row">
 
                                         <input type="text" style="width: 90%"
@@ -116,7 +114,7 @@
 
                                 <div class="input-group form-group date" id="akhir_pagi"
                                     style="display: flex; flex-direction: column;">
-                                    <label class="font-weight-bold">Akhir</label>
+                                    <label class="font-weight-bold">Pulang kerja</label>
                                     <div class="d-flex flex-row">
 
                                         <input type="text" style="width: 90%"
@@ -139,12 +137,12 @@
                             </div>
 
 
-                            <h6>Jam Malam</h6>
+                            <h6>Jam Lembur</h6>
                             <div class="d-flex flex-col">
 
                                 <div class="input-group form-group date" id="mulai_malam"
                                     style="display: flex; flex-direction: column;">
-                                    <label class="font-weight-bold">Mulai</label>
+                                    <label class="font-weight-bold">Masuk lembur</label>
                                     <div class="d-flex flex-row">
 
                                         <input type="text" style="width: 90%"
@@ -168,7 +166,7 @@
 
                                 <div class="input-group form-group date" id="akhir_malam"
                                     style="display: flex; flex-direction: column;">
-                                    <label class="font-weight-bold">Akhir</label>
+                                    <label class="font-weight-bold">Pulang lembur</label>
                                     <div class="d-flex flex-row">
 
                                         <input type="text" style="width: 90%"

@@ -65,11 +65,9 @@ class SuratController extends Controller
 
             // 'lama' => $request->lama,
             'acc_divisi' => 'Belum Di Terima',
-            'acc_direktur' => 'Belum Di Terima',
             // 'lampiran' => $request->lampiran,
             'status' => 'Di Proses',
             // 'acc_divisi' => $request->acc_divisi,
-            // 'acc_direktur' => $request->acc_direktur,
         ];
 
         surat::create($createSurat);
@@ -141,11 +139,9 @@ class SuratController extends Controller
 
 
             'acc_divisi' => $request->acc_divisi ?? 'Belum Di Terima',
-            'acc_direktur' => $request->acc_direktur ?? 'Belum Di Terima',
             // 'lampiran' => $request->lampiran,
             'status' => 'Di Proses',
             // 'acc_divisi' => $request->acc_divisi,
-            // 'acc_direktur' => $request->acc_direktur,
         ];
 
 
@@ -196,7 +192,6 @@ class SuratController extends Controller
                 // 'mulai_malam' => 'required|min:1',
                 // 'akhir_malam' => 'required|min:1',
                 'acc_divisi' => 'required|min:1',
-                'acc_direktur' => 'required|min:2',
                 'status' => 'required|min:2',
             ]
         );
@@ -217,7 +212,6 @@ class SuratController extends Controller
                 'mulai_malam' => $request->mulai_malam ?? '-',
                 'akhir_malam' => $request->akhir_malam ?? '-',
                 'acc_divisi' => 'Safira Nuraiha M.kom',
-                'acc_direktur' => 'Heri Pamungkas S.S.M.I.KOM',
                 'status' => 'Di Proses'
             ]
         );
@@ -225,8 +219,9 @@ class SuratController extends Controller
         return redirect()
             ->route('surat-ijin.index')
             ->with(['success' => 'Data Berhasil Di Ubah!']);
-
-
     }
 
+
+
+    
 }

@@ -28,7 +28,6 @@ class UpdatesuratRequest extends FormRequest
             // 'mulai_malam' => 'required|min:1',
             // 'akhir_malam' => 'required|min:1',
             'acc_divisi' => 'required|min:1',
-            'acc_direktur' => 'required|min:2',
             'status' => 'required|min:2',
         ];
     }

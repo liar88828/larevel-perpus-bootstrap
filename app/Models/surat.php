@@ -21,7 +21,6 @@ class surat extends Model
 
         // 'lama',
         'acc_divisi',
-        'acc_direktur',
         // 'lampiran',
         'status',
         'user_id'

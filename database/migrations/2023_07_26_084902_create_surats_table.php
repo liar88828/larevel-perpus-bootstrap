@@ -27,7 +27,6 @@ return new class extends Migration
 
             // $table->string('lama');
             $table->string('acc_divisi');
-            $table->string('acc_direktur');
             // $table->string('lampiran');
             //realsional
             $table->foreignId('user_id')->constrained()->onDelete('cascade');

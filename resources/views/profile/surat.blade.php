@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Detail Data Post</title>
+    <title>3</title>
     <style>
         .judul {
             font-size: 15pt;
@@ -13,6 +13,11 @@
 
         .tulis {
             font-size: 10pt;
+            color: black !important;
+        }
+
+        .tulisTable {
+            font-size: 9pt;
             color: black !important;
         }
     </style>
@@ -37,111 +42,117 @@
                     Dengan ini saya,
             </p>
             </div>
-{{-- {{dd($surat->user()->get())}} --}}
+                {{-- {{dd($surat->user()->get())}} --}}
             <div class="">
                 <p class='tulis'>
-                    Nama : {{auth()->user()->nama}}
+                    Nama : {{ $surat[0]->nama }}
                      <br>
                      {{-- {{ $surat->nama }} --}}
-                    {{-- {{ $surat->jabatan }} --}}
-                    Staff : {{auth()->user()->jabatan}}<br>
+                    Staff : {{ $surat[0]->anggota }}<br>
                     {{-- {{ $surat->divisi }} --}}
                 </p>
             </div>
-{{-- {{dd($surat)}} --}}
+              
             <div class="">
                 <p class="tulis"> Memohon untuk bekerja ekstra pada,</p>
 
-                <div class=" ">
-
+                <div class= >
                     <table class="table table-bordered border-dark">
                         <thead>
                             <tr>
-                                <th>No. </th>
-                                {{-- <th>Id </th> --}}
-                                <th>Nama </th>
-                                <th>Hari/Tanggal </th>
-                                <th>Hari Kerja Normal </th>
-                                <th>Mulai Pagi </th>
-                                <th>Akhir Pagi </th>
-                                <th>Mulai Malam </th>
-                                <th>Akhir Malam </th>
-                                <th>Keterangan/Guna </th>
+                                <th class='tulisTable'>No. </th>
+                                <th class='tulisTable'>Nama </th>
+                                <th class='tulisTable'>Hari/Tanggal </th>
+                                <th class='tulisTable'>Hari Kerja Normal </th>
+                                <th class='tulisTable'>Masuk kerja </th>
+                                <th class='tulisTable'>Pulang kerja </th>
+                                <th class='tulisTable'>Masuk lembur</th>
+                                <th class='tulisTable'>Pulang lembur</th>
+                                <th class='tulisTable'>Keterangan/Guna </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @unless($surat->isEmpty())
-                            @foreach($surat as $key=>$s)
-                                
-                            <tr>
-                                <td>{{$key+1}}</td>
-                                {{-- <td>{{$s->id}}</td> --}}
-                                <td>{{$s->nama}}</td>
-                                <td>{{$s->hari_tanggal}}</td>
-                                <td>{{$s->hari_kerja}}</td>
-                                <td>{{$s->mulai_pagi}}</td>
-                                <td>{{$s->akhir_pagi}}</td>
-                                <td>{{$s->mulai_malam}}</td>
-                                <td>{{$s->akhir_malam}}</td>
-                                <td>{{$s->keterangan}}</td>
-                            </tr>
-                            
-                            @endforeach
-                            @else
-                            <tr>
-                                <td>0</td>
-                                <td>Data kosong</td>
-                            </tr>
-                            @endunless
+                            @unless ($surat->isEmpty())
+                                 @foreach ($surat as $key=> $s)
+                <tr>
+                    <td class='tulisTable'>{{ $key + 1 }}</td>
+                    <td class='tulisTable'>{{ $s->nama }}</td>
+                    <td class='tulisTable'>{{ $s->hari_tanggal }}</td>
+                    <td class='tulisTable'>{{ $s->hari_kerja }}</td>
+                    <td class='tulisTable'>{{ $s->mulai_pagi }}</td>
+                    <td class='tulisTable'>{{ $s->akhir_pagi }}</td>
+                    <td class='tulisTable'>{{ $s->mulai_malam }}</td>
+                    <td class='tulisTable'>{{ $s->akhir_malam }}</td>
+                    <td class='tulisTable'
+                        style=" 
+                               overflow: hidden;
+                               text-overflow: ellipsis;
+                               max-width:5rem;
+                                white-space: nowrap;
 
-                        </tbody>
-                    </table>
-                    {{-- <p class='tulis'> {{ $surat->no }}</p> --}}
-                    {{-- <p class='tulis'>Hari, tanggal : {{ $surat->hari_tanggal }}</p>
-                    <p class='tulis'>Waktu kerja normal : {{ $surat->jam_kerja_normal }}</p>
-                    <p class='tulis'>Waktu kerja lembur : {{ $surat->jam_kerja_lembur }}</p>
-                    <p class='tulis'>Keterangan : {{ $surat->guna }}</p> --}}
-                </div>
-            </div>
+                               ">
+                        {{ $s->keterangan }}</td>
+                </tr>
+                @endforeach
 
-            <div class="">
-                <p class='tulis'>Dengan demikian permohonan dari kami, atas persetujuannya kami ucapkan terima kasih
-                </p>
-            </div>
-{{-- -------------------------------------------------------- --}}
-            <br>
-            <div class="d-flex    justify-content-around">
-                <div class="">
-                    <p class='tulis'>Pemohon,</p>
-                    <br>
-                    <br>
-                    <p class='tulis'>Nama : Bayu 1223
-                        {{-- {{ $surat->nama }} --}}
-                    </p>
-                    <p class='tulis'>{{ auth()->user()->jabatan }}
-                        {{-- {{ $surat->jabatan }} --}}
-                    </p>
-                </div>
-                <div class="">
-                    <p class='tulis'>Mengetahui,</p>
-                    <br>
-                    <br>
-                    {{-- <p class='tulis'>Nama : {{ $surat->acc_divisi }}</p> --}}
-                    <p class='tulis'>Jabatan : Manager TI
-                        {{-- {{ $surat->jabatan_divisi }} --}}
-                    </p>
-                </div>
-                <div class="">
-                    <p class='tulis'>Menyetujui,</p>
-                    <br>
-                    <br>
-                    {{-- <p class='tulis'>Nama : {{ $surat->acc_direktur }}</p> --}}
-                    <p class='tulis'>Jabatan :
-                        {{-- {{ $surat->jabatan_penyetujui }} --}}
-                    </p>
-                </div>
-            </div>
+                @for ($i = 0; $i < 10 - count($surat); $i++)
+                    <tr>
+                        <td class ='tulisTable'>{{ count($surat) + $i + 1 }}</td>
+                        <td class ='tulisTable'>-</td>
+                        <td class ='tulisTable'>-</td>
+                        <td class ='tulisTable'>-</td>
+                        <td class ='tulisTable'>-</td>
+                        <td class ='tulisTable'>-</td>
+                        <td class ='tulisTable'>-</td>
+                        <td class ='tulisTable'>-</td>
+                        <td class ='tulisTable'>-</td>
+                    </tr>
+                @endfor
+            @else
+                <tr>
+                    <td>0</td>
+                    <td>Data kosong</td>
+                </tr>
+            @endunless
+
+            </tbody>
+            </table>
         </div>
+    </div>
+
+    <div class="">
+        <p class='tulis'>Dengan demikian permohonan dari kami, atas persetujuannya kami ucapkan terima kasih
+        </p>
+    </div>
+    {{-- -------------------------------------------------------- --}}
+    <br>
+    <div class="d-flex    justify-content-around">
+        <div class="">
+            <p class='tulis'>Pemohon,</p>
+            <br>
+            <br>
+            <p class='tulis'>Nama : {{ $surat[0]->nama }} </p>
+            <p class='tulis'> Jabatan : {{ $surat[0]->divisi }}
+            </p>
+        </div>
+        <div class="">
+            <p class='tulis'>Mengetahui,</p>
+            <br>
+            <br>
+            <p class='tulis'>Nama : XXX</p>
+            <p class='tulis'>Jabatan : {{ $surat[0]->divisi }}
+            </p>
+        </div>
+        <div class="">
+            <p class='tulis'>Menyetujui,</p>
+            <br>
+            <br>
+            <p class='tulis'>Nama : Heri Pamungkas S.S.M.I.KOM</p>
+            <p class='tulis'>Jabatan : Direktur Oprasional
+            </p>
+        </div>
+    </div>
+    </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

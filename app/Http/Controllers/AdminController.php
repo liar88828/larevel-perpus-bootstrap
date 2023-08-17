@@ -6,12 +6,13 @@ use App\Models\surat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\Count;
 
 class AdminController extends Controller
 {
     public function userShow($slug)
     {
-    
+
         if ($slug === 'all') {
 
             $user = User::all();
@@ -19,20 +20,19 @@ class AdminController extends Controller
                 'admin.user',
                 ['user' => $user]
             );
-        }
-        else{
+        } else {
             $user = DB::table('users')
-            ->where('users.divisi', '=', $slug)
-            ->select('users.*',  )
-            ->get();
+                ->where('users.divisi', '=', $slug)
+                ->select('users.*', )
+                ->get();
             return view(
                 'admin.user',
                 ['user' => $user]
-            ); 
+            );
         }
     }
 
-    public function suratShow(string $slug)
+    public function suratShow($slug)
     {
 
         if ($slug === 'all') {
@@ -42,17 +42,17 @@ class AdminController extends Controller
                 'admin.surat',
                 ['surat' => $surat]
             );
-        }
-        else{
+        } else {
             $surat = DB::table('users')
-            ->join('surats', 'surats.user_id', '=', 'users.id')
-            ->where('users.divisi', '=', $slug)
-            ->select('users.*', 'surats.*')
-            ->get();
+                ->join('surats', 'surats.user_id', '=', 'users.id')
+                ->where('users.divisi', '=', $slug)
+                ->select('users.*', 'surats.*')
+                ->get();
+
             return view(
                 'admin.surat',
                 ['surat' => $surat]
-            ); 
+            );
         }
     }
 
@@ -68,17 +68,29 @@ class AdminController extends Controller
             ]
         );
     }
-
+    public function suratPrint($id)
+    {
+        // dd($id);
+        $surat = DB::table('users')
+            ->join('surats', 'surats.user_id', '=', 'users.id')
+            ->where('users.id', '=', $id)
+            ->select('users.*', 'surats.*')
+            ->get();
+        // dd($surat);
+        return view('profile.surat', ['surat' => $surat]);
+    }
 
     public function suratEdit(
-        $id,
-        $option,
-        $value
+        Request $request
     ) {
+        $id = $request->id; //id user
+        $option = $request->option; //
+        $value = $request->value;
+        $jenis = $request->jenis; //jenis 
+
         $belum = 'Belum Di Terima';
         $sudah = 'Di Terima';
         $divisi = 'divisi';
-        $direktur = 'direktur';
 
         if ($option === $divisi) {
             if ($value === $sudah) {
@@ -87,19 +99,13 @@ class AdminController extends Controller
                 surat::where('id', $id)->update(array('acc_divisi' => $sudah));
             }
         }
+        return back();
+    }
 
-        if ($option === $direktur) {
-            if ($value === $sudah && $option === $direktur) {
-                // dd($id, $option, $value);
-                surat::where('id', $id)->update(array('acc_direktur' => $belum));
-            } else if ($value === $belum && $option === $direktur) {
-                // dd($id, $option, $value);
-                surat::where('id', $id)->update(array('acc_direktur' => $sudah));
-            }
-        }
-
-        return redirect()
-            ->route('admin.surat.show')
-            ->with(['success' => 'Data' . $value . ' Berhasil Di Ubah']);
+    public function destroy(string $id)
+    {
+        $surat = surat::query()->findOrFail($id);
+        $surat->delete();
+        return back();
     }
 }

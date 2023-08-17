@@ -35,7 +35,6 @@ class StoresuratRequest extends FormRequest
 
             // 'lama' => 'required|min:5',
             'acc_divisi' => 'required|min:1',
-            'acc_direktur' => 'required|min:2',
             // 'lampiran' => 'required|min:2',
             'status' => 'required|min:2',
         ];

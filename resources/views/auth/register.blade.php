@@ -170,25 +170,6 @@
                     @enderror
                 </div>
 
-                <div class="form-group mb-3">
-                    <label class="font-weight-bold mb-3">Pilih Jabatan</label>
-                    <select class="form-control @error('jabatan') is-invalid @enderror" name="jabatan"  value="{{old('jabatan')}}" 
-                        placeholder="Masukkan Jabatan">
-                        <option value="Manager Produksi">Manager Produksi</option>
-                        <option value="Manager IT">Manager IT</option>
-                        <option value="Manager Marketing">Manager Marketing</option>
-                        <option value="Manager Teknik">Manager Teknik</option>
-                        <option value="Manager Kepala News">Manager Kepala News</option>
-                        <option value="Manager Keuangan & HRD">Manager Keuangan & HRD</option>
-                    </select>
-
-                    <!-- error message untuk nama -->
-                    @error('jabatan')
-                        <div class="alert alert-danger mt-2">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Pilih Divisi</label>
@@ -202,7 +183,7 @@
                     </select>
 
                     <!-- error message untuk nama -->
-                    @error('jabatan')
+                    @error('divisi')
                         <div class="alert alert-danger mt-2">
                             {{ $message }}
                         </div>

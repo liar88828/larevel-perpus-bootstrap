@@ -41,7 +41,7 @@
             <br>
             <div class="">
                 <p class='tulis'>Nama : {{ $surat->nama }}</p>
-                <p class='tulis'>Jabatan : {{ $surat->jabatan }}</p>
+                <p class='tulis'>Jabatan : {{ $surat->anggota }}</p>
                 <p class='tulis'>Divisi : {{ $surat->divisi }}</p>
             </div>
 
@@ -78,7 +78,7 @@
                     <br>
 
                     <p class='tulis'>Nama : {{ $surat->nama }}</p>
-                    <p class='tulis'>Jabatan : {{ $surat->jabatan }}</p>
+                    <p class='tulis'>Anggota : {{ $surat->anggota }}</p>
                 </div>
 
 
@@ -91,7 +91,7 @@
                     <br>
 
                     <p class='tulis'>Nama : {{ $surat->nama_divisi }}</p>
-                    <p class='tulis'>Jabatan : {{ $surat->jabatan_divisi }}</p>
+                    <p class='tulis'>Jabatan : {{ $surat->anggota }}</p>
                 </div>
 
 
@@ -103,7 +103,7 @@
                     <br>
                     <br>
 
-                    <p class='tulis'>Nama : {{ $surat->nama_penyetujui }}</p>
+                    <p class='tulis'>Nama :     Heri Pamungkas S.S.M.I.KOM</p>
                     <p class='tulis'>Jabatan : {{ $surat->jabatan_penyetujui }}</p>
                 </div>
 

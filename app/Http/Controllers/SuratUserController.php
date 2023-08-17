@@ -13,11 +13,9 @@
         //     'jam_lebur' => $request->jam_lebur,
         //     'lama' => $request->lama,
         //     'acc_divisi' => 'Safira Nuraiha M.kom',
-        //     'acc_direktur' => 'Heri Pamungkas S.S.M.I.KOM',
         //     'lampiran' => $request->lampiran,
         //     'status=' > 'Di Proses',
         //     // 'acc_divisi' => $request->acc_divisi,
-        //     // 'acc_direktur' => $request->acc_direktur,
         //     // 'status=' > $request->status,
         // ];
 

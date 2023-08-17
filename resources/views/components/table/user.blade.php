@@ -14,7 +14,6 @@
             <th scope="col"> Tanggal Lahir</th>
             <th scope="col"> No Hp</th>
             <th scope="col"> Anggota</th>
-            <th scope="col"> Jabatan</th>
             <th scope="col"> Divisi</th>
         </tr>
     </thead>
@@ -31,7 +30,6 @@
                 <td>{{ $u->tanggalLahir }}</td>
                 <td>{{ $u->noHp }}</td>
                 <td>{{ $u->anggota }}</td>
-                <td>{{ $u->jabatan }}</td>
                 <td>{{ $u->divisi }}</td>
                 <td class="text-center">
                     {{-- --------------------DELETE------------------------------------------------- --}}

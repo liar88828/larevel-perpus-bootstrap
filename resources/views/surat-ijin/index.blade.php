@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Data Posts - SantriKoding.com</title>
+    <title>Data Posts</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <style>
@@ -69,7 +69,6 @@
                                         <th scope="col"> Akhir Malam</th>
                                         {{-- <th scope="col"> lama</th> --}}
                                         <th scope="col"> Acc Divisi</th>
-                                        <th scope="col"> Acc Direktur</th>
                                         {{-- <th scope="col"> Lampiran</th> --}}
                                         <th scope="col"> Status</th>
                                         <th scope="col"> Aksi</th>
@@ -79,40 +78,24 @@
                                 <tbody>
                                     @forelse ($surat_ijin as $key=>$s)
                                         <tr>
-                                            {{-- <td>{{ $loop->index }}</td> --}}
                                             <td>{{ $s->id }}</td>
                                             <td>{{ $s->nama }}</td>
-                                            {{-- <td>{{ $s->jenis }}</td> --}}
                                             <td>{{ $s->hari_tanggal }}</td>
                                             <td>{{ $s->keterangan }}</td>
-
                                             <td>{{ $s->hari_kerja }}</td>
                                             <td>{{ $s->mulai_pagi }}</td>
                                             <td>{{ $s->akhir_pagi }}</td>
                                             <td>{{ $s->mulai_malam }}</td>
                                             <td>{{ $s->akhir_malam }}</td>
-                                            {{-- <td>{{ $s->lama }}</td> --}}
                                             <td>
-                                                {{-- Safira Nuraiha M.kom --}}
-
                                                 <span
                                                     class="btn btn-{{ $s->acc_divisi === 'Belum Di Terima' ? 'warning' : 'info' }}">{{ $s->acc_divisi }}</span>
 
                                             </td>
-                                            <td>
-                                                {{-- Heri Pamungkas S.S.M.I.KOM --}}
-                                                <span
-                                                    class="btn btn-{{ $s->acc_direktur === 'Belum Di Terima' ? 'warning' : 'info' }}">{{ $s->acc_direktur }}</span>
-
-                                            </td>
-                                            {{-- <td>{{ $s->acc_divisi}}</td> --}}
-                                            {{-- <td>{{ $s->acc_direktur}}</td> --}}
-                                            {{-- <td>{{ $s->lampiran }}</td> --}}
-
+                                         
                                             <td
-                                                class="btn btn-sm btn-{{ $s->acc_divisi === 'Di Terima' && $s->acc_direktur === 'Di Terima' ? 'info' : 'warning' }}">
-                                                {{ $s->acc_divisi === 'Di Terima' && $s->acc_direktur === 'Di Terima' 
-                                                ? 'Mencukupi' : 'Belum Mencukupi' }}
+                                                class="btn btn-sm btn-{{ $s->acc_divisi === 'Di Terima'   ? 'info' : 'warning' }}">
+                                                {{ $s->acc_divisi === 'Di Terima'  ? 'Mencukupi' : 'Belum Mencukupi' }}
                                             </td>
                                             {{-- <td>{{ $s->status }}</td> --}}
                                             <td class="text-center">

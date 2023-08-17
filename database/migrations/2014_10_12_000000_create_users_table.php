@@ -21,7 +21,6 @@ return new class extends Migration {
             $table->string('tanggalLahir');
             $table->string('noHp')->unique();
             $table->string('anggota');
-            $table->string('jabatan');
             $table->string('divisi');
             //
             $table->rememberToken();

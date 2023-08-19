@@ -1,20 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tambah Data Post </title>`
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
-    {{-- // iki penting --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body style="background: lightgray">
-
+<x-layout>
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
@@ -23,8 +7,6 @@
                         <h1 class="h1 text-center my-5">Buat Pengajuan Surat</h1>
                         <form action="{{ route('surat-ijin.store') }}" method="POST">
                             @csrf()
-
-
                             {{-- hidden --}}
                             <input type="hidden" name="acc_divisi" value="{{ old('acc_divisi') }}">
                             <input type="hidden" name="status" value="{{ old('status') }}">
@@ -81,13 +63,8 @@
                                 @enderror
                             </div>
 
-
-
-
-
-                            
-
-                            <h6>Jam Pagi</h6>
+                            <h5 class="h5 ">Jam Pagi</h5>
+                            <hr>
                             <div class="d-flex flex-col">
                                 <div class="input-group form-group date" id="mulai_pagi"
                                     style="display: flex; flex-direction: column;">
@@ -135,13 +112,13 @@
                                 </div>
                             </div>
 
+                            <h5 class='h5'>Jam Lembur</h5>
+                            <hr>
 
-                            <h6>Jam Lembur</h6>
                             <div class="d-flex flex-col">
-
                                 <div class="input-group form-group date" id="mulai_malam"
                                     style="display: flex; flex-direction: column;">
-                                    <label class="font-weight-bold">Muasuk lembur</label>
+                                    <label class="font-weight-bold">Masuk lembur</label>
                                     <div class="d-flex flex-row">
 
                                         <input type="text" style="width: 90%"
@@ -185,44 +162,8 @@
                                 </div>
                             </div>
 
-
-
-
-                            {{-- <div class="form-group">
-                                <label class="font-weight-bold">Lama</label>
-                                <input type="text"
-                                    class="form-control @error('lama') 
-                                is-invalid @enderror"
-                                    name="lama" placeholder="Masukan Lama " value="{{ old('lama') }}">
-
-                                <!-- error message untuk hal -->
-                                @error('lama')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
-
-                            {{-- <div class="form-group">
-                                <label class="font-weight-bold">Lampiran</label>
-                                <input type="text"
-                                    class="form-control @error('lampiran') 
-                                is-invalid @enderror"
-                                    name="lampiran" placeholder="Masukan Lampiran " value="{{ old('lampiran') }}">
-
-                                <!-- error message untuk hal -->
-                                @error('lampiran')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div> --}}
-
                             <button type="submit" class="btn btn-md btn-success">SIMPAN</button>
-                            {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
-                            {{-- <button onclick="history.back()" class="btn btn-md btn-primary">KEMBALI</button> --}}
-                            <a href="{{ url()->previous() }}" class="btn btn-secondary">KEMBALI</a>
-                            {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
+                            <a href="{{ url('/user') }}" class="btn btn-secondary">KEMBALI</a>
 
                         </form>
                     </div>
@@ -230,83 +171,4 @@
             </div>
         </div>
     </div>
-
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
-    </script>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
-
-    <script>
-        var firstOpen = true;
-        var time;
-
-        $('#mulai_pagi').datetimepicker({
-            useCurrent: true,
-            format: 'HH:mm'
-        }) 
-    </script>
-
-    <script>
-        var firstOpen = true;
-        var time;
-
-        $('#akhir_pagi').datetimepicker({
-            useCurrent: true,
-            format: 'HH:mm'
-        }).on('dp.show', function() {
-            if (firstOpen) {
-                time = moment().startOf('day');
-                firstOpen = false;
-            } else {
-                time = "01:00 PM"
-            }
-            $(this).data('DateTimePicker').date(time);
-        });
-    </script>
-
-    <script>
-        var firstOpen = true;
-        var time;
-
-        $('#mulai_malam').datetimepicker({
-            useCurrent: true,
-            format: 'HH:mm'
-        }).on('dp.show', function() {
-            if (firstOpen) {
-                time = moment().startOf('day');
-                firstOpen = false;
-            } else {
-                time = "01:00 PM"
-            }
-            $(this).data('DateTimePicker').date(time);
-        });
-    </script>
-
-    <script>
-        var firstOpen = true;
-        var time;
-
-        $('#akhir_malam').datetimepicker({
-            useCurrent: true,
-            format: 'HH:mm'
-        }).on('dp.show', function() {
-            if (firstOpen) {
-                time = moment().startOf('day');
-                firstOpen = false;
-            } else {
-                time = "01:00 PM"
-            }
-            $(this).data('DateTimePicker').date(time);
-        });
-    </script>
-
-</body>
-
-</html>
+</x-layout>

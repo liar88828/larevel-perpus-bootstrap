@@ -1,4 +1,3 @@
-
 @props(['user'])
 
 <table class="table table-bordered">

@@ -27,7 +27,6 @@ class SuratController extends Controller
             );
         } else {
             $surats = auth()->user()->userSurat()->get();
-            // dd($surats);
             return view(
                 'surat-ijin.index',
                 ['surat_ijin' => $surats]
@@ -53,21 +52,13 @@ class SuratController extends Controller
             'nama' => $request->nama,
             'hari_tanggal' => $request->hari_tanggal,
             'keterangan' => $request->keterangan ?? '-',
-
             'hari_kerja' => $request->hari_kerja ?? '-',
             'mulai_pagi' => $request->mulai_pagi ?? '-',
             'akhir_pagi' => $request->akhir_pagi ?? '-',
-
             'mulai_malam' => $request->mulai_malam ?? '-',
             'akhir_malam' => $request->akhir_malam ?? '-',
-            // Safira Nuraiha M.kom'
-// 'Heri Pamungkas S.S.M.I.KOM',
-
-            // 'lama' => $request->lama,
             'acc_divisi' => 'Belum Di Terima',
-            // 'lampiran' => $request->lampiran,
             'status' => 'Di Proses',
-            // 'acc_divisi' => $request->acc_divisi,
         ];
 
         surat::create($createSurat);
@@ -82,46 +73,21 @@ class SuratController extends Controller
     // hnya melihat satian data
     public function show(string $id)
     {
-        // $surat = surat::query()->findOrFail((int) $id);
-        // $surat = surat::query()->findOrFail((int) $id);
-        // $surat->user()->where('id', '1') 
-
-        // $surat = surat::query()->whereBelongsTo('user', $id);
-        // $surat = surat::with('user')->whereBelongsTo('')
-        // ->where('user_id','==',1)->get()
-        //   ->whereIn('user_id',1)//->get()
-        // $surat=surat::with('user')->where('user_id','=', 1)->get();
-// $data=$surat->user->email;
-
         $surat = surat::latest()->get();
-        // dd($surat);
-        // dd($surat);
         return view(
             'surat-ijin.show',
             compact('surat')
         );
-        // $data = Item::select('*')
-        //     ->whereMonth('created_at', Carbon::now()->month)
-        //     ->get();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $surat = surat::query()->findOrFail($id);
         return view('surat-ijin.edit', compact('surat'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatesuratRequest $request, string $id)
     {
-        // dd($request);
-        // dd($id);
-
         $createSurat = [
             'user_id' => $request->user_id,
             'nama' => $request->nama,
@@ -134,14 +100,8 @@ class SuratController extends Controller
 
             'mulai_malam' => $request->mulai_malam ?? '-',
             'akhir_malam' => $request->akhir_malam ?? '-',
-
-            // 'lama' => $request->lama,
-
-
             'acc_divisi' => $request->acc_divisi ?? 'Belum Di Terima',
-            // 'lampiran' => $request->lampiran,
             'status' => 'Di Proses',
-            // 'acc_divisi' => $request->acc_divisi,
         ];
 
 
@@ -149,17 +109,12 @@ class SuratController extends Controller
 
         $surat->update($createSurat);
 
-        // dd($request);
-        //redirect to index
         return redirect()
             ->route('surat-ijin.index')
             ->with(['success' => 'Data Berhasil Di Ubah!']);
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $surat = surat::query()->findOrFail($id);
@@ -167,14 +122,6 @@ class SuratController extends Controller
         return redirect()->route('surat-ijin.index')->with(['success' => 'Berhasil Di Hapus']);
 
     }
-
-    // public function surat(string $id)
-
-
-    // {
-    //     return redirect()->route('surat-ijin.surat' );
-
-    // }
 
     public function editData(Request $request, string $id)
     {
@@ -187,18 +134,12 @@ class SuratController extends Controller
                 'hari_tanggal' => 'required|min:1',
                 'keterangan' => 'required|min:1',
                 'hari_kerja' => 'required|min:1',
-                // 'mulai_pagi' => 'required|min:1',
-                // 'akhir_pagi' => 'required|min:1',
-                // 'mulai_malam' => 'required|min:1',
-                // 'akhir_malam' => 'required|min:1',
                 'acc_divisi' => 'required|min:1',
                 'status' => 'required|min:2',
             ]
         );
-        // dd($request);
 
         $surat = surat::query()->findOrFail($id);
-        // dd($surat);
 
         $surat->update(
             [
@@ -220,8 +161,7 @@ class SuratController extends Controller
             ->route('surat-ijin.index')
             ->with(['success' => 'Data Berhasil Di Ubah!']);
     }
-
-
-
+public function managerSurat(){
     
+}
 }

@@ -835,41 +835,41 @@
         class="relative sm:flex1 sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
 
         {{-- @if (Route::has('login')) --}}
-            <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-                {{-- validasi apa bila user sudah login --}}
-                @auth
-                    <div class="flex flex-row">
-                        <a href="{{  route('profile') }}"
-                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                            Profile 
-                            <span  
-                             style="border: 1px solid lightgray; padding:.5rem; border-radius:1rem; margin:0 0.5rem 0 0.5rem;">
-                                {{ auth()->user()->nama }}
-                            </span>
-                        </a>
-
-                        <div class="text-gray-600 " style="margin:0 .5rem 0 .5rem;"> || </div>
-
-                        {{-- logout --}}
-                        <form class="inline" method="POST" action="logout">
-                            @csrf
-                            <button type="submit"
-                                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                                Logout 
-                            </button>
-                        </form>
-                    </div>
-                @else
-                    <a href="{{ route('login') }}"
+        <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+            {{-- validasi apa bila user sudah login --}}
+            @auth
+                <div class="flex flex-row">
+                    <a href="{{ url('/profile') }}"
                         class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
-                        Log in</a>
+                        Profile
+                        <span
+                            style="border: 1px solid lightgray; padding:.5rem; border-radius:1rem; margin:0 0.5rem 0 0.5rem;">
+                            {{ auth()->user()->nama }}
+                        </span>
+                    </a>
 
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-                    @endif
-                @endauth
-            </div>
+                    <div class="text-gray-600 " style="margin:0 .5rem 0 .5rem;"> || </div>
+
+                    {{-- logout --}}
+                    <form class="inline" method="POST" action="logout">
+                        @csrf
+                        <button type="submit"
+                            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            @else
+                <a href="{{ route('login') }}"
+                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">
+                    Log in</a>
+
+                @if (Route::has('register'))
+                    <a href="{{ route('register') }}"
+                        class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                @endif
+            @endauth
+        </div>
         {{-- @endif --}}
 
         <div class="max-w-7xl mx-auto p-6 lg:p-8">

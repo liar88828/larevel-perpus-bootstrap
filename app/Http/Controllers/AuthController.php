@@ -15,10 +15,13 @@ use function PHPUnit\Framework\isNull;
 
 class AuthController extends Controller
 {
+    public function managerSurat($slug)
+    {
 
+    }
 
     // Logout User
-    public function logoutUser(Request $request)
+    public function logoutAccount (Request $request)
     {
         auth()->logout();
         $request->session()->invalidate();
@@ -41,11 +44,11 @@ class AuthController extends Controller
         // dd($request->all());
         $formField = $request->validate([
 
-            'nama' =>[ 'required','min:3' ,Rule::unique('users', 'nama')],
+            'nama' => ['required', 'min:3', Rule::unique('users', 'nama')],
             'jenisKelamin' => 'required',
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'tanggalLahir' => 'required',
-            'noHp' => ['required','min:8',Rule::unique('users', 'noHp')],
+            'noHp' => ['required', 'min:8', Rule::unique('users', 'noHp')],
             'anggota' => 'required',
             'divisi' => 'required',
             'password' => 'required|confirmed|min:6'
@@ -63,21 +66,6 @@ class AuthController extends Controller
         return redirect()->route('login', )->with('message', 'User created and logged in');
     }
 
-    // logout user
-    // public function logoutUser(Request $request)
-    // {
-    //     dd($request);
-    //     // logout dengan user tersebut
-    //     auth()->logout();
-    //     // hapus / nonaktifan sesson
-    //     $request->session()->invalidate();
-    //     // buat ulang token untuk user lain yang ingin login
-    //     $request->session()->regenerateToken();
-    //     // akan di arahkan ke halaman login apa bila sudah logout
-    //     return redirect('/profile')
-    //     ->with('message', 'User logged out');
-    // }
-
     // untuk menuju halaman login
     public function loginView()
     {
@@ -85,67 +73,95 @@ class AuthController extends Controller
     }
 
     // login user
-    function loginAuth(Request $request): RedirectResponse
+    public function loginAuth(Request $request): RedirectResponse
     {
-        //validasi login
+        // validasi login
         $formField = $request->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
         ]);
-        //set user session /buat session setelah login 
+        // set user session / buat session setelah login
         if (auth()->attempt($formField)) {
-            //set user
+            // set user
             $request->session()->regenerate();
             // akan di arahkan di home/menu beranda pada aplikasi
-            return redirect('/profile')->with('message', 'You are now logged in!');
+            $a = auth()->user()->anggota;
+            if ($a === 'Staff' || $a === 'Kepala' || $a === 'Admin') {
+                return redirect('/user')->with('message', 'You are now logged in!');
+            } elseif ($a === 'Manager' || $a === 'Admin') {
+                return redirect('/manager')->with('message', 'You are now logged in!');
+            } elseif ($a === 'Admin') {
+                return redirect('/admin')->with('message', 'You are now logged in!');
+
+            }
         }
         // apa bila salah akan di muat ulang login
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 
 
-    // apa bila lupa akun
-    function lupa()
+
+    public function profileController()
     {
-        return view('auth.lupa');
-    }
+        $a = auth()->user()->anggota;
+        if ($a === 'Staff' || $a === 'Kepala' || $a === 'Admin') {
+            return redirect('/user')->with('message', 'You are now logged in!');
+        } elseif ($a === 'Manager' || $a === 'Admin') {
+            return redirect('/manager')->with('message', 'You are now logged in!');
+        } elseif ($a === 'Admin') {
+            return redirect('/admin')->with('message', 'You are now logged in!');
 
-
-    // kirim kan email kepada admin
-    function lupaPost()
-    {
-        return view('auth.lupa');
-    }
-
-    // kirim kan email kepada admin
-    function profile()
-    {
-
-        $surat = DB::table('users')
-            ->join('surats', 'surats.user_id', '=', 'users.id')
-            ->where('users.id', '=', auth()->user()->id)
-            ->where('acc_divisi', '=', 'Di Terima')
-            ->select('users.*', 'surats.*')
-            ->get();
-        // dd(count($surat));
-        return view('profile.index', ['surat' => count($surat)]);
-    }
-
-
-    function surat()
-    {
-        $surat = DB::table('users')
-            ->join('surats', 'surats.user_id', '=', 'users.id')
-            ->where('users.id', '=', auth()->user()->id)
-            ->where('acc_divisi', '=', 'Di Terima')
-            ->select('users.*', 'surats.*')
-            ->get();
-// dd ('test');
-        if (count($surat) <= 0) {
-            return redirect('/profile');
         }
-        // dd($surat);
-        return view('profile.surat', ['surat' => $surat]);
+    }
+    // apa bila lupa akun
+    public function lupa()
+    {
+        return view('auth.lupa');
+    }
+
+
+    // kirim kan email kepada admin
+    public function lupaPost()
+    {
+        return view('auth.lupa');
+    }
+
+    // kirim kan email kepada admin
+    public function profile()
+    {
+        $a = auth()->user()->anggota;
+        if ($a === 'Staff' || $a === 'Kepala') {
+            $user = DB::table('users')
+                ->join('surats', 'surats.user_id', '=', 'users.id')
+                ->where('users.id', '=', auth()->user()->id)
+                ->where('acc_divisi', '=', 'Di Terima')
+                ->select('users.*', 'surats.*')
+                ->get();
+            return view('user.index', ['surat' => count($user)]);
+        }
+        if ($a === 'Manager') {
+            $manager = DB::table('users')
+                ->join('surats', 'surats.user_id', '=', 'users.id')
+                ->where('users.divisi', '=', auth()->user()->divisi)
+                ->select('users.*', 'surats.*')
+                ->get();
+            return view('manager.index', ['surat' =>  $manager]);
+        }
+    }
+
+
+    public function surat()
+    {
+        $surat = DB::table('users')
+            ->join('surats', 'surats.user_id', '=', 'users.id')
+            ->where('users.id', '=', auth()->user()->id)
+            ->where('acc_divisi', '=', 'Di Terima')
+            ->select('users.*', 'surats.*')
+            ->get();
+        if (count($surat) <= 0) {
+            return redirect('/user');
+        }
+        return view('user.surat', ['surat' => $surat]);
     }
 
 }

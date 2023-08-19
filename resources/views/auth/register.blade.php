@@ -1,15 +1,4 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-</head>
-
-<body>
+<x-layout>
     <div class="row justify-content-center mt-5 py-5">
         <div class="col-lg-4">
 
@@ -47,7 +36,7 @@
                         <div class="form-group mb-3">
                             <label class="font-weight-bold mb-3">Nama</label>
                             <input class="form-control @error('nama') is-invalid @enderror" name="nama"
-                                type="text" placeholder="Masukkan Nama"  value="{{old('nama')}}"  />
+                                type="text" placeholder="Masukkan Nama" value="{{ old('nama') }}" />
 
                             <!-- error message untuk nama -->
                             @error('nama')
@@ -62,23 +51,16 @@
                             <p>Masukan Jenis Kelamin</p>
                             <div class="form-check">
                                 <input class="form-check-input"
-                                    class="form-control @error('jenisKelamin') is-invalid @enderror" 
-                                    type="radio"
-                                    value="Laki-laki"
-
-                                    name="jenisKelamin" id="flexRadioDefault1">
+                                    class="form-control @error('jenisKelamin') is-invalid @enderror" type="radio"
+                                    value="Laki-laki" name="jenisKelamin" id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Laki Laki
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input"
-                                    class="form-control @error('jenisKelamin') is-invalid @enderror" 
-                                    type="radio"
-                                    name="jenisKelamin" 
-                                    id="flexRadioDefault1"
-                                    value="Perempuan"
-                                    >
+                                    class="form-control @error('jenisKelamin') is-invalid @enderror" type="radio"
+                                    name="jenisKelamin" id="flexRadioDefault1" value="Perempuan">
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     Perempuan
                                 </label>
@@ -108,9 +90,7 @@
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Email</label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
-                        placeholder="Masukkan Email"
-                        value="{{old('email')}}" 
-                        />
+                        placeholder="Masukkan Email" value="{{ old('email') }}" />
 
                     <!-- error message untuk nama -->
                     @error('email')
@@ -125,9 +105,7 @@
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Tanggal Lahir</label>
                     <input type="date" class="form-control @error('tanggalLahir') is-invalid @enderror"
-                        name="tanggalLahir"
-                        value="{{old('tanggalLahir')}}" 
-                        />
+                        name="tanggalLahir" value="{{ old('tanggalLahir') }}" />
 
                     <!-- error message untuk nama -->
                     @error('tanggalLahir')
@@ -140,8 +118,8 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">No.Hp</label>
-                    <input type="number" class="form-control @error('noHp') is-invalid @enderror" name="noHp" value="{{old('noHp')}}" 
-                        placeholder="Masukkan No.Hp" />
+                    <input type="number" class="form-control @error('noHp') is-invalid @enderror" name="noHp"
+                        value="{{ old('noHp') }}" placeholder="Masukkan No.Hp" />
 
                     <!-- error message untuk nama -->
                     @error('noHp')
@@ -155,8 +133,8 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Anggota</label>
-                    <select class="form-control @error('anggota') is-invalid @enderror" name="anggota"  value="{{old('anggota')}}" 
-                        placeholder="Masukkan Anggota">
+                    <select class="form-control @error('anggota') is-invalid @enderror" name="anggota"
+                        value="{{ old('anggota') }}" placeholder="Masukkan Anggota">
                         <option value="Staff">Staff</option>
                         <option value="Kepala">Kepala</option>
                         <option value="Manager">Manager</option>
@@ -173,8 +151,8 @@
 
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Pilih Divisi</label>
-                    <select class="form-control @error('divisi') is-invalid @enderror" name="divisi"    value="{{old('divisi')}}" 
-                        placeholder="Masukkan Divisi">
+                    <select class="form-control @error('divisi') is-invalid @enderror" name="divisi"
+                        value="{{ old('divisi') }}" placeholder="Masukkan Divisi">
                         <option value="Divisi Produksi">Divisi Produksi</option>
                         <option value="Divisi IT">Divisi IT</option>
                         <option value="Divisi Marketing">Divisi Marketing</option>
@@ -200,9 +178,7 @@
                 <div class="form-group mb-3">
                     <label class="font-weight-bold mb-3">Password</label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
-                        placeholder="Masukkan Password" 
-                        value="{{old('password')}}" 
-                        />
+                        placeholder="Masukkan Password" value="{{ old('password') }}" />
 
                     <!-- error message untuk nama -->
                     @error('password')
@@ -216,7 +192,7 @@
                     <label class="font-weight-bold mb-3">ConfPass</label>
                     <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
                         name="password_confirmation" placeholder="Masukkan Ulang Password"
-                        value="{{ old('password_confirmation') }}" /> 
+                        value="{{ old('password_confirmation') }}" />
 
                     <!-- error message untuk nama -->
                     @error('password_confirmation')
@@ -226,33 +202,19 @@
                     @enderror
                 </div>
 
-
-
                 {{-- <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="password" required>
                         </div> --}}
-
-
                 <div class="d-flex flex-row-reverse align-items-center ">
-
                     <button class="btn btn-primary">Register</button>
                     <a href="{{ route('login') }}" method="GET">
                         <p class="border border-transparent ">Sudah Punya Akun?</p>
                     </a>
-
                     </form>
-
-
                 </div>
-
             </div>
         </div>
     </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+</x-layout>

@@ -12,9 +12,7 @@ class AdminController extends Controller
 {
     public function userShow($slug)
     {
-
         if ($slug === 'all') {
-
             $user = User::all();
             return view(
                 'admin.user',
@@ -32,27 +30,44 @@ class AdminController extends Controller
         }
     }
 
+
     public function suratShow($slug)
     {
-
         if ($slug === 'all') {
-
             $surat = surat::all();
-            return view(
-                'admin.surat',
-                ['surat' => $surat]
-            );
+            if (auth()->user()->anggota === 'Manager') {
+                return view(
+                    'manager.surat',
+                    ['surat' => $surat]
+                );
+            }
+            if (auth()->user()->anggota === 'Admin') {
+
+                return view(
+                    'admin.surat',
+                    ['surat' => $surat]
+                );
+            }
         } else {
             $surat = DB::table('users')
                 ->join('surats', 'surats.user_id', '=', 'users.id')
                 ->where('users.divisi', '=', $slug)
                 ->select('users.*', 'surats.*')
                 ->get();
+                
+            if (auth()->user()->anggota === 'Manager') {
+                return view(
+                    'manager.surat',
+                    ['surat' => $surat]
+                );
+            }
+            if (auth()->user()->anggota === 'Admin') {
 
-            return view(
-                'admin.surat',
-                ['surat' => $surat]
-            );
+                return view(
+                    'admin.surat',
+                    ['surat' => $surat]
+                );
+            }
         }
     }
 
@@ -70,24 +85,19 @@ class AdminController extends Controller
     }
     public function suratPrint($id)
     {
-        // dd($id);
         $surat = DB::table('users')
             ->join('surats', 'surats.user_id', '=', 'users.id')
             ->where('users.id', '=', $id)
             ->select('users.*', 'surats.*')
             ->get();
-        // dd($surat);
-        return view('profile.surat', ['surat' => $surat]);
+        return view('user.surat', ['surat' => $surat]);
     }
 
-    public function suratEdit(
-        Request $request
-    ) {
+    public function suratEdit(Request $request)
+    {
         $id = $request->id; //id user
         $option = $request->option; //
         $value = $request->value;
-        $jenis = $request->jenis; //jenis 
-
         $belum = 'Belum Di Terima';
         $sudah = 'Di Terima';
         $divisi = 'divisi';

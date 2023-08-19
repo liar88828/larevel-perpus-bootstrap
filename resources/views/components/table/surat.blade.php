@@ -41,7 +41,8 @@
                             'value' => $s->acc_divisi,
                             'divisi' => $s->divisi,
                         ]) }}"
-                        {{-- action="{{ url("admin/surat/edit/{$s->id}/divisi/{$s->acc_divisi}/$s->divisi") }}" --}} method="POST">
+                        {{-- action="{{ url("admin/surat/edit/{$s->id}/divisi/{$s->acc_divisi}/$s->divisi") }}" --}}
+                         method="POST">
                         @csrf
                         @method('PUT')
                         <button type="submit"

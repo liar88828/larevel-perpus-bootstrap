@@ -8,25 +8,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Constraint\Count;
 
+use function PHPUnit\Framework\isNull;
+
 class AdminController extends Controller
 {
+
+
     public function userShow($slug)
     {
         if ($slug === 'all') {
-            $user = User::all();
-            return view(
-                'admin.user',
-                ['user' => $user]
-            );
+            $user = User::paginate(10);
+            if (auth()->user()->anggota === 'Manager') {
+                return view(
+                    'manager.user',
+                    ['user' => $user]
+                );
+            } elseif (auth()->user()->anggota === 'Admin') {
+                return view(
+                    'admin.user',
+                    ['user' => $user]
+                );
+            }
         } else {
-            $user = DB::table('users')
+            $users = DB::table('users')
                 ->where('users.divisi', '=', $slug)
-                ->select('users.*', )
-                ->get();
-            return view(
-                'admin.user',
-                ['user' => $user]
-            );
+                ->paginate(10);
+
+            if (auth()->user()->anggota === 'Manager') {
+                return view(
+                    'manager.user',
+                    ['users' => $users]
+                );
+            } elseif (auth()->user()->anggota === 'Admin') {
+                return view(
+                    'admin.user',
+                    ['users' => $users]
+                );
+            }
+
         }
     }
 
@@ -34,15 +53,13 @@ class AdminController extends Controller
     public function suratShow($slug)
     {
         if ($slug === 'all') {
-            $surat = surat::all();
+            $surat = surat::paginate(15);
             if (auth()->user()->anggota === 'Manager') {
                 return view(
                     'manager.surat',
                     ['surat' => $surat]
                 );
-            }
-            if (auth()->user()->anggota === 'Admin') {
-
+            } elseif (auth()->user()->anggota === 'Admin') {
                 return view(
                     'admin.surat',
                     ['surat' => $surat]
@@ -53,15 +70,13 @@ class AdminController extends Controller
                 ->join('surats', 'surats.user_id', '=', 'users.id')
                 ->where('users.divisi', '=', $slug)
                 ->select('users.*', 'surats.*')
-                ->get();
-                
+                ->paginate(10);
             if (auth()->user()->anggota === 'Manager') {
                 return view(
                     'manager.surat',
                     ['surat' => $surat]
                 );
-            }
-            if (auth()->user()->anggota === 'Admin') {
+            } elseif (auth()->user()->anggota === 'Admin') {
 
                 return view(
                     'admin.surat',
@@ -73,13 +88,32 @@ class AdminController extends Controller
 
     public function index()
     {
+        // if (empty($auth)) {
+        //     return redirect('/ ')
+        //         ->with('message', 'Anda Tidak Berhak');
+        // }
+
+        // $admin = auth()->user()->anggota;
+        // if ($admin !== 'admin') {
+        //     return redirect('/ ')
+        //         ->with('message', 'Anda Tidak Berhak');
+        // }
+
         $surat = surat::count();
         $user = user::count();
+
+
+
+        $lupa = DB::table('password_reset_tokens')
+            ->select('*')
+            ->paginate(10);
+
         return view(
             'admin.index',
             [
                 'surat' => $surat,
-                'user' => $user
+                'user'  => $user,
+                'lupa'  => count($lupa),
             ]
         );
     }
@@ -89,7 +123,7 @@ class AdminController extends Controller
             ->join('surats', 'surats.user_id', '=', 'users.id')
             ->where('users.id', '=', $id)
             ->select('users.*', 'surats.*')
-            ->get();
+            ->paginate(10);
         return view('user.surat', ['surat' => $surat]);
     }
 
@@ -104,9 +138,18 @@ class AdminController extends Controller
 
         if ($option === $divisi) {
             if ($value === $sudah) {
-                surat::where('id', $id)->update(array('acc_divisi' => $belum));
+                surat::where('id', $id)->update([
+                    'acc_divisi'   => $belum,
+                    'nama_manager' => '-'
+
+                ]);
             } else if ($value === $belum) {
-                surat::where('id', $id)->update(array('acc_divisi' => $sudah));
+                surat::where('id', $id)->update(
+                    array(
+                        'acc_divisi'   => $sudah,
+                        'nama_manager' => auth()->user()->nama
+                    )
+                );
             }
         }
         return back();

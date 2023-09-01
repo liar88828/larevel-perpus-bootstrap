@@ -1,5 +1,4 @@
-
-{{-- 
+@props(['role'])
 
 <x-layout>
     <div style="background: lightgray">
@@ -24,47 +23,46 @@
                                 </div>
                             @endif
                         </div>
+
                         <div class="card border-0 shadow-sm rounded mx-4">
-                            <div class="card-body">
+                            <div class="card-body ">
+
                                 <div class="d-flex justify-content-between px-5">
                                     <div class="">
-                                        <a href="{{ route('admin') }}" class="btn btn-secondary ">KEMBALI</a>
+                                        <a href="{{ url($role) }}" class="btn btn-secondary mx-2">KEMBALI</a>
                                     </div>
 
                                     <div style='display:flex; gap: 2rem'>
-
-                                        <a href="{{ url('admin/surat/all') }}" class="px-3 btn  "
+                                        <a href="{{ url($role . '/user/all') }}" class="px-3 btn  "
                                             style="background: lightsalmon">Semua
                                         </a>
 
-                                        <a href="{{ url('admin/surat/Divisi Produksi') }}"
+                                        <a href="{{ url($role . '/user/Divisi Produksi') }}"
                                             class="px-3 btn btn-primary">Divisi Produksi
                                         </a>
 
-                                        <a href="{{ url('admin/surat/Divisi IT') }}"
-                                            class="px-3 btn btn-success">Divisi IT
+                                        <a href="{{ url($role . '/user/Divisi IT') }}" class="px-3 btn btn-success">
+                                            Divisi IT
                                         </a>
 
-                                        <a href="{{ url('admin/surat/Divisi Marketing') }}"
+                                        <a href="{{ url($role . '/user/Divisi Marketing') }}"
                                             class="px-3 btn btn-info">Divisi
                                             Marketing
                                         </a>
 
-                                        <a href="{{ url('admin/surat/Divisi Teknik') }}"
+                                        <a href="{{ url($role . '/user/Divisi Teknik') }}"
                                             class="px-3 btn btn-warning">Divisi
                                             Teknik
                                         </a>
 
-                                        <a href="{{ url('admin/surat/Divisi News') }}"
+                                        <a href="{{ url($role . '/user/Divisi News') }}"
                                             class="px-3 btn btn-danger">Divisi
                                             News
                                         </a>
 
                                     </div>
                                 </div>
-                                {{-- ---------------------- iki table ---------------------- --}}
-                                <x-table.surat :surat="$surat" />
-                                {{-- ---------------------- iki table ---------------------- --}}
+                                {{ $slot }}
                             </div>
                         </div>
                     </div>
@@ -73,4 +71,4 @@
         </div>
 
     </div>
-</x-layout> --}}
+</x-layout>

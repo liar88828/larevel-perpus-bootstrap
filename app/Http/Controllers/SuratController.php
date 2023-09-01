@@ -7,6 +7,7 @@ use App\Http\Requests\StoresuratRequest;
 use App\Http\Requests\UpdatesuratRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SuratController extends Controller
 {
@@ -20,13 +21,17 @@ class SuratController extends Controller
     {
 
         if (auth()->user()->anggota === 'Manager') {
-            $surats = surat::all();
+            $surats = surat::paginate(10);
             return view(
                 'surat-ijin.index',
                 ['surat_ijin' => $surats]
             );
         } else {
-            $surats = auth()->user()->userSurat()->get();
+
+            $surats = Surat::join('users', 'surats.user_id', '=', 'users.id')
+                ->select('surats.*', 'users.nama')
+                ->where('users.id', auth()->user()->id)
+                ->paginate(10);
             return view(
                 'surat-ijin.index',
                 ['surat_ijin' => $surats]
@@ -48,17 +53,18 @@ class SuratController extends Controller
     public function store(Request $request)
     {
         $createSurat = [
-            'user_id' => $request->user_id,
-            'nama' => $request->nama,
+            'user_id'      => $request->user_id,
+            //'nama'         => $request->nama,
             'hari_tanggal' => $request->hari_tanggal,
-            'keterangan' => $request->keterangan ?? '-',
-            'hari_kerja' => $request->hari_kerja ?? '-',
-            'mulai_pagi' => $request->mulai_pagi ?? '-',
-            'akhir_pagi' => $request->akhir_pagi ?? '-',
-            'mulai_malam' => $request->mulai_malam ?? '-',
-            'akhir_malam' => $request->akhir_malam ?? '-',
-            'acc_divisi' => 'Belum Di Terima',
-            'status' => 'Di Proses',
+            'keterangan'   => $request->keterangan ?? '-',
+            'hari_kerja'   => $request->hari_kerja ?? '-',
+            'mulai_pagi'   => $request->mulai_pagi ?? '-',
+            'akhir_pagi'   => $request->akhir_pagi ?? '-',
+            'mulai_malam'  => $request->mulai_malam ?? '-',
+            'akhir_malam'  => $request->akhir_malam ?? '-',
+            'nama_manager' => $request->nama_manager ?? '-',
+            'acc_divisi'   => 'Belum Di Terima',
+            'status'       => 'Di Proses',
         ];
 
         surat::create($createSurat);
@@ -73,7 +79,7 @@ class SuratController extends Controller
     // hnya melihat satian data
     public function show(string $id)
     {
-        $surat = surat::latest()->get();
+        $surat = surat::latest()->paginate(10);
         return view(
             'surat-ijin.show',
             compact('surat')
@@ -82,31 +88,34 @@ class SuratController extends Controller
 
     public function edit(string $id)
     {
-        $surat = surat::query()->findOrFail($id);
-        return view('surat-ijin.edit', compact('surat'));
+        $surat=surat::query()->findOrFail($id);
+        return view('surat-ijin.edit', ['surat' => $surat]);
     }
 
     public function update(UpdatesuratRequest $request, string $id)
     {
+
+
+        //    dd($request);
         $createSurat = [
-            'user_id' => $request->user_id,
-            'nama' => $request->nama,
-            'hari_tanggal' => $request->hari_tanggal,
-            'keterangan' => $request->keterangan ?? '-',
+            'user_id'      => $request->user_id ?? '-',
+            'hari_tanggal' => $request->hari_tanggal ?? '-',
+            'keterangan'   => $request->keterangan ?? '-',
 
-            'hari_kerja' => $request->hari_kerja ?? '-',
-            'mulai_pagi' => $request->mulai_pagi ?? '-',
-            'akhir_pagi' => $request->akhir_pagi ?? '-',
+            'hari_kerja'   => $request->hari_kerja ?? '-',
+            'mulai_pagi'   => $request->mulai_pagi ?? '-',
+            'akhir_pagi'   => $request->akhir_pagi ?? '-',
 
-            'mulai_malam' => $request->mulai_malam ?? '-',
-            'akhir_malam' => $request->akhir_malam ?? '-',
-            'acc_divisi' => $request->acc_divisi ?? 'Belum Di Terima',
-            'status' => 'Di Proses',
+            'mulai_malam'  => $request->mulai_malam ?? '-',
+            'akhir_malam'  => $request->akhir_malam ?? '-',
+            'nama_manager' => $request->nama_manager ?? '-',
+            'acc_divisi'   => $request->acc_divisi ?? 'Belum Di Terima',
+            'status'       => 'Di Proses',
         ];
-
+        // dd($createSurat);
 
         $surat = surat::query()->findOrFail($id);
-
+// dd($surat);
         $surat->update($createSurat);
 
         return redirect()
@@ -129,13 +138,13 @@ class SuratController extends Controller
         $this->validate(
             $request,
             [
-                'user_id' => 'required|min:1',
-                'nama' => 'required|min:1',
+                'user_id'      => 'required|min:1',
+                'nama'         => 'required|min:1',
                 'hari_tanggal' => 'required|min:1',
-                'keterangan' => 'required|min:1',
-                'hari_kerja' => 'required|min:1',
-                'acc_divisi' => 'required|min:1',
-                'status' => 'required|min:2',
+                'keterangan'   => 'required|min:1',
+                'hari_kerja'   => 'required|min:1',
+                'acc_divisi'   => 'required|min:1',
+                'status'       => 'required|min:2',
             ]
         );
 
@@ -143,17 +152,18 @@ class SuratController extends Controller
 
         $surat->update(
             [
-                'user_id' => $request->user_id,
-                'nama' => $request->nama,
+                'user_id'      => $request->user_id,
+                'nama'         => $request->nama,
                 'hari_tanggal' => $request->hari_tanggal ?? '-',
-                'keterangan' => $request->keterangan ?? '-',
-                'hari_kerja' => $request->hari_kerja ?? '-',
-                'mulai_pagi' => $request->mulai_pagi ?? '-',
-                'akhir_pagi' => $request->akhir_pagi ?? '-',
-                'mulai_malam' => $request->mulai_malam ?? '-',
-                'akhir_malam' => $request->akhir_malam ?? '-',
-                'acc_divisi' => 'Safira Nuraiha M.kom',
-                'status' => 'Di Proses'
+                'keterangan'   => $request->keterangan ?? '-',
+                'hari_kerja'   => $request->hari_kerja ?? '-',
+                'mulai_pagi'   => $request->mulai_pagi ?? '-',
+                'akhir_pagi'   => $request->akhir_pagi ?? '-',
+                'mulai_malam'  => $request->mulai_malam ?? '-',
+                'akhir_malam'  => $request->akhir_malam ?? '-',
+                'nama_manager' => $request->nama_manager ?? '-',
+                'acc_divisi'   => 'Safira Nuraiha M.kom',
+                'status'       => 'Di Proses'
             ]
         );
 
@@ -161,7 +171,4 @@ class SuratController extends Controller
             ->route('surat-ijin.index')
             ->with(['success' => 'Data Berhasil Di Ubah!']);
     }
-public function managerSurat(){
-    
-}
 }

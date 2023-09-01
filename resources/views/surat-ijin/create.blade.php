@@ -1,4 +1,8 @@
 <x-layout>
+    <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
@@ -10,10 +14,9 @@
                             {{-- hidden --}}
                             <input type="hidden" name="acc_divisi" value="{{ old('acc_divisi') }}">
                             <input type="hidden" name="status" value="{{ old('status') }}">
+                            <input type="hidden" name="status" value="{{ old('nama_manager') }}">
                             <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                             <input type="hidden" name="nama" value="{{ auth()->user()->nama }}">
-
-
                             <div class="form-group">
                                 <label class="font-weight-bold">Hari/Tanggal</label>
                                 <input type="date"

@@ -10,31 +10,33 @@
                     alt="tvku" style="width:30%;height: auto;">
             </div>
             {{-- tekan iki --}}
-
             <div class="card ">
-
-
                 <div class="card-header">
-
-
-
                     <h1 class="card-tittle">Lupa Akun</h1>
                 </div>
 
+                @if (isset($message))
+                    <div class="alert alert-success mt-2">
+                        {{ $message }}
+                    </div>
+                @endif
+
+                @error('email')
+                    <div class="alert alert-danger mt-2">
+                        {{-- Email sudah Di kirim Tunggu sampai Di Acc Admin --}}
+                        {{ $message }}
+                    </div>
+                @enderror
+
                 <div class="card-body">
-                    @if (session('success'))
+                    @if (session('emailSend'))
                         <div class="card-body"></div>
                         <div class="alert alert-success" role="alert">
-                            {{ session('success') }}
-                        </div>
-                    @elseif (session('error'))
-                        <div class="card-body"></div>
-                        <div class="alert alert-warning " role="alert">
-                            {{ session('error') }}
+                            {{ session('emailSend') }}
                         </div>
                     @endif
 
-                    <form action="{{ route('lupa') }}" method="POST">
+                    <form action="{{ url('forget-password') }}" method="POST">
                         @csrf
 
                         <div class="p-2">
@@ -48,11 +50,11 @@
                                 name="email" placeholder="Masukkan Email" />
 
                             <!-- error message untuk nama -->
-                            @error('email')
+                            {{-- @error('email')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
                                 </div>
-                            @enderror
+                            @enderror --}}
                         </div>
 
                         <div class="d-flex  flex-row-reverse ">
@@ -63,11 +65,7 @@
                                         <a href="{{ route('login') }}">
                                             <p style="font-size: .7rem">Kembali </p>
                                         </a>
-
-
-
                                     </div>
-
                                     <button class="btn btn-primary ">Kirim Link Reset Password</button>
                                 </div>
                             </div>

@@ -34,17 +34,20 @@
                                          <th scope="col"> Nama</th>
                                          <th scope="col"> Hari/Tanggal</th>
                                          <th scope="col"> Keterangan</th>
+                                         {{-- waktu --}}
                                          <th scope="col"> Hari Kerja</th>
                                          <th scope="col"> Mulai Pagi</th>
                                          <th scope="col"> Akhir Pagi</th>
                                          <th scope="col"> Mulai Malam</th>
                                          <th scope="col"> Akhir Malam</th>
+                                         {{-- keterangan --}}
+                                         <th scope="col"> Nama Manager</th>
                                          <th scope="col"> Acc Divisi</th>
                                          <th scope="col"> Status</th>
-                                         <th scope="col"> Aksi</th>
+                                         <th scope="col" style="text-align: center">Aksi</th>
                                      </tr>
                                  </thead>
-
+                                 {{-- {{ dd($surat_ijin) }} --}}
                                  <tbody>
                                      @forelse ($surat_ijin as $key=>$s)
                                          <tr>
@@ -52,41 +55,64 @@
                                              <td>{{ $s->nama }}</td>
                                              <td>{{ $s->hari_tanggal }}</td>
                                              <td>{{ $s->keterangan }}</td>
+                                             {{-- waktu --}}
+
                                              <td>{{ $s->hari_kerja }}</td>
                                              <td>{{ $s->mulai_pagi }}</td>
                                              <td>{{ $s->akhir_pagi }}</td>
                                              <td>{{ $s->mulai_malam }}</td>
                                              <td>{{ $s->akhir_malam }}</td>
+                                             {{-- keterangan --}}
+                                             <td>{{ $s->nama_manager }}</td>
                                              <td>
                                                  <span
-                                                     class="btn btn-{{ $s->acc_divisi === 'Belum Di Terima' ? 'warning' : 'info' }}">{{ $s->acc_divisi }}</span>
+                                                     class="btn bg-{{ $s->acc_divisi === 'Di Terima' ? 'info' : 'warning' }}">
+                                                     {{ $s->acc_divisi }}</span>
                                              </td>
-                                             <td
-                                                 class="btn btn-sm btn-{{ $s->acc_divisi === 'Di Terima' ? 'info' : 'warning' }}">
-                                                 {{ $s->acc_divisi === 'Di Terima' ? 'Mencukupi' : 'Belum Mencukupi' }}
+
+
+                                             <td>
+                                                 <span
+                                                     class="btn bg-{{ $s->acc_divisi === 'Di Terima' ? 'info' : 'warning' }}">
+                                                     {{ $s->acc_divisi === 'Di Terima' ? 'Mencukupi' : 'Belum Mencukupi' }}</span>
+
                                              </td>
+
                                              <td class="text-center">
-                                                 {{-- --------------------SHOW------------------------------------------------- --}}
-                                                 {{-- <a href="{{ route('surat-ijin.show', $s->id) }}"
+                                                 <span>
+                                                     {{-- --------------------SHOW------------------------------------------------- --}}
+                                                     {{-- <a href="{{ route('surat-ijin.show', $s->id) }}"
                                                     class="btn btn-sm btn-dark">
                                                     SHOW
                                                 </a> --}}
 
-                                                 {{-- --------------------DELETE------------------------------------------------- --}}
-                                                 <form class='' onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                     action="{{ route('surat-ijin.destroy', $s->id) }}" method="POST">
-                                                     @csrf
-                                                     @method('DELETE')
-                                                     {{-- --------------------EDIT------------------------------------------------- --}}
+                                                     {{-- --------------------DELETE------------------------------------------------- --}}
+                                                     <form class='d-grid gap-1'
+                                                         onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                         action="{{ route('surat-ijin.destroy', $s->id) }}"
+                                                         method="POST">
+                                                         @csrf
+                                                         @method('DELETE')
+                                                         {{-- --------------------EDIT------------------------------------------------- --}}
 
-                                                     <a href="{{ route('surat-ijin.edit', $s->id) }}"
-                                                         class="btn btn-sm btn-primary btn-lg btn-block mb-1">
-                                                         EDIT
-                                                     </a>
+                                                         <a href="{{ route('surat-ijin.edit', $s->id) }}"
+                                                             class="btn btn-sm btn-primary ">
+                                                             EDIT
+                                                         </a>
 
-                                                     <button type="submit"
-                                                         class="btn btn-sm btn-danger ">HAPUS</button>
-                                                 </form>
+                                                         <button type="submit" class="btn btn-sm btn-danger ">
+                                                             HAPUS
+                                                         </button>
+
+                                                         @if ($s->acc_divisi === 'Di Terima')
+                                                             <a href="{{ url('/user/download') }}"
+                                                                 class="btn btn-sm btn-warning ">
+                                                                 DOWNLOAD
+                                                             </a>
+                                                         @endif
+
+                                                     </form>
+                                                 </span>
                                              </td>
                                          </tr>
                                      @empty

@@ -18,7 +18,6 @@ class UpdatesuratRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|min:1',
             'nama' => 'required|min:1',
             'hari_tanggal' => 'required|min:1',
             'keterangan' => 'required|min:1',

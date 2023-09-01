@@ -9,9 +9,9 @@ class surat extends Model
 {
     use HasFactory;
     protected $fillable=[
+        // 'id',
         'hari_tanggal',
         'keterangan',
-        'nama',
 
         'hari_kerja',
         'mulai_pagi',
@@ -21,6 +21,7 @@ class surat extends Model
 
         // 'lama',
         'acc_divisi',
+        'nama_manager',
         // 'lampiran',
         'status',
         'user_id'

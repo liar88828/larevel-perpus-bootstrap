@@ -1,7 +1,8 @@
 <x-layout>
 
+    
     <!------ Include the above in your HEAD tag ---------->
-    <div class="m-5 border  border-2 p-2 rounded">
+    <div class="m-5 ">
 
         <div class="container emp-profile ">
 
@@ -17,19 +18,29 @@
                                     alt="" class="rounded" />
                             </div>
 
-
-                            <div class="col-md-2 mt-3">
+                            <div class="d-grid gap-2 col-6 mx-auto">
                                 <a class="btn btn-success text-nowrap p-2 " href="{{ url('admin/user/all') }}">
-                                    Lihat User </a>
-                            </div>
+                                    Lihat User
+                                    {{ $user }}
+                                </a>
 
-                            <div class="col-md-2 mt-3">
                                 <a class="btn btn-primary text-nowrap p-2 " href="{{ url('admin/surat/all') }}">
                                     Lihat Surat
+                                    {{ $surat }}
                                 </a>
-                            </div>
 
-                        </div>
+                                <a class="btn btn-warning text-nowrap p-2 " href="{{ url('admin/pass/all') }}">
+                                    Lihat Lupa Password
+                                    {{ $lupa }}
+                                </a>
+
+                                <form class="inline" method="POST" action="logout">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger text-nowrap p-2  ">
+                                        Logout
+                                    </button>
+                                </form>
+                            </div>
             </form>
         </div>
     </div>

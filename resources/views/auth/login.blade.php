@@ -60,7 +60,7 @@
                                 <div class="d-flex flex-col " >
                                     <div class="f-flex flex-row">
 
-                                        <a href="{{ route('lupa') }}" >
+                                        <a href="{{ url('forget-password') }}" >
                                                 <p style="font-size: .7rem"> Lupa Password </p>
                                         </a>
 

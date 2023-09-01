@@ -13,21 +13,15 @@ return new class extends Migration
     {
         Schema::create('surats', function (Blueprint $table) {
             $table->id();
-            // $table->string(column: 'user_id');
-            // $table->string('jenis');
             $table->string('hari_tanggal');
             $table->string('keterangan');
-            $table->string('nama');
-
             $table->string('hari_kerja');
             $table->string('mulai_pagi') ;
             $table->string('akhir_pagi') ;
             $table->string('mulai_malam') ;
             $table->string('akhir_malam') ;
-
-            // $table->string('lama');
             $table->string('acc_divisi');
-            // $table->string('lampiran');
+            $table->string('nama_manager');
             //realsional
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             //

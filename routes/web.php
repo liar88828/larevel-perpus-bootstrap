@@ -22,20 +22,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 Route::get('/profile', [AuthController::class, 'profileController'])->name('profile.controller')->middleware('auth');
 
 
 Route::resource('/surat-ijin', SuratController::class)->middleware('auth');
-// Route::put('/surat-ijin/update/{id}', [SuratController::class, 'update'])->middleware('auth');
 
 
 // ------------------------------- Admin -------------------------------
 Route::middleware('auth')->group(function () {
     Route::prefix('/admin')->group(function () {
+
         Route::controller(AuthController::class)->group(function () {
             Route::post('/', 'logoutAccount')->name('logout');
+            Route::get('/download/{id}', 'download')->name('download');
         });
 
         Route::prefix('/pass')->group(function () {
@@ -44,7 +45,6 @@ Route::middleware('auth')->group(function () {
                 Route::put('ganti', 'submitResetPasswordForm')->name('admin.lupa.ganti');
                 Route::get('{slug}', 'showLupaPass');
             });
-
         });
 
         Route::controller(AdminController::class)->group(function () {
@@ -66,13 +66,16 @@ Route::middleware('auth')->group(function () {
 
 // ------------------------------- User --------------------------------
 Route::middleware('auth')->group(function () {
-
     Route::prefix('/user')->group(function () {
         Route::controller(AuthController::class)->group(function () {
             Route::get('/', 'profile')->name('user');
+            // edit profile
+            Route::get('/{role}/edit_profile', 'show_edit_profile');
+            Route::put('/{role}/edit_profile', 'save_edit_profile');
+            // edit profile
             Route::post('/', 'logoutAccount')->name('logout');
             Route::get('/surat', 'surat')->name('user.surat');
-            Route::get('/download', 'download')->name('download');
+            Route::get('/download/{id}', 'download')->name('download');
         });
     });
 });
@@ -83,7 +86,10 @@ Route::prefix('/manager')->group(callback: function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/', 'profile')->middleware('auth');
         Route::post('/', 'logoutAccount')->name('logout')->middleware('auth');
-
+        // edit profile
+        Route::get('/{role}/edit_profile', 'show_edit_profile');
+        Route::put('/{role}/edit_profile', 'save_edit_profile');
+        // edit profile
         Route::prefix('/surat')->group(function () {
             Route::get('/{slug}', 'suratShow')->name('manager.surat.show')->middleware('auth');
         });
@@ -106,7 +112,6 @@ Route::controller(AuthController::class)->group(function () {
     //loginView
     Route::get('/login', 'loginView')->name('login');
     Route::post('/login', 'loginAuth')->name('login');
-
 });
 
 

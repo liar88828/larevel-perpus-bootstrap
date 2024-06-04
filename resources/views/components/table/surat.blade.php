@@ -1,5 +1,41 @@
 @props(['surat'])
 
+@php
+    function formatDate($dateString)
+    {
+        $date = date_create($dateString);
+        $dayNames = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+    
+        $dayName = $dayNames[date_format($date, 'w')]; // Get the day name in Indonesian
+        $day = date_format($date, 'd'); // Get the day
+        $month = date_format($date, 'F'); // Get the full month name
+        $year = date_format($date, 'Y'); // Get the year
+    
+        // Format the date as "senin, 29 agustus 2023"
+    
+        // Define the Indonesian month names
+        $monthNames = [
+            'January' => 'januari',
+            'February' => 'februari',
+            'March' => 'maret',
+            'April' => 'april',
+            'May' => 'mei',
+            'June' => 'juni',
+            'July' => 'juli',
+            'August' => 'agustus',
+            'September' => 'september',
+            'October' => 'oktober',
+            'November' => 'november',
+            'December' => 'desember',
+        ];
+    
+        // Replace the English month name with the Indonesian month name
+        $month = $monthNames[$month];
+    
+        $formattedDate = "$dayName, $day $month $year";
+        return $formattedDate;
+    }
+@endphp
 <table class="table table-bordered">
     <thead>
         <tr>
@@ -20,15 +56,12 @@
             @endif
         </tr>
     </thead>
-
     <tbody>
-        {{-- {{      dd($surat)}} --}}
         @forelse ($surat as $key=>$s)
             <tr>
-                {{-- <td>{{ $s->id }}</td> --}}
                 <td>{{ $key + 1 }}</td>
-                <td>{{ $s->nama }}</td>
-                <td>{{ $s->hari_tanggal }}</td>
+                <td class="nowrap">{{ $s->nama }}</td>
+                <td class="nowrap">{{ formatDate($s->hari_tanggal) }}</td>
                 <td>{{ $s->keterangan }}</td>
                 <td>{{ $s->hari_kerja }}</td>
                 <td>{{ $s->mulai_pagi }}</td>
@@ -62,6 +95,7 @@
 
                     </span>
                 </td>
+
                 @if (strtolower(auth()->user()->anggota) === 'admin')
                     <td class="text-center">
                         {{-- --------------------DELETE------------------------------------------------- --}}
@@ -71,12 +105,18 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-sm btn-danger ">HAPUS</button>
                             {{-- --------------------EDIT------------------------------------------------- --}}
-                             
-                            <a href="{{ route('surat-ijin.edit', $s->id) }}"
-                                class="btn btn-sm btn-primary ">EDIT</a>
+
+                            <a href="{{ route('surat-ijin.edit', $s->id) }}" class="btn btn-sm btn-primary ">EDIT</a>
                             {{-- PRINT SURAT --}}
-                            <a href="{{ route('admin.surat.print', $s->user_id) }}"
-                                class="btn btn-sm btn-success ">PRINT</a>
+                            {{-- <a href="{{ route('admin.surat.print', $s->user_id) }}"
+                                class="btn btn-sm btn-success ">
+                                PRINT
+                            </a> --}}
+                            @if ($s->acc_divisi === 'Di Terima')
+                                <a href="{{ url('/admin/download/' . $s->user_id) }}" class="btn btn-sm btn-warning ">
+                                    DOWNLOAD
+                                </a>
+                            @endif
                         </form>
                     </td>
                 @endif

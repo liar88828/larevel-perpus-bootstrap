@@ -1,4 +1,5 @@
 <x-layout>
+
     <!------ Include the above in your HEAD tag ---------->
     <div class="m-5">
 
@@ -21,13 +22,19 @@
                                     style="width: 60%; height: auto" />
                             </div>
                             <div class="d-grid gap-2 col-6 mx-auto" style="width: 9rem">
-                                    <a class="btn btn-success text-nowrap p-2 " href="{{ Route('surat-ijin.create') }}">
-                                        Buat Ijin Lembur </a>
+                                <a class="btn btn-success text-nowrap p-2 " href="{{ Route('surat-ijin.create') }}">
+                                    Buat Ijin Lembur </a>
                                 {{-- Href Create --}}
 
-                                    <a class="btn btn-primary text-nowrap p-2  " href="{{ Route('surat-ijin.index') }}">
-                                        Status Surat
-                                    </a>
+                                <a class="btn btn-primary text-nowrap p-2  " href="{{ Route('surat-ijin.index') }}">
+                                    Status Surat
+                                </a>
+
+                                <a class="btn btn-warning text-nowrap p-2  "
+                                    href="{{ url('/user/' . auth()->user()->anggota . '/edit_profile') }}">
+                                    Edit Profile
+                                </a>
+
                                 {{-- @if ($surat !== 0)
                                 <div class="col-md-2 mt-3">
                                     <a class="btn btn-warning text-nowrap p-2  " href="{{ Route('user.surat') }}">
@@ -40,7 +47,7 @@
                                 <a class="btn btn-warning text-nowrap p-2  ">
                                 </a>
                             </div> --}}
-                                <form   method="POST" action="logout">
+                                <form method="POST" action="logout">
                                     @csrf
                                     <button type="submit" class="btn btn-danger text-nowrap p-2  ">
                                         Logout

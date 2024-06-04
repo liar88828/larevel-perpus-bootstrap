@@ -30,6 +30,7 @@ class AdminController extends Controller
                 );
             }
         } else {
+            
             $users = DB::table('users')
                 ->where('users.divisi', '=', $slug)
                 ->paginate(10);
@@ -49,11 +50,22 @@ class AdminController extends Controller
         }
     }
 
-
+// lihat semua surat bagi admin
     public function suratShow($slug)
     {
+
+        // $surat = Surat::join('users', 'surats.user_id', '=', 'users.id')
+        // ->select('surats.*', 'users.nama')
+        // ->where('users.id', auth()->user()->id)
+        // ->paginate(10);
+
+ 
         if ($slug === 'all') {
-            $surat = surat::paginate(15);
+            $surat = DB::table('users')
+            ->join('surats', 'surats.user_id', '=', 'users.id')
+            ->select('users.*', 'surats.*')
+            ->paginate(10);
+
             if (auth()->user()->anggota === 'Manager') {
                 return view(
                     'manager.surat',

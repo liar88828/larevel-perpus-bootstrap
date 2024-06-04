@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Ijin Lembur</title>
     <style>
+        .nowrap{
+              white-space: nowrap;
+        }
         .tulisTable {
             font-size: 9pt;
             color: black !important;
@@ -19,7 +22,7 @@
         }
 
         .judul {
-            font-size: 26pt;
+            font-size: 20pt;
         }
 
         .tulis {
@@ -45,6 +48,7 @@
 </head>
 
 <body>
+
 
     {{ $slot }}
 

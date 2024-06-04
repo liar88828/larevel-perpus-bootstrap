@@ -1,3 +1,4 @@
+
 <x-layout>
     <!------ Include the above in your HEAD tag ---------->
     <div class="m-5 ">
@@ -31,6 +32,11 @@
                                     href="{{ url(strtolower(auth()->user()->anggota) . '/user/' . auth()->user()->divisi) }}">
                                     Status User {{ count($user) }}
                                 </a>
+                                <a class="btn btn-warning text-nowrap p-2  "
+                                    href="{{ url('/manager/' . auth()->user()->anggota . '/edit_profile') }}">
+                                    Edit Profile
+                                </a>
+
                                 <form method="POST" action="logout">
                                     @csrf
                                     <button type="submit" class="btn btn-danger text-nowrap p-2  ">

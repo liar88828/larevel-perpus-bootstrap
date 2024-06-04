@@ -105,7 +105,7 @@
                                                          </button>
 
                                                          @if ($s->acc_divisi === 'Di Terima')
-                                                             <a href="{{ url('/user/download') }}"
+                                                             <a href="{{ url('/user/download/'.auth()->user()->id) }}"
                                                                  class="btn btn-sm btn-warning ">
                                                                  DOWNLOAD
                                                              </a>

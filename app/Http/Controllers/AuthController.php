@@ -8,6 +8,7 @@ use App\Models\surat;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,7 +60,9 @@ class AuthController extends Controller
         // set sesson berdasarkan user
         session(['success' => $formField['nama'] . " Success Register"]);
         // akan di redirec/ di pindah halaman ke login
-        return redirect()->route('login', )->with('message', 'User created and logged in');
+        return redirect()
+            ->route('login', )
+            ->with('message', 'User created and logged in');
     }
 
     // untuk menuju halaman login
@@ -133,8 +136,8 @@ class AuthController extends Controller
                 ->where('acc_divisi', '=', 'Di Terima')
                 ->select('users.*', 'surats.*')
                 ->paginate(10);
-                
-                return view('user.index', ['surat' => count($surat)]);
+
+            return view('user.index', ['surat' => count($surat)]);
         }
 
         if ($a === 'Manager') {
@@ -185,6 +188,7 @@ class AuthController extends Controller
     {
         if ($slug === 'all') {
             $surat = surat::all();
+
             if (auth()->user()->anggota === 'Manager') {
                 return view(
                     'manager.surat',
@@ -255,27 +259,102 @@ class AuthController extends Controller
     }
 
 
+    public function show_edit_profile(): View
+    {
+        $user = User::where('id', auth()->user()->id)->first();
+        // $user=    User::query()->findOrFail(auth()->user()->id );
+        // dd($user);
+
+        $anggota = auth()->user()->anggota;
+
+        $role = $anggota === 'Manager' ? 'manager' : 'user';
+
+
+        return view('auth.editProfile', [
+            'user' => $user,
+            'role' => $role,
+        ]);
+    }
+
+    public function save_edit_profile(Request $request)
+    {
+        $formField = $request->validate([
+            'nama'         => 'required',
+            'jenisKelamin' => 'required',
+            'email'        => 'required|email',
+            'tanggalLahir' => 'required',
+            'noHp'         => 'required',
+            'divisi'       => 'required',
+        ]);
+
+        User::where(
+            'id', auth()->user()->id
+        )
+            ->update(
+                [
+                    'nama'         => $formField['nama'],
+                    'jenisKelamin' => $formField['jenisKelamin'],
+                    'noHp'         => $formField['noHp'],
+                    'email'        => $formField['email'],
+                    'tanggalLahir' => $formField['tanggalLahir'],
+                    'divisi'       => $formField['divisi']
+                ]
+            );
+
+        $anggota = auth()->user()->anggota;
+        if ($anggota === 'Kepala' || $anggota === 'Staff') {
+            return redirect('/user')
+                ->with('message', 'User Success Edited');
+        }
+
+        if ($anggota === 'Manager') {
+            return redirect('/manager')
+                ->with('message', 'Manager Success Edited');
+        }
+
+    }
+
     public function managerSurat()
     {
     }
 
-    public function download()
+    public function download(string $user_id)
     {
-        $surat = DB::table('users')
-            ->join('surats', 'surats.user_id', '=', 'users.id')
-            ->where('users.id', '=', auth()->user()->id)
-            ->where('acc_divisi', '=', 'Di Terima')
-            ->select('users.*', 'surats.*')
-            ->paginate(10);
-        if (count($surat) <= 0) {
-            return redirect('/user');
-        }
-        $userName = auth()->user()->nama;
-        $mytime = Carbon::now()->toDateTimeString();
+        $role = auth()->user()->anggota;
+        if ($role === 'Admin') {
+            $surat = DB::table('users')
+                ->join('surats', 'surats.user_id', '=', 'users.id')
+                ->where('users.id', '=', $user_id)
+                ->where('acc_divisi', '=', 'Di Terima')
+                ->select('users.*', 'surats.*')
+                ->get(10);
+            if (count($surat) <= 0) {
+                return redirect('/admin');
+            }
+            $userName = auth()->user()->nama;
+            $mytime = Carbon::now()->toDateTimeString();
 
-        $pdf = Pdf::loadview('user.surat', ['surat' => $surat]);
-        return $pdf->download("surat_{$userName}_{$mytime}.pdf");
-        // return view('user.surat', ['surat' => $surat]);
+            $pdf = Pdf::loadview('user.surat', ['surat' => $surat]);
+            return $pdf->download("surat_{$userName}_{$mytime}.pdf");
+        }
+
+
+        if ($role === 'Staff' || $role === 'Kepala') {
+            $surat = DB::table('users')
+                ->join('surats', 'surats.user_id', '=', 'users.id')
+                ->where('users.id', '=', auth()->user()->id)
+                ->where('acc_divisi', '=', 'Di Terima')
+                ->select('users.*', 'surats.*')
+                ->get(10);
+            if (count($surat) <= 0) {
+                return redirect('/user');
+            }
+            $userName = auth()->user()->nama;
+            $mytime = Carbon::now()->toDateTimeString();
+
+            $pdf = Pdf::loadview('user.surat', ['surat' => $surat]);
+            return $pdf->download("surat_{$userName}_{$mytime}.pdf");
+        }
     }
 
 
